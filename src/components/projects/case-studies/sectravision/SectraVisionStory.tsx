@@ -3,7 +3,6 @@ export default function SectraVisionStory() {
     <section className="relative bg-[#090a09] text-white">
       <div className="mx-auto w-full max-w-[1400px] px-6 py-20 md:px-10 md:py-24 lg:px-16 lg:py-28">
         <div className="grid gap-16 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-20">
-          {/* left story */}
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
               EL PROYECTO
@@ -33,7 +32,6 @@ export default function SectraVisionStory() {
             </div>
           </div>
 
-          {/* right meta */}
           <aside className="lg:pt-14">
             <div className="border-t border-white/10 pt-8">
               <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
@@ -42,11 +40,13 @@ export default function SectraVisionStory() {
 
               <ul className="mt-8 space-y-4">
                 {[
-                  "WordPress / CMS",
-                  "HTML, CSS, JavaScript",
-                  "Google Analytics / Tag Manager",
+                  "WordPress",
+                  "HTML",
+                  "CSS",
+                  "JavaScript",
+                  "Google Analytics",
+                  "Tag Manager",
                   "CRM Integrations",
-                  "Hosting & Domain Management",
                 ].map((item) => (
                   <li
                     key={item}
@@ -65,7 +65,7 @@ export default function SectraVisionStory() {
               </p>
 
               <p className="mt-5 font-mono text-[15px] text-white/55 md:text-[16px]">
-                Webmaster · UX/UI · Desarrollo Web · Marketing Digital
+                Webmaster · UX/UI · Desarrollo Web · Marketing
               </p>
             </div>
 
@@ -80,9 +80,15 @@ export default function SectraVisionStory() {
             </div>
 
             <div className="mt-10 border-t border-white/10 pt-8">
-              <span className="inline-flex items-center gap-2 border-b border-[#7c5cff] pb-1 font-mono text-[15px] uppercase tracking-[0.18em] text-[#7c5cff] md:text-[16px]">
-                Proyecto interno
-              </span>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://omahacapitalprotegido.com.mx/"
+                className="inline-flex items-center gap-2 border-b border-[#7c5cff] pb-1 font-mono text-[15px] uppercase tracking-[0.18em] text-[#7c5cff] transition-opacity duration-300 hover:opacity-70 md:text-[16px]"
+              >
+                Ver sitio
+                <span aria-hidden="true">↗</span>
+              </a>
             </div>
           </aside>
         </div>

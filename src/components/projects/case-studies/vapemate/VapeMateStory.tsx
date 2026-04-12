@@ -82,15 +82,12 @@ export default function VapeMateStory() {
             </div>
 
             <div className="mt-10 border-t border-white/10 pt-8">
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="#"
+              <span
                 className="inline-flex items-center gap-2 border-b border-[#7c5cff] pb-1 font-mono text-[15px] uppercase tracking-[0.18em] text-[#7c5cff] transition-opacity duration-300 hover:opacity-70 md:text-[16px]"
               >
-                Ver proyecto
+                Página no disponible
                 <span aria-hidden="true">↗</span>
-              </a>
+              </span>
             </div>
           </aside>
         </div>

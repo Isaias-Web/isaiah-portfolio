@@ -50,7 +50,7 @@ export default function HookahPartnerStory() {
                     key={item}
                     className="flex items-center gap-4 font-mono text-[15px] text-white/62 md:text-[16px]"
                   >
-                    <span className="text-[#ffd15c]">•</span>
+                    <span className="text-[#7c5cff]">•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -82,7 +82,7 @@ export default function HookahPartnerStory() {
                 target="_blank"
                 rel="noreferrer"
                 href="https://hookahpartner.com/"
-                className="inline-flex items-center gap-2 border-b border-[#ffd15c] pb-1 font-mono text-[15px] uppercase tracking-[0.18em] text-[#ffd15c] transition-opacity duration-300 hover:opacity-70 md:text-[16px]"
+                className="inline-flex items-center gap-2 border-b border-[#7c5cff] pb-1 font-mono text-[15px] uppercase tracking-[0.18em] text-[#7c5cff] transition-opacity duration-300 hover:opacity-70 md:text-[16px]"
               >
                 Ver sitio
                 <span aria-hidden="true">↗</span>

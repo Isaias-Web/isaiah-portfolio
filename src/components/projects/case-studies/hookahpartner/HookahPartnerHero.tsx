@@ -8,7 +8,7 @@ export default function HookahPartnerHero() {
         <img
           src="/images/hookahpartner-bg.webp"
           alt="Hookah Partner background"
-          className="h-full w-full scale-[1.03] object-cover object-center opacity-[0.22]"
+          className="h-full w-full object-cover object-center opacity-[0.22] scale-[1.03]"
         />
       </div>
 
@@ -31,7 +31,7 @@ export default function HookahPartnerHero() {
 
         <div className="mt-12 flex items-start justify-between gap-6 md:mt-16">
           <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
-            03 / 04
+            07 / 07
           </p>
 
           <div className="text-right">
@@ -45,13 +45,13 @@ export default function HookahPartnerHero() {
         </div>
 
         <div className="mt-auto flex flex-col">
-          <div className="border-b border-[#ffd15c]/35 pb-4">
+          <div className="border-b border-[#6d56ff]/45 pb-4">
             <h1 className="text-[22vw] font-black uppercase leading-[0.86] tracking-[-0.08em] text-[#f3efe8] md:text-[15vw] lg:text-[13vw]">
               HOOKAH PARTNER
             </h1>
           </div>
 
-          <p className="mt-4 max-w-[720px] font-mono text-[13px] leading-[1.8] text-[#ffd15c]/85 md:mt-5 md:text-[15px]">
+          <p className="mt-4 max-w-[720px] font-mono text-[13px] leading-[1.8] text-[#8f7cff] md:mt-5 md:text-[15px]">
             Experiencia ecommerce enfocada en navegación, claridad de producto y conversión
           </p>
         </div>

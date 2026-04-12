@@ -33,7 +33,7 @@ export default function SectraVisionHero() {
         {/* secondary meta */}
         <div className="mt-12 flex items-start justify-between gap-6 md:mt-16">
           <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
-            01 / 03
+            04 / 07
           </p>
 
           <div className="text-right">

@@ -39,7 +39,7 @@ export default function ProjectPanelIntro({
       <div className="relative z-20 flex min-h-screen flex-col px-4 py-8 sm:px-5 md:h-full md:px-10 lg:px-16">
         <div data-reveal className="space-y-2">
           <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/20 md:text-[11px]">
-            01 / 03
+            01 / 07
           </p>
 
           <p className="max-w-[260px] font-mono text-[10px] leading-[1.6] uppercase tracking-[0.24em] text-[#ff2d00] md:max-w-none md:text-[11px] md:tracking-[0.28em]">
