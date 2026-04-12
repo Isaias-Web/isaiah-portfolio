@@ -6,11 +6,15 @@ import ProjectDetailShell from "@/components/projects/overlay/ProjectDetailShell
 import TradeMateCaseStudy from "@/components/projects/case-studies/TradeMateCaseStudy";
 import TryfumCaseStudy from "@/components/projects/case-studies/TryfumCaseStudy";
 import OndaCaseStudy from "@/components/projects/case-studies/OndaCaseStudy";
+import SectraVisionCaseStudy from "@/components/projects/case-studies/SectraVisionCaseStudy";
+import VapeMateCaseStudy from "@/components/projects/case-studies/VapeMateCaseStudy";
+import HookahGtCaseStudy from "@/components/projects/case-studies/HookahGtCaseStudy";
+import HookahPartnerCaseStudy from "@/components/projects/case-studies/HookahPartnerCaseStudy";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
 import type { CaseStudySlug } from "@/data/caseStudies";
 
-export type ProjectKey = "trademate" | "tryfum" | "onda" | null;
+export type ProjectKey = "trademate" | "tryfum" | "onda" | "sectravision" | "vapemate" | "hookahgt" | "hookahpartner" | null;
 
 type ProjectOverlayHostProps = {
   activeProject: ProjectKey;
@@ -128,6 +132,7 @@ export default function ProjectOverlayHost({
   return (
     <ProjectDetailShell onClose={onClose} scrollRef={shellScrollRef}>
       <div ref={contentRef}>
+
         {displayedProject === "trademate" && (
           <TradeMateCaseStudy onNavigate={handleNavigate} />
         )}
@@ -139,6 +144,23 @@ export default function ProjectOverlayHost({
         {displayedProject === "onda" && (
           <OndaCaseStudy onNavigate={handleNavigate} />
         )}
+
+        {displayedProject === "sectravision" && (
+          <SectraVisionCaseStudy onNavigate={handleNavigate} />
+        )}
+
+        {displayedProject === "vapemate" && (
+          <VapeMateCaseStudy onNavigate={handleNavigate} />
+        )}
+
+        {displayedProject === "hookahgt" && (
+          <HookahGtCaseStudy onNavigate={handleNavigate} />
+        )}
+
+        {displayedProject === "hookahpartner" && (
+          <HookahPartnerCaseStudy onNavigate={handleNavigate} />
+        )}
+
       </div>
     </ProjectDetailShell>
   );

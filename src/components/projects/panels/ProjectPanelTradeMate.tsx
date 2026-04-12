@@ -4,15 +4,15 @@ import { useRef } from "react";
 import { gsap } from "@/animations/gsap-config";
 import { useProjectPanelReveal } from "@/hooks/useProjectPanelReveal";
 
-type ProjectPanelTradeMateProps = {
+type ProjectPanelIntroProps = {
   railTween?: gsap.core.Tween | null;
   onOpen?: () => void;
 };
 
-export default function ProjectPanelTradeMate({
+export default function ProjectPanelIntro({
   railTween,
   onOpen,
-}: ProjectPanelTradeMateProps) {
+}: ProjectPanelIntroProps) {
   const panelRef = useRef<HTMLElement | null>(null);
 
   useProjectPanelReveal(panelRef, railTween);

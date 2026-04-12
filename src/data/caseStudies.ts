@@ -1,4 +1,4 @@
-export type CaseStudySlug = "trademate" | "tryfum" | "onda";
+export type CaseStudySlug = "trademate" | "tryfum" | "onda" | "sectravision" | "vapemate" | "hookahgt" | "hookahpartner";
 
 export type CaseStudyItem = {
   slug: CaseStudySlug;
@@ -17,5 +17,21 @@ export const caseStudies: CaseStudyItem[] = [
   {
     slug: "onda",
     title: "Onda",
+  },
+  {
+    slug: "sectravision",
+    title: "SectraVision",
+  },
+  {
+    slug: "vapemate",
+    title: "VapeMate",
+  },
+  {
+    slug: "hookahgt",
+    title: "HookahGt",
+  },
+  {
+    slug: "hookahpartner",
+    title: "HookahPartner",
   },
 ];
