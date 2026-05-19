@@ -26,7 +26,19 @@ export default function OpenChannel() {
           <div className="mt-10 md:mt-12">
             <a
               href="mailto:isaiahweb333@gmail.com"
-              className="block max-w-full overflow-hidden text-ellipsis whitespace-nowrap font-black uppercase leading-[0.9] tracking-[-0.06em] text-[#f3efe8] text-[10vw] sm:text-[9vw] md:text-[7vw] lg:text-[6vw]"
+              className="
+                block
+                w-full
+                overflow-hidden
+                whitespace-nowrap
+                text-ellipsis
+                font-black
+                uppercase
+                leading-[2.2]
+                tracking-[-0.03em]
+                text-[#f3efe8]
+                text-[clamp(1.4rem,8vw,6rem)]
+              "
             >
               isaiahweb333@gmail.com
             </a>

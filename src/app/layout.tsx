@@ -2,6 +2,7 @@ import "./globals.css";
 import CustomCursor from "@/components/system/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import { SmoothScrollProvider } from "@/components/SmoothScrollContext";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata = {
   title: "Isaiah Portfolio",
@@ -21,6 +22,7 @@ export default function RootLayout({
         <SmoothScrollProvider>
           <CustomCursor />
           <SmoothScroll>{children}</SmoothScroll>
+          <WhatsAppButton />
         </SmoothScrollProvider>
       </body>
     </html>
