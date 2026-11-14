@@ -27,6 +27,9 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     });
 
     lenisRef.current = lenis;
+    // The intro and overlay own independent pause conditions in the provider.
+    // Start stopped so the ticker never advances before the pause effect runs.
+    lenis.stop();
 
     const update = (time: number) => {
       lenis.raf(time * 1000);
