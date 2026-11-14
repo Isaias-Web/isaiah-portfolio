@@ -28,10 +28,11 @@ export default function ProjectsRail() {
   return (
     <>
       <section
+        data-projects-rail
         ref={sectionRef}
         className="relative h-screen overflow-hidden bg-[#090a09]"
       >
-        <div ref={trackRef} className="flex h-screen w-max">
+        <div data-projects-track ref={trackRef} className="flex h-screen w-max">
           <div className="h-screen w-screen shrink-0">
             <ProjectPanelTradeMate
               railTween={railTween}

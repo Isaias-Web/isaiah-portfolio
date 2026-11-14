@@ -1,5 +1,7 @@
 "use client";
 
+import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
+
 import { RefObject, useLayoutEffect, useState } from "react";
 import { gsap } from "@/animations/gsap-config";
 
@@ -9,7 +11,10 @@ export function useProjectsRail(
 ) {
   const [railTween, setRailTween] = useState<gsap.core.Tween | null>(null);
 
+  const { introReady } = useSmoothScrollControl();
+
   useLayoutEffect(() => {
+    if (!introReady) return;
     const section = sectionRef.current;
     const track = trackRef.current;
 
@@ -46,7 +51,7 @@ export function useProjectsRail(
       setRailTween(null);
       ctx.revert();
     };
-  }, [sectionRef, trackRef]);
+  }, [sectionRef, trackRef, introReady]);
 
   return railTween;
 }

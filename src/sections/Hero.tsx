@@ -1,5 +1,7 @@
 "use client";
 
+import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
+
 import Image from "next/image";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/animations/gsap-config";
@@ -37,7 +39,10 @@ export default function Hero() {
   const bgRef = useRef<HTMLDivElement | null>(null);
   const bottomBlendRef = useRef<HTMLDivElement | null>(null);
 
+  const { introReady } = useSmoothScrollControl();
+
   useLayoutEffect(() => {
+    if (!introReady) return;
     const cleanups: Array<() => void> = [];
 
     const section = sectionRef.current;
@@ -238,7 +243,7 @@ export default function Hero() {
       cleanups.forEach((fn) => fn());
       ctx.revert();
     };
-  }, []);
+  }, [introReady]);
 
   return (
     <section
