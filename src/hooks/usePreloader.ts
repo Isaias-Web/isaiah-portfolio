@@ -9,7 +9,7 @@ type UsePreloaderParams = {
   lineRef: RefObject<HTMLDivElement | null>;
   setProgress: (value: number) => void;
   onComplete?: () => void;
-  deps?: unknown[];
+  svgWidth: number;
 };
 
 export function usePreloader({
@@ -18,7 +18,7 @@ export function usePreloader({
   lineRef,
   setProgress,
   onComplete,
-  deps = [],
+  svgWidth,
 }: UsePreloaderParams) {
   useEffect(() => {
     const root = rootRef.current;
@@ -88,5 +88,5 @@ export function usePreloader({
     return () => {
       tl.kill();
     };
-  }, [rootRef, wavePathRef, lineRef, setProgress, onComplete, ...deps]);
+  }, [rootRef, wavePathRef, lineRef, setProgress, onComplete, svgWidth]);
 }

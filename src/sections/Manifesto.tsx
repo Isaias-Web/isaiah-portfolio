@@ -78,7 +78,7 @@ export default function Manifesto() {
         {/* BOTTOM */}
         <div data-animate="bottom" className="flex justify-end">
           <p className="font-mono text-[10px] lowercase tracking-[0.2em] text-white/35 md:text-[11px]">
-            isaiasfrutosweb.site / 2026
+            isaiasfrutos.dev / 2026
           </p>
         </div>
 
