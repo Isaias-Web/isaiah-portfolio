@@ -22,7 +22,13 @@ export default function Page() {
     const main = mainRef.current;
     if (!main) return;
     main.inert = !introReady;
-    return () => { main.inert = false; };
+    // Preserve the empty background beneath the preloader's upward exit.
+    // Only hydration applies this; SSR and the no-JS page remain visible.
+    main.style.visibility = introReady ? "" : "hidden";
+    return () => {
+      main.inert = false;
+      main.style.visibility = "";
+    };
   }, [introReady]);
 
   useEffect(() => {
