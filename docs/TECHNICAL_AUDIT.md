@@ -185,3 +185,69 @@ El inventario completo de archivos y líneas está en la sección anterior. **No
 - Logs de esta ejecución en `/workspace/work/technical-audit/lint-review.log` y `build-review.log`. No se realizaron pruebas de navegador ni mediciones Web Vitals. CI usa Node 22 y el entorno local Node 24; verificar CI por separado.
 
 Los pushes a la rama del PR pueden activar CI y un Preview automático de la integración existente. No se ejecuta despliegue manual ni se cambia configuración de Vercel; no se modifica `main` ni se fusiona el PR. Esta documentación se guarda en un segundo commit para separar lo ya implementado del plan pendiente de aprobación.
+
+## Implementación aprobada de HTML inicial e introReady
+
+### Alcance y commits
+
+Se partió de `chore/technical-audit-seo` en `b224272`, con árbol limpio, tras leer `AGENTS.md` y este documento. El usuario aprobó implementar el plan, manteniendo fuera la migración de imágenes y los refactors del overlay/rail para ESLint.
+
+- `aef79c1`: estado `introReady` y finalización estable en `SmoothScrollContext`; la pausa efectiva es `!introReady || paused`, separando la carga de la pausa que ya controla el overlay. Lenis se crea detenido y su efecto de pausa aplica el estado actual antes de avanzar el ticker.
+- `120a805`: `main` y sus seis secciones se renderizan siempre; nuevo coordinador `IntroPreloader`; los efectos de Hero, Manifesto, WhoAmI y rail esperan `introReady`. El cambio del rail se limita a esa guarda y su dependencia; se conserva su estado/tween, geometría y configuración. Se añaden dos atributos de datos para el fallback sin JS.
+- `7a53c4a`: refresh diferido y agrupado de ScrollTrigger, también cuando llegan imágenes o fuentes después de la preparación inicial, con cancelación de frames y retirada de listeners.
+- `ae32398`: ocultación temporal de `main` exclusivamente tras hidratación, para preservar el fondo vacío debajo de la salida ascendente del preloader. Se retira al terminar, al recuperarse de un fallo o al limpiar el efecto. El servidor no emite `visibility: hidden`, `inert` ni `aria-hidden` en `main`.
+
+Archivos de implementación: `src/app/page.tsx`, `src/components/IntroPreloader.tsx`, `src/components/SmoothScrollContext.tsx`, `src/components/SmoothScroll.tsx`, `src/hooks/useManifestoReveal.ts`, `src/hooks/useWhoAmIReveal.ts`, `src/hooks/useProjectsRail.ts`, `src/sections/Hero.tsx` y `src/sections/ProjectsRail.tsx`. No se modifican `Preloader.tsx`, `usePreloader.ts`, los paneles/reveals, el overlay, imágenes, contenidos, estilos editoriales, duraciones, easing, dependencias ni Vercel en esta implementación.
+
+### Coordinación, recuperación y cleanup
+
+- El servidor muestra la misma capa oscura de espera y emite todo `main`. Tras hidratar, `main` queda temporalmente `inert` e invisible, manteniendo su geometría. Se bloquea el documento con el hook existente y Lenis permanece parado. No se crean los contextos de las secciones todavía.
+- `IntroPreloader` importa el componente real y prepara `document.fonts.ready` e imágenes de `main` en paralelo. Imágenes fallidas cuentan como resueltas. La preparación de recursos tiene un máximo de 4 s porque los contenedores ya fijan la geometría; no se espera indefinidamente. Este máximo puede añadir espera antes de la timeline en redes lentas, pero no cambia sus duraciones ni easing.
+- El callback estable `completeIntro` solo pasa a listo; no remonta las secciones. En la ruta normal lo llama la timeline original al completar su salida. Los efectos de layout de las secciones se ejecutan en orden de documento. El rail conserva su actualización síncrona de layout para entregar el tween a los paneles. Dos RAF cancelables posponen `sort()`/`refresh()` hasta después de ese commit, sin asumir que el efecto del padre corre primero.
+- Un error de importación o un error de render/efecto capturado por el boundary revela el portfolio. Un watchdog de 15 s desde el montaje recupera descargas bloqueadas o una timeline que no complete. No controla el tiempo de la ruta normal ni se usa para eludir ESLint. Los fallos se registran en consola para diagnóstico.
+- Al desmontar el coordinador se abortan las esperas, se retiran listeners de imágenes, se limpian ambos timers y se ignoran imports que resuelvan tarde. Un import dinámico ya iniciado no puede cancelarse a nivel de red; se cancela su aplicación al estado. La timeline original mantiene su `tl.kill()` y el ResizeObserver su `disconnect()` al desmontar.
+- La limpieza de `page.tsx` cancela los dos RAF, retira los listeners de fuentes e imágenes y restaura visibilidad/interacción. Los contextos de sección conservan `ctx.revert()`. No se refactoriza ni se declara corregido el cleanup preexistente del overlay señalado en la primera continuación.
+- El fallback `<noscript>` oculta únicamente la capa de carga, restituye cursor nativo, hace legible el manifiesto y muestra los siete proyectos en flujo vertical. Con JS activo el rail continúa horizontal, con sus mismos `pin`, `scrub`, anchuras y triggers. Sin JS no se promete interacción con los casos en overlay.
+
+### Validaciones automatizadas y HTML
+
+| Comprobación final | Resultado |
+| --- | --- |
+| `npm run lint` | Código 1: los mismos 2 errores y 22 advertencias; ningún diagnóstico nuevo |
+| `npx tsc --noEmit` | Código 0 |
+| `npm run build` | Código 0; `/`, `/_not-found`, `/robots.txt`, `/sitemap.xml` prerenderizados |
+| `git diff --check` | Código 0 |
+| Parser Python sobre `.next/server/app/index.html` | Un `main` sin ocultación/inert del servidor, seis secciones principales y siete paneles internos (13 elementos `section`); `lang="es-MX"` y canonical `https://isaiasfrutos.dev` conservados |
+
+El lint continúa bloqueando CI: `ProjectOverlayHost.tsx` y `useProjectsRail.ts` mantienen `set-state-in-effect`; siguen las 21 advertencias de imágenes y la dependencia de Escape. No se suprimen reglas. Local: Node 24; no se afirma que los checks remotos de Node 22 hayan pasado.
+
+### Pruebas de navegador realizadas
+
+Se utilizó Playwright con Chromium del entorno (`/usr/bin/chromium`) contra servidores locales `next start` y `next dev`, sin abrir producción ni desplegar manualmente. Se capturó una referencia desktop antes de modificar el código; se inspeccionaron también capturas posteriores desktop/móvil. Las capturas no constituyen una comparación de píxeles sincronizada de todas las animaciones.
+
+| Escenario | Resultado observado |
+| --- | --- |
+| Desktop 1440×900 | `main` con seis secciones durante la carga; cero pins, documento bloqueado. Tras terminar: sin inert/bloqueo, tres pins. Altura total 16859 px, igual a la referencia desktop inicial |
+| Móvil 390×844 | Mismas fases, tres pins y altura total 11180 px; sin errores de página. Resize posterior al cierre sin errores |
+| `prefers-reduced-motion: reduce` | Carga, scroll horizontal, apertura/cierre y resize funcionan sin errores. Se conserva la política previa: las animaciones siguen ejecutándose; no se implementa una nueva adaptación de movimiento reducido en esta tarea |
+| Rail | Desplazamiento de 400 px produce traslación aproximada de −400 px. Se recorrieron los siete paneles en desktop; sus reveals alcanzan opacidad 1 y el último llega a posición 0 |
+| Overlays | Apertura y cierre por botón en desktop/móvil/reduced motion. Recorrido por los siete casos con seis navegaciones internas, cierre por Escape, overflow restaurado y rueda posterior avanza 450 px (multiplicador Lenis original de 0.9 para 500 px) |
+| Sin JavaScript, móvil | `main` presente y no inert; capa `display:none`; rail en bloque de 390 px, 16 headings y contenido desplazable. Los siete paneles permanecen en el documento |
+| Chunk rechazado | Recuperación en aproximadamente 1 s; main visible, no inert, overflow restaurado y tres pins. Error esperado registrado |
+| Error inyectado en `SVGPathElement.getTotalLength` | Boundary recupera contenido y scroll, sin capa persistente; error esperado registrado |
+| Chunk bloqueado indefinidamente | Watchdog libera contenido y scroll aproximadamente a los 15 s; no inert y tres pins |
+| Strict Mode (`next dev`) y resize durante la carga | Termina correctamente, sin errores de página, tres pins y overflow restaurado |
+| Visibilidad temporal | En carga hidratada: `visibility:hidden`, inert true. Al terminar: `visibility:visible`, inert false. Sin JS se conserva visible |
+
+Los scripts, capturas y logs se guardan fuera del repositorio en `/workspace/work/intro-ready/`: `check-final.cjs`, `failures-final.cjs`, `rail-overlay.cjs`, `browser-final.log`, `failures-final.log`, `rail-overlay.log`, `lint-final.log`, `types-final.log`, `build-final.log` y PNG de referencia/resultados. No se añadieron dependencias de pruebas ni se cambiaron package/lockfile. Los puertos locales usados fueron 3100–3104; un intento de reutilizar 3100 encontró el proceso anterior todavía activo y se continuó en otro puerto.
+
+### Riesgos y comprobaciones pendientes antes de fusionar
+
+- Solo se probó Chromium local. Pendientes Safari/iOS, Firefox, dispositivos táctiles reales y comparación visual completa/sincronizada de las timelines; las emulaciones de viewport no sustituyen esos dispositivos.
+- Se probaron resize durante carga y tras cierre. Pendientes resize/orientación con overlay abierto y a mitad del rail, navegación muy rápida, Escape repetido, cierre durante fade y navegación/desmontaje mientras llegan recursos. Los riesgos previos del overlay siguen fuera de alcance.
+- Pendientes pruebas específicas de fuentes/imágenes lentas que superen los 4 s, restauración de scroll/historial y comportamiento del watchdog al volver de una pestaña suspendida. Se añadieron listeners para refrescar mediciones tardías, pero no se declara validada toda combinación de red y navegación.
+- Strict Mode verificó montaje y limpieza inicial sin pins duplicados. No se instrumentó un recuento exhaustivo de RAF/listeners vivos tras cada navegación; el cleanup nuevo se revisó estáticamente. La recuperación de errores no es una garantía ante fallos globales de hidratación o de los propios módulos GSAP.
+- Pendientes lector de pantalla, recorrido completo por teclado, auditoría de movimiento reducido y Web Vitals. `inert` protege `main` durante la carga; el enlace flotante de WhatsApp del layout conserva su comportamiento y posición existentes.
+- La respuesta HTML es mayor porque ahora incluye el contenido; debe medirse su impacto en transferencia y LCP. El fallback sin JS muestra los proyectos en vertical para hacerlos accesibles, sin cambiar el rail animado con JS.
+
+Resultados y riesgos se documentan antes de subir estos commits y actualizar el PR #1. El PR debe permanecer en borrador, sin merge a `main`, cambios de Vercel ni despliegue manual. El push puede activar CI y un Preview automático de la integración ya existente.
