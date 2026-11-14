@@ -130,4 +130,58 @@ Se añadieron saltos de línea finales donde faltaban. No se modificaron reglas 
 
 ### Estado para revisión
 
-Los ajustes seguros quedan como diff local sobre el head del PR #1. No se hizo commit, push, publicación, merge, cambio de `main` ni despliegue manual. **La auditoría no deja el lint en verde:** siguen dos errores y 22 advertencias. Por la instrucción del usuario de reportar y no implementar automáticamente cambios que necesiten navegador, las correcciones del overlay, rail, cierre e imágenes quedan propuestas para una siguiente revisión con esas pruebas. No aprobar producción basándose solo en TypeScript y build.
+Al terminar la primera continuación, los ajustes seguros quedaron como diff local sobre el head del PR #1, sin commit ni push en esa sesión. **La auditoría no deja el lint en verde:** siguen dos errores y 22 advertencias. Por la instrucción del usuario de reportar y no implementar automáticamente cambios que necesiten navegador, las correcciones del overlay, rail, cierre e imágenes quedan propuestas para una siguiente revisión con esas pruebas. No aprobar producción basándose solo en TypeScript y build.
+
+## Plan técnico para aprobación — segunda continuación
+
+### Persistencia y alcance
+
+Se revisaron primero `git status --short --branch` y `git diff`: estaban exactamente los cinco archivos de la continuación anterior. Se conservaron y guardaron en `7c45706` (`chore: preserve audit findings and safe SEO fixes`). El push normal a `chore/technical-audit-seo` tuvo éxito, avanzando desde `dbc76c1` y actualizando el PR #1. No fue necesario forzar ni cambiar permisos. En esta segunda continuación solo se modifica documentación; no se implementa el plan siguiente ni se cambian componentes o arquitectura.
+
+### Causa del HTML inicial incompleto
+
+`page.tsx` es cliente, pero eso por sí solo no impide que Next prerenderice su markup. La causa concreta es `{loadingComplete && <main>…</main>}` con estado inicial `false`. El preloader se importa con `ssr: false`; su fallback es una capa oscura fija. Por tanto, el servidor genera metadata y shell, pero ninguna de las seis secciones de `main`. Sin JavaScript tampoco se ejecuta el callback que libera el contenido.
+
+Al montar más tarde las secciones, sus efectos arrancan entonces: Hero crea y reproduce inmediatamente `introTl`; Manifesto y WhoAmI crean ScrollTriggers con pin; ProjectsRail crea el tween horizontal que consumen los reveals. Renderizar `main` incondicionalmente sin coordinar esos efectos adelantaría su arranque durante los aproximadamente 3.55 s de la timeline del preloader (puede reiniciarse al cambiar `svgWidth`). Esa sustitución aislada no conserva la experiencia.
+
+### Propuesta recomendada, aún sin implementar
+
+1. **HTML permanente:** mantener `<main>` con Hero, Manifesto, WhoAmI, ProjectsRail, RightNow y OpenChannel en el render inicial, en el mismo orden y sin `key` que provoque remontaje al terminar la carga. No hace falta convertir toda la página a Server Component para conseguir SSR. Una separación servidor/cliente más amplia queda fuera de esta corrección.
+2. **Capa visual independiente:** conservar el preloader fijo y su timeline actual. Su finalización solo retira la capa y cambia una señal explícita `introReady`; nunca determina la existencia de `main`. Usar un callback estable de finalización para que renders del coordinador no reinicien `usePreloader`. Mantener las duraciones, easing y dependencia de ancho actuales; revisar resize en una tarea separada.
+3. **Arranque controlado:** pasar la señal a Hero y a los hooks de scroll (incluidos sus consumidores en Manifesto, WhoAmI y ProjectsRail). Antes de `introReady`, no crear timelines, pins ni reveals que consuman su animación bajo la capa. Al cambiar a listo, crear los contextos y reproducir la intro una sola vez. Los efectos deben depender explícitamente de la señal y devolver `ctx.revert()`; no llamar hooks condicionalmente. Mantener el SSR visible por defecto, sin clases globales `opacity: 0`, `hidden` o `visibility: hidden` en el contenido.
+4. **Medición y orden:** establecer una barrera de preparación: fuentes (`document.fonts.ready`) e imágenes que determinen geometría; crear contextos en orden de documento y refrescar ScrollTrigger una vez que todos los pins y el tween horizontal estén registrados. Coordinarlo explícitamente, sin asumir que un efecto del padre corre antes que los hijos. Cancelar la preparación al desmontar. No esperar indefinidamente por recursos fallidos y no usar timers para esconder errores de Hooks. Conservar fórmulas de anchura, pin y scrub de cada sección.
+5. **Scroll y entrada durante la capa:** integrar la fase de carga con `SmoothScrollContext` y el bloqueo del documento; comprobar que la instancia Lenis, creada en un efecto distinto, recibe el estado inicial de pausa. Evitar que un overlay cerrado libere accidentalmente una pausa del preloader. De ser necesario, diseñar propietarios independientes del bloqueo antes de cambiar ese contexto; no reutilizar ciegamente el booleano actual. Mantener la posición inicial y el retorno del scroll del overlay.
+6. **Accesibilidad y fallos:** durante la carga hidratada, impedir foco y clics bajo la capa mediante `inert`, limitado a esa fase y retirado al terminar. No emitir `inert` ni `aria-hidden` de forma permanente en el HTML del servidor. Hacer que el fallback oscuro de la importación dinámica no tape el contenido sin JavaScript (capa activada solo tras hidratación, o fallback exclusivamente cliente). Definir una salida de error que retire la capa y deje contenido visible si falla la importación o la preparación. El modo sin JavaScript debe mostrar contenido y scroll nativo; no prometer funcionalidad de overlays interactivos sin JS.
+
+Archivos previstos para una implementación aprobada: `src/app/page.tsx`, consumidores/secciones y hooks de animación indicados arriba; posiblemente `SmoothScrollContext.tsx`, `SmoothScroll.tsx` y `useBodyScrollLock.ts` si la coordinación de bloqueo lo requiere. No se necesitan cambios SEO, Vercel, dependencias ni estilos editoriales. Los cambios de SSR y los arreglos de overlay/rail deben dividirse en commits revisables para identificar regresiones.
+
+### Clasificación de los dos errores y las 22 advertencias actuales
+
+| Grupo | Corrección propuesta | Riesgo y validación |
+| --- | --- | --- |
+| Overlay: 1 error `set-state-in-effect` | Coordinar selección inicial en el evento de apertura y fases de transición; reservar el cambio de contenido de navegación para el callback de salida GSAP. Cancelar ambos RAF y los tweens desde el cleanup real del efecto; restablecer la transición en cancelación | Requiere navegador: no derivar siempre `displayedProject` de la prop ni remontar el shell por proyecto. Conservar primera apertura, reapertura y fades de 0.22/0.28 s |
+| Rail: 1 error `set-state-in-effect` | Prototipo de un coordinador imperativo de tween y reveals: registrar paneles por ref, crear primero el tween y después sus ScrollTriggers dentro de contextos con limpieza conjunta; retirar su transporte por estado React | Requiere aprobación y navegador: cambia coordinación interna. Preservar orden y cleanup de los siete paneles. No basta con borrar el setter de la rama nula; no publicar un ref durante render ni desplazar setters a un timer |
+| Shell: 1 advertencia `exhaustive-deps` | `useCallback` con `[isClosing, onClose]` para `handleRequestClose`, y dependencia explícita del listener de Escape | Cambio pequeño sin intención de cambiar apariencia, pero corrige una captura obsoleta y por ello puede cambiar comportamiento. Probar Escape repetido, botón, backdrop y cierre durante apertura |
+| Imágenes: 21 advertencias `no-img-element` | Migración por grupos (7 Hero, 7 Feature, 7 paneles), con `fill`/dimensiones y `sizes` adecuados a cada contenedor | Requiere comparación visual y de red: mantener cajas, recortes, opacidad y escala. No asignar prioridad a todas ni cambiar la carga sin medir |
+
+El inventario completo de archivos y líneas está en la sección anterior. **No quedan diagnósticos cuya corrección pueda asegurarse como puramente equivalente sin pruebas funcionales o visuales.** La sustitución de `...deps` por `svgWidth`, ya incluida en `7c45706`, sí conserva exactamente las dependencias y no se repite. Corregir la dependencia de Escape es el candidato más acotado, pero no es una equivalencia estricta. No se desactivan reglas ni se editan componentes en esta fase.
+
+### Secuencia de revisión y criterios de aceptación
+
+1. Capturar el comportamiento actual en móvil y escritorio, incluyendo primera apertura y reapertura, antes de implementar. Probar también Strict Mode local.
+2. Aprobar primero el contrato `introReady`, el tratamiento de errores/sin JS, el bloqueo de entrada y la coordinación de preparación. Implementar SSR y arranque sin mezclar la migración de imágenes.
+3. Comprobar el HTML de la respuesta (sin depender del DOM hidratado): un `main`, texto de las seis secciones, headings y enlaces existentes; metadata intacta. Con JS desactivado, contenido legible sin capa negra bloqueante.
+4. Con JS, verificar que no se vea contenido antes de la capa, que la intro Hero comience tras su salida y que no se repita por renders/resize. Revisar scroll temprano, restauración de posición, fuentes lentas, importación fallida y movimiento reducido.
+5. Comprobar los pins de Manifesto/WhoAmI, los siete reveals del rail, resize/orientación, scroll horizontal y overlay (navegación rápida, cierre durante fade, Escape repetido y devolución de Lenis). No deben quedar RAF, listeners ni ScrollTriggers tras desmontar.
+6. Abordar los arreglos de Hooks y después las imágenes en commits separados. Ejecutar lint, TypeScript y build después de cada cambio relevante, más comparaciones de navegador para los grupos indicados. Ninguno de estos pasos autoriza producción.
+
+### Validaciones de esta segunda continuación
+
+- `npm run lint`: código 1, **2 errores y 22 advertencias**, sin cambios respecto al estado previamente conservado.
+- `npx tsc --noEmit`: código 0.
+- `npm run build`: código 0; rutas estáticas `/`, `/_not-found`, `/robots.txt`, `/sitemap.xml`.
+- `git diff --check`: código 0.
+- Inspección del HTML generado: el `main` sigue ausente, coherente con que el plan no está implementado.
+- Logs de esta ejecución en `/workspace/work/technical-audit/lint-review.log` y `build-review.log`. No se realizaron pruebas de navegador ni mediciones Web Vitals. CI usa Node 22 y el entorno local Node 24; verificar CI por separado.
+
+Los pushes a la rama del PR pueden activar CI y un Preview automático de la integración existente. No se ejecuta despliegue manual ni se cambia configuración de Vercel; no se modifica `main` ni se fusiona el PR. Esta documentación se guarda en un segundo commit para separar lo ya implementado del plan pendiente de aprobación.
