@@ -30,16 +30,28 @@ export default function Page() {
     // Layout effects create pins in document order; the rail's synchronous
     // layout update then supplies its tween to the panel reveal effects.
     // Refresh after that commit, rather than relying on parent effect order.
+    let firstFrame = 0;
     let secondFrame = 0;
-    const firstFrame = requestAnimationFrame(() => {
-      secondFrame = requestAnimationFrame(() => {
-        ScrollTrigger.sort();
-        ScrollTrigger.refresh();
+    const refresh = () => {
+      cancelAnimationFrame(firstFrame);
+      cancelAnimationFrame(secondFrame);
+      firstFrame = requestAnimationFrame(() => {
+        secondFrame = requestAnimationFrame(() => {
+          ScrollTrigger.sort();
+          ScrollTrigger.refresh();
+        });
       });
-    });
+    };
+    refresh();
+    // Also cover resources that finish after the bounded preparation window.
+    const main = mainRef.current;
+    main?.addEventListener("load", refresh, true);
+    document.fonts.addEventListener("loadingdone", refresh);
     return () => {
       cancelAnimationFrame(firstFrame);
       cancelAnimationFrame(secondFrame);
+      main?.removeEventListener("load", refresh, true);
+      document.fonts.removeEventListener("loadingdone", refresh);
     };
   }, [introReady]);
 
@@ -57,14 +69,14 @@ export default function Page() {
         `}</style>
       </noscript>
       {!introReady && <IntroPreloader onComplete={completeIntro} />}
-        <main ref={mainRef}>
-          <Hero />
-          <Manifesto />
-          <WhoAmI />
-          <ProjectsRail />
-          <RightNow />
-          <OpenChannel />
-        </main>
+      <main ref={mainRef}>
+        <Hero />
+        <Manifesto />
+        <WhoAmI />
+        <ProjectsRail />
+        <RightNow />
+        <OpenChannel />
+      </main>
     </>
   );
 }
