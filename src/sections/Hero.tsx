@@ -278,7 +278,7 @@ export default function Hero() {
           className="flex items-start justify-between"
         >
           <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
-            isaiasfrutosweb.site
+            isaiasfrutos.dev
           </p>
 
           <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
