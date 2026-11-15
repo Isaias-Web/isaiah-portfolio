@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Script from "next/script";
+import { createPortal } from "react-dom";
 import {
   inquiryTypes,
   validateContact,
@@ -217,7 +218,7 @@ export default function ContactForm() {
         </p>
       </form>
 
-      {successToast && (
+      {successToast && typeof document !== "undefined" && createPortal(
         <div
           role="status"
           aria-live="polite"
@@ -234,7 +235,8 @@ export default function ContactForm() {
             <button type="button" onClick={() => setSuccessToast(false)} aria-label="Cerrar notificación"
               className="shrink-0 px-2 text-white/60 hover:text-white">×</button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
