@@ -48,7 +48,7 @@ function InfoTable({
       <div className="mt-8 sm:mt-10 md:mt-16 lg:mt-20">
         <h2
           data-reveal="title"
-          className="font-black uppercase leading-[0.9] tracking-[-0.06em] text-[#f3efe8] text-[15vw] sm:text-[13vw] md:text-[7.6vw] lg:text-[6.6vw]"
+          className="font-black uppercase leading-[0.9] tracking-[-0.06em] text-[#f3efe8] text-[15vw] sm:text-[13vw] md:text-[5.2vw] lg:text-[5.5vw] xl:text-[6.6vw]"
         >
           {title.split("\n").map((line) => (
             <span key={line} className="block">
@@ -63,7 +63,7 @@ function InfoTable({
           <div
             key={row.label}
             data-reveal="row"
-            className="group grid grid-cols-[84px_1fr] gap-4 border-b border-white/10 py-4 transition-colors duration-300 sm:grid-cols-[92px_1fr] md:grid-cols-[96px_1fr] md:gap-7"
+            className="group grid grid-cols-[84px_1fr] gap-4 border-b border-white/10 py-4 transition-colors duration-300 sm:grid-cols-[92px_1fr] md:grid-cols-[84px_minmax(0,1fr)] md:gap-3 xl:grid-cols-[96px_minmax(0,1fr)] xl:gap-7"
           >
             <span className="font-mono text-[10px] uppercase leading-[1.4] tracking-[0.2em] text-[#ff2d00] md:text-[11px]">
               {row.label}
@@ -97,7 +97,7 @@ export default function WhoAmI() {
         />
       </div>
 
-      <div className="relative mx-auto w-full max-w-[1600px] px-4 py-8 sm:px-5 md:flex md:min-h-[100dvh] md:flex-col md:px-10 md:py-10 lg:px-16 lg:py-12">
+      <div className="relative mx-auto w-full max-w-[1600px] px-4 py-8 sm:px-5 md:flex md:min-h-[100dvh] md:flex-col md:px-7 md:py-10 lg:px-10 lg:py-12 xl:px-16">
         {/* top label */}
         <div className="mb-8 shrink-0 md:mb-14 lg:mb-16">
           <p
@@ -111,7 +111,7 @@ export default function WhoAmI() {
         {/* content area */}
         <div className="relative md:flex-1">
           <div className="grid gap-14 md:h-full md:min-h-full md:grid-cols-2 md:gap-0">
-            <div className="flex flex-col md:h-full md:justify-center md:pr-10 lg:pr-14">
+            <div className="flex flex-col md:h-full md:justify-center md:pr-4 lg:pr-6 xl:pr-14">
               <InfoTable
                 eyebrow="El código"
                 title={`Lo que\ndesarrollo`}
@@ -119,7 +119,7 @@ export default function WhoAmI() {
               />
             </div>
 
-            <div className="flex flex-col md:h-full md:justify-center md:pl-10 lg:pl-14">
+            <div className="flex flex-col md:h-full md:justify-center md:pl-4 lg:pl-6 xl:pl-14">
               <InfoTable
                 eyebrow="Mi cultura"
                 title={`Lo que\nme mueve`}
