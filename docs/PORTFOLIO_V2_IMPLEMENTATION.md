@@ -153,4 +153,10 @@ Capturas del build optimizado, con el formulario vacío y sin datos personales d
 | Experiencia y método | [Ver captura](assets/portfolio-v2-implementation/experience-desktop.png) | [Ver captura](assets/portfolio-v2-implementation/experience-mobile.png) |
 | Contacto y demo | [Ver captura](assets/portfolio-v2-implementation/contact-desktop.png) | [Ver captura](assets/portfolio-v2-implementation/contact-mobile.png) |
 
-La preview debe obtenerse de la integración automática de Vercel del nuevo PR. No se ejecuta ningún despliegue manual ni se cambian sus opciones. El enlace, cuando lo emita la integración, se comunicará junto al PR; no se construye ni se inventa una URL.
+## Entrega en GitHub y preview
+
+Los cambios se guardaron en commits por funcionalidad y se subieron a `feat/portfolio-v2-implementation`. El [PR #4](https://github.com/Isaias-Web/isaiah-portfolio/pull/4) está en borrador hacia `feat/portfolio-v2-audit`, sin conflictos al abrirlo. El PR #3 continúa separado y no se fusionó ninguno.
+
+La integración automática de Vercel emitió estado **Ready** para la [preview de revisión](https://isaiah-portfolio-git-feat-po-b4f4e1-isaiahweb333-8083s-projects.vercel.app). No se ejecutó ningún despliegue manual ni se cambiaron sus opciones.
+
+El intento de smoke test remoto desde Chromium en este entorno falló antes de cargar la página con `net::ERR_TUNNEL_CONNECTION_FAILED`. Por tanto, no se afirma una validación visual de esa URL: las pruebas detalladas arriba corresponden a los servidores locales de desarrollo/build. Revisar la preview desde un navegador con acceso sigue pendiente. La CI remota se consulta en [Portfolio CI](https://github.com/Isaias-Web/isaiah-portfolio/actions/workflows/ci.yml) y en los checks del PR; sus resultados son independientes de la validación local.
