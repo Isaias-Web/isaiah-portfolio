@@ -54,17 +54,17 @@ export default function Manifesto() {
 
             <RevealLine
               text="No digas que"
-              className="ml-0 text-[14vw] font-black leading-[0.9] tracking-[-0.06em] uppercase sm:text-[12vw] md:ml-[10%] md:text-[9vw] lg:text-[8vw]"
+              className="ml-0 text-[14vw] font-black leading-[0.9] tracking-[-0.06em] uppercase sm:text-[12vw] xl:ml-[10%] md:text-[9vw] lg:text-[8vw]"
             />
 
             <RevealLine
               text="No puedes,"
-              className="ml-0 text-[14vw] font-black leading-[0.9] tracking-[-0.06em] uppercase sm:text-[12vw] md:ml-[18%] md:text-[9vw] lg:text-[8vw]"
+              className="ml-0 text-[14vw] font-black leading-[0.9] tracking-[-0.06em] uppercase sm:text-[12vw] xl:ml-[18%] md:text-[9vw] lg:text-[8vw]"
             />
 
             <RevealLine
               text="Di que aún"
-              className="ml-0 text-[14vw] font-black leading-[0.9] tracking-[-0.06em] uppercase sm:text-[12vw] md:ml-[18%] md:text-[9vw] lg:text-[8vw]"
+              className="ml-0 text-[14vw] font-black leading-[0.9] tracking-[-0.06em] uppercase sm:text-[12vw] xl:ml-[18%] md:text-[9vw] lg:text-[8vw]"
             />
 
             <RevealLine
