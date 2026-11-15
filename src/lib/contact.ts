@@ -13,7 +13,7 @@ export type ContactValues = {
 };
 export type ContactErrors = Partial<Record<keyof ContactValues, string>>;
 
-// Pure client-side demo validation. A future endpoint must validate independently.
+// Shared field validation: called in the client and independently by the server endpoint.
 export function validateContact(values: ContactValues): ContactErrors {
   const errors: ContactErrors = {};
   if (values.name.trim().length < 2 || values.name.trim().length > 100)
