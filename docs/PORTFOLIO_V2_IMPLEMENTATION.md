@@ -1,5 +1,7 @@
 # Portfolio V2 — implementación profesional, IA y contacto
 
+Continuación aprobada de motion design en RightNow: ver [timelines, hover, cleanup y validaciones](RIGHT_NOW_MOTION.md). El informe siguiente conserva el registro de la implementación editorial anterior.
+
 ## Base, alcance y revisión
 
 Implementación desde `feat/portfolio-v2-audit` en `2443026`, sincronizada por fast-forward antes de editar. Se creó `feat/portfolio-v2-implementation` desde ese HEAD. Se revisaron `AGENTS.md`, `README.md`, `TECHNICAL_AUDIT.md`, `PORTFOLIO_V2_AUDIT.md`, los commits remotos y los componentes reales.
