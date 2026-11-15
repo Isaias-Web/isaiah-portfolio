@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { inquiryTypes, validateContact, type ContactValues } from "@/lib/contact";
 
 export const runtime = "nodejs";
+export const maxDuration = 30;
 
 const recipient = "isaiahweb333@gmail.com";
 const maxBodyBytes = 12_000;
