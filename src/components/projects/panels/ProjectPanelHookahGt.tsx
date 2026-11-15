@@ -49,7 +49,7 @@ export default function ProjectPanelIntro({
 
         <div data-reveal className="flex flex-1 items-center pt-10 pb-8 sm:pt-12 md:pt-0 md:pb-0">
           <div className="relative w-full overflow-visible">
-            <h1 className="max-w-full text-[15vw] font-black uppercase leading-[0.92] tracking-[-0.045em] text-[#f3efe8] sm:text-[17vw] md:text-[17vw] md:tracking-[-0.07em] lg:text-[15vw]">
+            <h1 className="max-w-full text-[15vw] font-black uppercase leading-[0.92] tracking-[-0.045em] text-[#f3efe8] md:tracking-[-0.07em]">
               HOOKAH GT
             </h1>
           </div>
