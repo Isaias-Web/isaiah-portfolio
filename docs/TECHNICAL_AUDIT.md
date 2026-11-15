@@ -251,3 +251,57 @@ Los scripts, capturas y logs se guardan fuera del repositorio en `/workspace/wor
 - La respuesta HTML es mayor porque ahora incluye el contenido; debe medirse su impacto en transferencia y LCP. El fallback sin JS muestra los proyectos en vertical para hacerlos accesibles, sin cambiar el rail animado con JS.
 
 Resultados y riesgos se documentan antes de subir estos commits y actualizar el PR #1. El PR debe permanecer en borrador, sin merge a `main`, cambios de Vercel ni despliegue manual. El push puede activar CI y un Preview automático de la integración ya existente.
+
+## Corrección de los errores de React Hooks
+
+### Base y cambios separados
+
+Se revisaron `AGENTS.md`, el informe, `git status` y el código en `chore/technical-audit-seo`, inicialmente limpio en `63da9c1`. El usuario autorizó corregir los dos errores y probar las interacciones. Se mantienen fuera las imágenes, `main`, Vercel y cualquier cambio de diseño.
+
+**`79b0995` — overlay y cierre.** En `ProjectOverlayHost.tsx`, la inicialización de `displayedProject`/`pendingFadeIn` se ajusta condicionalmente durante el render cuando llega la primera selección y el proyecto mostrado todavía es nulo. React repite ese render antes de confirmar los hijos; la condición converge inmediatamente. No hay efectos externos en ese ajuste, render vacío confirmado ni copia de props desde un efecto. El estado se sigue conservando para retener el contenido saliente durante la navegación; las selecciones posteriores solo sustituyen el caso desde el callback de salida de GSAP.
+
+El mismo commit cancela los dos RAF y el tween de entrada desde el cleanup real del efecto, limpia el indicador de transición al cancelar y descarta un fade pendiente cuando se cierra. Durante la entrada también se bloquea navegación, evitando que un clic interrumpa una transición activa. Se mantienen salida de 0.22 s, entrada de 0.28 s, `power2.out`, los dos frames y el reinicio del scroll interno. No se remonta el shell al navegar. En `ProjectDetailShell.tsx`, `useCallback([isClosing, onClose])` y la dependencia explícita del listener de Escape corrigen la captura obsoleta y la advertencia asociada, conservando la timeline y sus tiempos.
+
+**`83cf5ec` — rail.** `useProjectsRail.ts` conserva la creación de GSAP detrás de `introReady`, pero expone su handle mediante un store externo privado por instancia y `useSyncExternalStore`. `useState(createRailStore)` crea únicamente la identidad estable del store; ningún efecto copia el tween a estado React. El snapshot es estable mientras no cambia el recurso y siempre nulo en el servidor. La creación publica el tween y el cleanup publica nulo antes de `ctx.revert()`; React gestiona alta/baja de suscriptores y detecta cambios entre render y suscripción.
+
+Se eligió esta suscripción acotada en lugar del coordinador imperativo de paneles considerado en el plan: conserva el retorno del hook y todos sus consumidores. No se sustituyó el estado por un ref que los paneles no pudieran observar. Se conservan `containerAnimation`, `x`, cálculo de anchura, `ease: none`, pin, `scrub: 1`, `anticipatePin`, `invalidateOnRefresh` y la configuración de los siete reveals. No se añadieron timers, microtareas ni RAF para diferir setters o evitar reglas.
+
+### Validaciones
+
+| Comando | Resultado |
+| --- | --- |
+| `npm run lint` antes | Código 1: 2 errores y 22 advertencias |
+| ESLint dirigido a overlay/shell y después a rail | Código 0, sin diagnósticos |
+| `npm run lint` después | **Código 0: 0 errores y 21 advertencias**, todas `@next/next/no-img-element` preexistentes |
+| `npx tsc --noEmit` | Código 0 |
+| `npm run build` | Código 0; mismas cuatro rutas estáticas |
+| `git diff --check` | Código 0 |
+| Parser del HTML generado | Un `main` sin ocultación del servidor; seis secciones y siete paneles internos, sin regresión del HTML inicial |
+
+No se cambiaron reglas, configuración ESLint, dependencias ni package/lockfile. Los scripts de validación usan Node 24.22.1/npm 11.9.0 locales; no se afirma que CI remota en Node 22 haya pasado. ESLint permite las advertencias con la configuración actual; las imágenes siguen pendientes de una tarea distinta.
+
+### Pruebas de navegador y evidencias
+
+Playwright/Chromium local contra `next start --port 3110`, con aserciones en desktop 1440×900 y móvil 390×844. El mismo recorrido también pasó contra `next dev --port 3111` para comprobar Strict Mode. Los cambios de viewport añaden 80 px de ancho y restan 30 px de alto y después vuelven al tamaño original, tanto dentro del rail como con el overlay abierto.
+
+- Antes de `introReady`: `main` inert y cero pins. Después: tres pins. Altura inicial conservada: 16859 px desktop y 11180 px móvil.
+- Recorrido por los siete paneles: cada reveal alcanza opacidad 1, el panel visible se sitúa aproximadamente en −10 px por el offset intencional del test y el último termina en 0. Tras resize, el track mide siete veces el ancho del viewport y siguen tres pins.
+- Apertura: título correcto, contenido visible, scroll de fondo bloqueado. Se inspeccionaron capturas desktop/móvil.
+- Ráfaga de ocho clicks de navegación en un frame durante la transición: conserva la primera selección y termina visible. Recorrido posterior por los siete casos sin contenido bloqueado; cada cambio reinicia el scroll interno a 0.
+- Rueda dentro del overlay desplaza su scroller y mantiene inmóvil el fondo. Cierre por botón y por tres Escape consecutivos restaura overflow. Una rueda posterior de 500 px mueve el documento 450 px con el multiplicador Lenis existente.
+- Cierre solicitado 60 ms después de abrir otro proyecto y cierre durante el fade de navegación: el shell se desmonta; reapertura y navegación posterior funcionan y el contenido vuelve a opacidad 1. También se valida reapertura del mismo proyecto.
+- Sin errores de página en los recorridos normales. No se alteraron las duraciones ni los easing del producto para hacer pasar las pruebas; las esperas pertenecen únicamente al harness.
+
+Las primeras versiones del harness fallaron por tres supuestos de prueba: calculaban el inicio desde la sección ya fijada en lugar de su pin-spacer; enviaban comandos de clicks separados por el driver que podían superar la duración del fade y por tanto aceptar legítimamente otra selección; y comparaban `TRYFÜM` con `TRYFUM` sin normalizar diacríticos. Se corrigieron el ancla de medida, la ráfaga en un solo frame y la comparación de texto del test. La instrumentación temporal confirmó el bloqueo durante la transición y fue retirada; no se cambió producto para acomodar esas aserciones.
+
+Scripts y evidencias fuera del repositorio: `/workspace/work/hooks-audit/interactions.cjs`, `browser.log`, `browser-production.json`, `strict-browser.log`, capturas `desktop-overlay.png`/`mobile-overlay.png`, `lint-before.log`, `lint-after.log`, `types.log` y `build.log`. El store y los efectos se revisaron estáticamente para comprobar limpieza y snapshots; no se instrumentó una auditoría exhaustiva de memoria/RAF vivos.
+
+### Riesgos y pendientes
+
+- Solo Chromium local, con emulación de viewport: pendientes Safari/iOS, Firefox, táctil real, comparación visual completa de cada frame, lector de pantalla y recorrido completo de foco.
+- No se amplía la política de movimiento reducido, ya probada en la continuación anterior, ni se repiten Web Vitals, fallos de chunk o todas las combinaciones de red/historial. Esas limitaciones anteriores siguen vigentes.
+- En desarrollo se observó una advertencia de hidratación por diferencias de whitespace en `className` del enlace de correo de `OpenChannel.tsx`, archivo sin cambios en esta tarea. No fue un error de página ni bloqueó el recorrido; se deja registrado para investigar por separado.
+- La política durante una transición es ignorar nuevos clicks hasta terminar; al completarla se vuelve a aceptar navegación. No se añade una cola de destinos. Se mantienen los casos anteriores visibles hasta completar su salida.
+- El store pertenece a cada rail montado; no hay estado global entre páginas o usuarios. SSR entrega snapshot nulo y la suscripción cliente recibe el tween vigente. Se deben conservar estas propiedades si se reutiliza el hook en otros montajes o se cambia el mecanismo de suscripción.
+
+Los dos arreglos están en commits distintos. No hay merge a `main`, migración de imágenes, cambios de Vercel ni despliegue manual. El push de la rama puede activar la CI y el Preview automático existentes; el PR debe continuar en borrador hasta revisar los resultados.
