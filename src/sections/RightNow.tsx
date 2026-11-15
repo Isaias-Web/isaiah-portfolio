@@ -48,7 +48,7 @@ export default function RightNow() {
               </p>
               <h3
                 id="uic-heading"
-                className="mt-6 max-w-[750px] text-[clamp(2.2rem,5.8vw,5.5rem)] font-black uppercase leading-[0.95] tracking-[-0.05em]"
+                className="mt-6 max-w-[750px] text-[clamp(2.2rem,5.2vw,5.5rem)] font-black uppercase leading-[0.95] tracking-[-0.05em]"
               >
                 Web Master
                 <br />

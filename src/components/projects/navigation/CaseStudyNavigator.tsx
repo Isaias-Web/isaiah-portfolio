@@ -42,7 +42,7 @@ export default function CaseStudyNavigator({
           >
             <p className={labelClass}>← Proyecto Anterior</p>
 
-            <h2 className={titleClass}>{prevCase.title}</h2>
+            <span className={titleClass}>{prevCase.title}</span>
           </button>
 
           <button
@@ -53,7 +53,7 @@ export default function CaseStudyNavigator({
           >
             <p className={labelClass}>Siguiente Proyecto →</p>
 
-            <h2 className={titleClass}>{nextCase.title}</h2>
+            <span className={titleClass}>{nextCase.title}</span>
           </button>
         </div>
       </div>
