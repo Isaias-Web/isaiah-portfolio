@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, type RefObject } from "react";
-import { gsap } from "@/animations/gsap-config";
+import { gsap, ScrollTrigger } from "@/animations/gsap-config";
 import { letterOffsets } from "@/animations/letter-motion";
 import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
 
@@ -84,42 +84,39 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
                   .map((name) => `[data-right-now-reveal="${name}"]`)
                   .join(","),
               );
+            const sequences: Array<{
+              id: string;
+              trigger: Element;
+              timeline: gsap.core.Timeline;
+            }> = [];
             const sequence = (
               id: string,
               trigger: Element,
               targets: gsap.TweenTarget = trigger,
-            ) =>
-              gsap
-                .timeline({
-                  defaults: { ease: "power3.out", duration: 0.55 },
-                  scrollTrigger: {
-                    id: `right-now-${id}`,
-                    trigger,
-                    start: "top 92%",
-                    toggleActions: "play none none none",
-                    once: true,
-                  },
-                })
-                .set(targets, { opacity: 0, y: 18, immediateRender: false }, 0);
+            ) => {
+              // This client-only starting state also remains the reverse end.
+              // A zero-duration set inside the timeline would undo it at zero.
+              gsap.set(targets, { opacity: 0, y: 18 });
+              const timeline = gsap.timeline({
+                paused: true,
+                defaults: { ease: "power3.out", duration: 0.55 },
+              });
+              sequences.push({ id, trigger, timeline });
+              return timeline;
+            };
             const label = targetsFor("label")[0];
             const letters = targetsFor("letter");
             if (!label || !letters.length) return;
             const title = sequence("title", label, [label, ...letters]);
-            // Only a playing timeline primes its group, before the stagger.
-            // Unvisited content stays visible if ScrollTrigger never runs.
+            // The two letter layers keep entry/reverse separate from hover.
             title
-              .fromTo(
-                label,
-                { opacity: 0, y: 18 },
-                {
-                  opacity: 1,
-                  y: 0,
-                  immediateRender: false,
-                },
-              )
-              .fromTo(
+              .to(label, {
+                opacity: 1,
+                y: 0,
+                immediateRender: false,
+              })
+              .to(
                 letters,
-                { opacity: 0, y: 18 },
                 {
                   opacity: 1,
                   y: 0,
@@ -136,9 +133,8 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
               position: number,
               stagger = 0,
             ) =>
-              timeline.fromTo(
+              timeline.to(
                 targetsFor(selector),
-                { opacity: 0, y: 18 },
                 { opacity: 1, y: 0, immediateRender: false, stagger },
                 position,
               );
@@ -182,18 +178,49 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
               section
                 .querySelectorAll(`[data-right-now-reveal="${group}"]`)
                 .forEach((item, index) => {
-                  sequence(`${group}-${index}`, item).fromTo(
-                    item,
-                    { opacity: 0, y: 18 },
-                    {
-                      opacity: 1,
-                      y: 0,
-                      immediateRender: false,
-                      delay: index * 0.07,
-                    },
-                  );
+                  sequence(`${group}-${index}`, item).to(item, {
+                    opacity: 1,
+                    y: 0,
+                    immediateRender: false,
+                    delay: index * 0.07,
+                  });
                 });
             }
+
+            // Register after all timelines are populated, including when the
+            // page restores a deep scroll position. One trigger per group.
+            sequences.forEach(({ id, trigger, timeline }) => {
+              let revealed = false;
+              const reveal = () => {
+                if (revealed) return;
+                revealed = true;
+                timeline.play();
+              };
+              const conceal = () => {
+                if (!revealed) return;
+                revealed = false;
+                timeline.reverse();
+              };
+              // Exclude the reveal's own y from measurements during refresh.
+              const top = () =>
+                trigger.getBoundingClientRect().top +
+                window.scrollY -
+                Number(gsap.getProperty(trigger, "y"));
+              ScrollTrigger.create({
+                id: `right-now-${id}`,
+                trigger,
+                start: () => top() - window.innerHeight * 1.08,
+                end: () => top() - window.innerHeight * 0.92,
+                // Entering either edge of the band keeps the previous state.
+                // Only leaving above/below the whole band changes direction.
+                onLeave: reveal,
+                onLeaveBack: conceal,
+                onRefresh: (self) => {
+                  if (self.scroll() >= self.end) reveal();
+                  else if (self.scroll() <= self.start) conceal();
+                },
+              });
+            });
 
             const hover = gsap.matchMedia();
             hover.add("(hover: hover) and (pointer: fine)", (hoverContext) => {

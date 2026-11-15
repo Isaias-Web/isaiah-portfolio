@@ -1,5 +1,7 @@
 # RightNow — motion design e integración GSAP
 
+Actualización aprobada: las entradas ahora son [reversibles con histéresis](RIGHT_NOW_REVERSIBLE.md). Este documento conserva el registro de la primera implementación de motion, que utilizaba una sola reproducción.
+
 Continuación aprobada del PR #4 sobre `feat/portfolio-v2-implementation`, sincronizada con el remoto en `36215e2` antes de editar. Se revisaron AGENTS, README, las auditorías, Hero, WhoAmI, Manifesto, GSAP compartido, SmoothScroll e `introReady`. El árbol inicial estaba limpio. Se conserva la composición editorial aprobada: contenido, tipografía, colores, columnas y espaciados.
 
 ## Archivos y commits
