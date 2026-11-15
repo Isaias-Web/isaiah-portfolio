@@ -10,26 +10,15 @@ export default function VapeMateStory() {
 
             <div className="mt-10 max-w-[930px] space-y-10">
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                Vape Mate fue un proyecto abordado desde la operación digital
-                diaria, donde desarrollo web, catálogo, contenido y experiencia
-                visual debían mantenerse alineados para sostener una presencia
-                online clara y funcional.
+                Vape Mate combina operación de eCommerce, gestión de catálogo y contenido para una marca de distribución con presencia en México y Europa.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                El reto no se limitaba a mantener una tienda activa, sino a
-                gestionar información de producto, estructurar catálogos,
-                desarrollar piezas visuales, implementar mejoras de UX/UI y dar
-                soporte a las necesidades comerciales de una empresa con presencia
-                en México y Europa.
+                El trabajo como webmaster y en UX/UI y diseño gráfico incluyó la organización de información de producto, piezas visuales y soporte a la operación digital diaria.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                La solución consistió en asumir un rol integral dentro de la
-                operación ecommerce, conectando Shopify, diseño, contenido y
-                comunicación visual para construir experiencias digitales más
-                efectivas, optimizar la presencia de marca y fortalecer su
-                ejecución comercial en distintos canales.
+                La implementación se apoyó en Shopify y Liquid, con JavaScript, CSS y contenido de producto. El catálogo y los materiales visuales formaron parte del soporte a los distintos canales de la marca.
               </p>
             </div>
           </div>

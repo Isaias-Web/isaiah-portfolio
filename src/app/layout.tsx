@@ -6,9 +6,9 @@ import { SmoothScrollProvider } from "@/components/SmoothScrollContext";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const siteUrl = "https://isaiasfrutos.dev";
-const siteTitle = "Isaías Frutos | Full-Stack Developer & Digital Solutions Architect";
+const siteTitle = "Isaías Frutos | Desarrollo full-stack, eCommerce y automatización";
 const siteDescription =
-  "Desarrollo web, eCommerce y soluciones digitales. Explora los proyectos, tecnologías y experiencia de Isaías Frutos en Next.js, Shopify y desarrollo de sistemas.";
+  "Desarrollo full-stack, eCommerce e integraciones. Experiencia en plataformas institucionales, automatización e ingeniería asistida por IA. Proyectos de Isaías Frutos.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

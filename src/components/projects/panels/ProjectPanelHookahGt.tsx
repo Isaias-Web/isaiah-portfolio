@@ -49,9 +49,9 @@ export default function ProjectPanelIntro({
 
         <div data-reveal className="flex flex-1 items-center pt-10 pb-8 sm:pt-12 md:pt-0 md:pb-0">
           <div className="relative w-full overflow-visible">
-            <h1 className="max-w-full text-[15vw] font-black uppercase leading-[0.92] tracking-[-0.045em] text-[#f3efe8] md:tracking-[-0.07em]">
+            <h3 className="max-w-full text-[15vw] font-black uppercase leading-[0.92] tracking-[-0.045em] text-[#f3efe8] md:tracking-[-0.07em]">
               HOOKAH GT
-            </h1>
+            </h3>
           </div>
         </div>
 
@@ -64,9 +64,9 @@ export default function ProjectPanelIntro({
               Ecommerce mayorista, catálogo y operación comercial
             </p>
 
-            <h3 className="mt-3 font-mono text-[22px] font-semibold leading-[1.08] tracking-[-0.03em] text-[#b79cff] sm:text-[24px] md:mt-4 md:text-[34px]">
+            <p className="mt-3 font-mono text-[22px] font-semibold leading-[1.08] tracking-[-0.03em] text-[#b79cff] sm:text-[24px] md:mt-4 md:text-[34px]">
               Plataforma B2B para distribución y escalabilidad de catálogo
-            </h3>
+            </p>
 
             <p className="mt-4 max-w-[760px] font-mono text-[12px] leading-[1.8] tracking-[0.01em] text-white/65 md:text-[13px] md:text-white/55">
               Optimización de la experiencia de compra mayorista mediante una

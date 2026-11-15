@@ -11,15 +11,15 @@ export default function TradeMateStory() {
 
             <div className="mt-10 max-w-[930px] space-y-10">
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                TradeMate es una plataforma de comercio diseñada para unificar operaciones B2B y B2C en un solo sistema. Nace de la necesidad de centralizar inventario, automatizar procesos y escalar múltiples canales de venta sin perder control operativo.
+                TradeMate reúne operaciones B2B y B2C, con un catálogo compartido y necesidades de gestión de inventario, productos y órdenes entre canales.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                Se desarrolló una arquitectura que permite gestionar productos, variantes y SKUs de forma eficiente, integrando flujos de mayoreo y menudeo dentro de una misma lógica. La sincronización de inventario y la automatización de órdenes reducen errores y optimizan la operación diaria.
+                El trabajo de desarrollo full-stack e integración se centró en conectar Shopify con la lógica operativa: productos, variantes, SKUs y flujos de mayoreo y menudeo.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                Más que una tienda, TradeMate funciona como un sistema de distribución digital, donde cada proceso está pensado para escalar: desde la gestión de stock hasta la integración entre plataformas.
+                La implementación utiliza APIs de Shopify, GraphQL y Webhooks, junto con Node.js y Redis/Upstash para coordinar los procesos de inventario y órdenes. El enlace permite consultar el sitio del proyecto.
               </p>
             </div>
           </div>

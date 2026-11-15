@@ -10,15 +10,15 @@ export default function TryfumStory() {
 
             <div className="mt-10 max-w-[930px] space-y-10">
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                TryFüm fue abordado como una experiencia enfocada en conversión, donde claridad de producto, narrativa visual y estructura debían trabajar en conjunto.
+                TryFüm es una experiencia de comercio directo al consumidor para presentar el producto y adaptar su comunicación al mercado mexicano.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                El reto no solo era diseñar una tienda atractiva, sino comunicar correctamente el valor del producto, mejorar la comprensión del usuario y optimizar el recorrido hacia la compra mediante una jerarquía clara, storytelling y secciones dinámicas.
+                El trabajo de eCommerce y UX/UI se centró en la estructura de la tienda, la jerarquía de información y la implementación de secciones de producto.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                La solución se centró en una experiencia limpia y estructurada, alineando branding, contenido y performance para lograr una navegación intuitiva, mayor claridad y mejores resultados de conversión.
+                La implementación combina Shopify y Liquid con JavaScript y CSS para organizar contenido, narrativa de marca y recorrido de compra.
               </p>
             </div>
           </div>

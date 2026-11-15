@@ -10,25 +10,15 @@ export default function HookahGtStory() {
 
             <div className="mt-10 max-w-[930px] space-y-10">
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                Hookah GT fue desarrollado como un ecosistema ecommerce B2B,
-                donde catálogo, estructura comercial y experiencia de usuario
-                debían funcionar con claridad dentro de un contexto de compra
-                mayorista.
+                Hookah GT es un entorno de comercio B2B orientado a distribuidores, con necesidades de catálogo, navegación y presentación de información para la compra mayorista.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                El reto no era solo construir una tienda funcional, sino
-                organizar un volumen amplio de productos, facilitar la
-                navegación y presentar la información de forma más estratégica
-                para distribuidores y clientes del canal comercial en Estados
-                Unidos y LATAM.
+                La participación como webmaster y en gestión de datos, UX/UI y soporte creativo se centró en organizar productos y contenido para el canal comercial.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                La solución se centró en optimizar la experiencia digital desde
-                Shopify, estructurar mejor el catálogo, apoyar la comunicación
-                visual de la marca y generar una base más clara, escalable y
-                útil para marketing, ventas y operación.
+                El trabajo en Shopify y Liquid, con JavaScript, CSS y diseño visual, integra catálogo y comunicación de producto. El sitio enlazado permite consultar la referencia pública del proyecto.
               </p>
             </div>
           </div>

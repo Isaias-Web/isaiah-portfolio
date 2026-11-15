@@ -4,15 +4,15 @@ import { useRef } from "react";
 import { useWhoAmIReveal } from "@/hooks/useWhoAmIReveal";
 
 const buildRows = [
-  { label: "CORE", value: "JavaScript · TypeScript · Shopify (Liquid, APIs, Webhooks)" },
-  { label: "FRONTEND", value: "React · Next.js · HTML · CSS · Tailwind" },
-  { label: "BACKEND", value: "Node.js · Express · APIs · Webhooks" },
+  { label: "ENFOQUE", value: "Full-stack · eCommerce · plataformas web" },
+  { label: "FRONTEND", value: "React · Next.js · TypeScript · HTML · CSS" },
+  { label: "BACKEND", value: "Node.js · PHP · Python" },
   { label: "DATA", value: "PostgreSQL · Redis · MySQL" },
-  { label: "INTEGRACIÓN", value: "GraphQL · REST APIs · Make · Integraciones de sistemas" },
-  { label: "ECOMMERCE & CMS", value: "Shopify · WordPress" },
-  { label: "DISEÑO", value: "Figma · Photoshop · Illustrator" },
-  { label: "ANIMACIÓN", value: "GSAP · Three.js" },
-  { label: "DEPLOY", value: "Vercel · AWS · Docker" },
+  { label: "INTEGRACIÓN", value: "REST · GraphQL · CRM · Webhooks" },
+  { label: "ECOMMERCE & CMS", value: "Shopify · Liquid · WordPress" },
+  { label: "FLUJOS", value: "Power Automate · Make · scripts" },
+  { label: "IA APLICADA", value: "ChatGPT · Codex · revisión y validación" },
+  { label: "DISEÑO", value: "UX/UI · Figma · Photoshop · Illustrator" },
 ];
 
 const cultureRows = [
@@ -46,7 +46,7 @@ function InfoTable({
       </p>
 
       <div className="mt-8 sm:mt-10 md:mt-16 lg:mt-20">
-        <h2
+        <h3
           data-reveal="title"
           className="font-black uppercase leading-[0.9] tracking-[-0.06em] text-[#f3efe8] text-[15vw] sm:text-[13vw] md:text-[4.8vw] lg:text-[5.2vw] xl:text-[6.6vw]"
         >
@@ -55,7 +55,7 @@ function InfoTable({
               {line}
             </span>
           ))}
-        </h2>
+        </h3>
       </div>
 
       <div className="mt-8 space-y-0 md:mt-12 lg:mt-14">
@@ -86,6 +86,7 @@ export default function WhoAmI() {
 
   return (
     <section
+      aria-labelledby="perfil-heading"
       ref={sectionRef}
       className="relative min-h-screen overflow-visible bg-[#090a09] text-white md:min-h-[100dvh] md:overflow-hidden"
     >
@@ -100,12 +101,13 @@ export default function WhoAmI() {
       <div className="relative mx-auto w-full max-w-[1600px] px-4 py-8 sm:px-5 md:flex md:min-h-[100dvh] md:flex-col md:px-7 md:py-10 lg:px-10 lg:py-12 xl:px-16">
         {/* top label */}
         <div className="mb-8 shrink-0 md:mb-14 lg:mb-16">
-          <p
+          <h2
+            id="perfil-heading"
             data-reveal="section-label"
             className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]"
           >
-            Quien soy / p. 003
-          </p>
+            Quién soy / p. 003
+          </h2>
         </div>
 
         {/* content area */}

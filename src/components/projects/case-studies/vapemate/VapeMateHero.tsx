@@ -21,12 +21,11 @@ export default function VapeMateHero() {
             CASO DE ESTUDIO
           </p>
 
-          <button
-            type="button"
+          <p
             className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] transition-opacity duration-300 hover:opacity-70 md:text-[11px]"
           >
             ECOMMERCE · WEBMASTER · UX/UI · CREATIVE SUPPORT
-          </button>
+          </p>
         </div>
 
         <div className="mt-12 flex items-start justify-between gap-6 md:mt-16">
@@ -46,9 +45,9 @@ export default function VapeMateHero() {
 
         <div className="mt-auto flex flex-col">
           <div className="border-b border-[#6d56ff]/45 pb-4">
-            <h1 className="text-[22vw] font-black uppercase leading-[0.86] tracking-[-0.08em] text-[#f3efe8] md:text-[15vw] lg:text-[13vw]">
+            <h2 className="text-[22vw] font-black uppercase leading-[0.86] tracking-[-0.08em] text-[#f3efe8] md:text-[15vw] lg:text-[13vw]">
               Vape Mate
-            </h1>
+            </h2>
           </div>
 
           <p className="mt-4 max-w-[760px] font-mono text-[13px] leading-[1.8] text-[#8f7cff] md:mt-5 md:text-[15px]">

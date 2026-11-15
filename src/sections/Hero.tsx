@@ -33,7 +33,7 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const topBarRef = useRef<HTMLDivElement | null>(null);
   const firstLineRef = useRef<HTMLHeadingElement | null>(null);
-  const secondLineRef = useRef<HTMLHeadingElement | null>(null);
+  const secondLineRef = useRef<HTMLParagraphElement | null>(null);
   const dividerRef = useRef<HTMLDivElement | null>(null);
   const bottomMetaRef = useRef<HTMLDivElement | null>(null);
   const bgRef = useRef<HTMLDivElement | null>(null);
@@ -254,7 +254,7 @@ export default function Hero() {
       <div ref={bgRef} className="absolute inset-0 z-0 will-change-transform">
         <Image
           src="/images/hero-portfolio.png"
-          alt="Isaias Frutos portrait background"
+          alt="Retrato de Isaías Frutos"
           fill
           priority
           className="object-cover object-center"
@@ -307,7 +307,7 @@ export default function Hero() {
 
             <div className="max-w-[520px] text-right">
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/80 md:text-[12px]">
-                Full-Stack Developer & Digital Solutions Architect
+                Desarrollo full-stack · eCommerce · integraciones
               </p>
               <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
                 ↓ Desplázate para sintonizar
@@ -321,20 +321,21 @@ export default function Hero() {
       <div className="absolute inset-x-6 bottom-24 z-30 md:inset-x-10 md:bottom-28 lg:inset-x-16 lg:bottom-32">
         <div className="max-w-[1300px] overflow-visible">
           <h1
+            aria-label="Isaías Frutos"
             ref={firstLineRef}
             className="font-black uppercase leading-[0.84] tracking-[-0.065em] text-[#ff2d00] text-[24vw] sm:text-[21vw] md:text-[18vw] lg:text-[15vw] will-change-transform drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
           >
-            {splitText("Isaias")}
+            {splitText("Isaías")}
           </h1>
         </div>
 
         <div className="max-w-[1300px] overflow-visible">
-          <h2
+          <p
             ref={secondLineRef}
             className="font-black uppercase leading-[0.88] tracking-[-0.065em] text-white text-[24vw] sm:text-[21vw] md:text-[18vw] lg:text-[15vw] will-change-transform drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
           >
             {splitText("Frutos")}
-          </h2>
+          </p>
         </div>
       </div>
 
