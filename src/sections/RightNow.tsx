@@ -1,3 +1,8 @@
+"use client";
+
+import { useRef } from "react";
+import { useRightNowReveal } from "@/hooks/useRightNowReveal";
+
 const responsibilities = [
   "Desarrollo y evolución de sitios, landings y funcionalidades con WordPress, PHP, HTML, CSS y JavaScript.",
   "Integración y mantenimiento de formularios conectados a CRM, servicios externos y mecanismos de validación.",
@@ -20,22 +25,34 @@ const workflow = [
 ];
 
 export default function RightNow() {
+  const sectionRef = useRef<HTMLElement>(null);
+  useRightNowReveal(sectionRef);
+
   return (
     <section
+      ref={sectionRef}
       id="experiencia"
       aria-labelledby="experience-heading"
       className="relative overflow-hidden bg-[#090a09] text-white"
     >
       <div className="relative px-6 py-10 md:px-10 md:py-12 lg:px-16 lg:py-14">
-        <p className="mb-8 font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
+        <p data-right-now-reveal="label" className="mb-8 font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
           / experiencia y método / p. 005
         </p>
         <h2
           id="experience-heading"
+          aria-label="Perfil actual"
           className="max-w-[620px] font-black uppercase leading-[0.84] tracking-[-0.07em] text-[#f3efe8] text-[24vw] sm:text-[20vw] md:text-[15vw] lg:text-[13vw]"
         >
-          <span className="block">PERFIL</span>
-          <span className="block text-[#ff2d00]">ACTUAL</span>
+          {["PERFIL", "ACTUAL"].map((line, lineIndex) => (
+            <span key={line} aria-hidden="true" className={lineIndex ? "block whitespace-nowrap text-[#ff2d00]" : "block whitespace-nowrap"}>
+              {line.split("").map((letter, index) => (
+                <span key={`${line}-${index}`} data-right-now-reveal="letter" className="inline-block">
+                  <span data-right-now-letter className="inline-block">{letter}</span>
+                </span>
+              ))}
+            </span>
+          ))}
         </h2>
         <article
           aria-labelledby="uic-heading"

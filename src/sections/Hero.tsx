@@ -5,17 +5,7 @@ import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
 import Image from "next/image";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/animations/gsap-config";
-
-const letterOffsets = [
-  { x: -14, y: 10, rotation: -4 },
-  { x: 8, y: -12, rotation: 3 },
-  { x: 14, y: 8, rotation: 4 },
-  { x: -8, y: -10, rotation: -3 },
-  { x: 10, y: 4, rotation: 2 },
-  { x: -12, y: 6, rotation: -2 },
-  { x: 6, y: -8, rotation: 3 },
-  { x: 12, y: -6, rotation: 2 },
-];
+import { letterOffsets } from "@/animations/letter-motion";
 
 function splitText(text: string) {
   return text.split("").map((char, i) => (
