@@ -78,24 +78,35 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
         media.add("(prefers-reduced-motion: no-preference)", () => {
           if (failed) return;
           try {
-            const label = section.querySelector(
-              '[data-right-now-reveal="label"]',
-            );
-            const letters = section.querySelectorAll(
-              '[data-right-now-reveal="letter"]',
-            );
-            const title = gsap.timeline({
-              defaults: { ease: "power3.out", duration: 0.55 },
-              scrollTrigger: {
-                id: "right-now-title",
-                trigger: label,
-                start: "top 92%",
-                toggleActions: "play none none none",
-                once: true,
-              },
-            });
-            // Deferring the from-state until playback keeps unvisited content
-            // visible if ScrollTrigger never runs. Layout is never changed.
+            const targetsFor = (...names: string[]) =>
+              section.querySelectorAll(
+                names
+                  .map((name) => `[data-right-now-reveal="${name}"]`)
+                  .join(","),
+              );
+            const sequence = (
+              id: string,
+              trigger: Element,
+              targets: gsap.TweenTarget = trigger,
+            ) =>
+              gsap
+                .timeline({
+                  defaults: { ease: "power3.out", duration: 0.55 },
+                  scrollTrigger: {
+                    id: `right-now-${id}`,
+                    trigger,
+                    start: "top 92%",
+                    toggleActions: "play none none none",
+                    once: true,
+                  },
+                })
+                .set(targets, { opacity: 0, y: 18, immediateRender: false }, 0);
+            const label = targetsFor("label")[0];
+            const letters = targetsFor("letter");
+            if (!label || !letters.length) return;
+            const title = sequence("title", label, [label, ...letters]);
+            // Only a playing timeline primes its group, before the stagger.
+            // Unvisited content stays visible if ScrollTrigger never runs.
             title
               .fromTo(
                 label,
@@ -119,17 +130,6 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
                 0.18,
               );
 
-            const sequence = (id: string, trigger: Element) =>
-              gsap.timeline({
-                defaults: { ease: "power3.out", duration: 0.55 },
-                scrollTrigger: {
-                  id: `right-now-${id}`,
-                  trigger,
-                  start: "top 92%",
-                  toggleActions: "play none none none",
-                  once: true,
-                },
-              });
             const reveal = (
               timeline: gsap.core.Timeline,
               selector: string,
@@ -137,9 +137,7 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
               stagger = 0,
             ) =>
               timeline.fromTo(
-                section.querySelectorAll(
-                  `[data-right-now-reveal="${selector}"]`,
-                ),
+                targetsFor(selector),
                 { opacity: 0, y: 18 },
                 { opacity: 1, y: 0, immediateRender: false, stagger },
                 position,
@@ -149,7 +147,11 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
               '[data-right-now-reveal="uic-label"]',
             );
             if (uicLabel) {
-              const uic = sequence("uic", uicLabel);
+              const uic = sequence(
+                "uic",
+                uicLabel,
+                targetsFor("uic-label", "uic-title", "uic-meta", "uic-date"),
+              );
               reveal(uic, "uic-label", 0);
               reveal(uic, "uic-title", 0.16);
               reveal(uic, "uic-meta", 0.4, 0.08);
@@ -159,7 +161,11 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
               '[data-right-now-reveal="ai-label"]',
             );
             if (aiLabel) {
-              const ai = sequence("engineering", aiLabel);
+              const ai = sequence(
+                "engineering",
+                aiLabel,
+                targetsFor("ai-label", "ai-line", "ai-intro"),
+              );
               reveal(ai, "ai-label", 0);
               reveal(ai, "ai-line", 0.16, 0.1);
               reveal(ai, "ai-intro", 0.5);
