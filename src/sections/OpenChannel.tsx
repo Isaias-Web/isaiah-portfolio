@@ -1,4 +1,8 @@
+"use client";
+
+import { useRef } from "react";
 import ContactForm from "@/components/contact/ContactForm";
+import { useContactGlow } from "@/hooks/useContactGlow";
 
 const socialLinks = [
   { label: "Sitio", href: "https://isaiasfrutos.dev" },
@@ -8,13 +12,30 @@ const socialLinks = [
 ];
 
 export default function OpenChannel() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  useContactGlow(sectionRef, glowRef);
+
   return (
     <section
+      ref={sectionRef}
       id="contacto"
       aria-labelledby="contact-heading"
-      className="relative min-h-screen overflow-hidden bg-[#090a09] text-white"
+      className="relative isolate min-h-screen overflow-hidden bg-[#090a09] text-white"
     >
-      <div className="relative flex min-h-screen flex-col px-6 py-10 md:px-10 md:py-12 lg:px-16 lg:py-14">
+      <div
+        ref={glowRef}
+        data-contact-glow
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-0 z-0 opacity-0"
+        style={{
+          width: "min(64rem, 120vw)",
+          height: "min(64rem, 120vw)",
+          backgroundImage:
+            "radial-gradient(ellipse at center, rgba(255,45,0,0.13) 0%, rgba(255,45,0,0.055) 32%, rgba(255,45,0,0.018) 52%, transparent 72%)",
+        }}
+      />
+      <div className="relative z-10 flex min-h-screen flex-col px-6 py-10 md:px-10 md:py-12 lg:px-16 lg:py-14">
         <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
           / contacto / p. 006
         </p>
@@ -61,9 +82,7 @@ export default function OpenChannel() {
           </div>
           <ContactForm />
         </div>
-        <div
-          className="mt-16 flex flex-col gap-4 border-t border-white/15 pt-8 text-[10px] uppercase tracking-[0.18em] text-white/40 md:flex-row md:items-end md:justify-between md:text-[11px]"
-        >
+        <div className="mt-16 flex flex-col gap-4 border-t border-white/15 pt-8 text-[10px] uppercase tracking-[0.18em] text-white/40 md:flex-row md:items-end md:justify-between md:text-[11px]">
           <p className="font-mono">© 2026 ISAÍAS FRUTOS — isaiasfrutos.dev</p>
           <p className="font-mono">
             Desarrollo full-stack · eCommerce · integraciones
