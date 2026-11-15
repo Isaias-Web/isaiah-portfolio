@@ -37,7 +37,7 @@ export default function OpenChannel() {
             </p>
             <a
               href="mailto:isaiahweb333@gmail.com"
-              className="mt-4 inline-block max-w-full break-all text-[clamp(1.1rem,3.5vw,3.4rem)] font-black uppercase leading-[1.25] tracking-[-0.03em] text-[#f3efe8]"
+              className="mt-4 inline-block max-w-full break-all text-[clamp(1.1rem,2.6vw,2.8rem)] font-black uppercase leading-[1.25] tracking-[-0.03em] text-[#f3efe8]"
             >
               isaiahweb333@gmail.com
             </a>

@@ -8,8 +8,18 @@ import {
   type ContactValues,
 } from "@/lib/contact";
 
-type FormState = { errors: ContactErrors; reviewed: boolean; revision: number };
-const initialState: FormState = { errors: {}, reviewed: false, revision: 0 };
+type FormState = {
+  errors: ContactErrors;
+  reviewed: boolean;
+  reviewedValues: ContactValues | null;
+  revision: number;
+};
+const initialState: FormState = {
+  errors: {},
+  reviewed: false,
+  reviewedValues: null,
+  revision: 0,
+};
 
 async function reviewDemo(
   previous: FormState,
@@ -26,6 +36,7 @@ async function reviewDemo(
   return {
     errors,
     reviewed: Object.keys(errors).length === 0,
+    reviewedValues: values,
     revision: previous.revision + 1,
   };
 }
@@ -45,6 +56,12 @@ export default function ContactForm() {
   });
   const formRef = useRef<HTMLFormElement>(null);
   const statusRef = useRef<HTMLParagraphElement>(null);
+  const reviewIsCurrent =
+    state.reviewed &&
+    state.reviewedValues &&
+    (Object.keys(values) as (keyof ContactValues)[]).every(
+      (key) => values[key] === state.reviewedValues?.[key],
+    );
 
   useEffect(() => {
     if (!state.revision) return;
@@ -67,6 +84,7 @@ export default function ContactForm() {
       <form
         ref={formRef}
         action={action}
+        onReset={(event) => event.preventDefault()}
         noValidate
         data-contact-demo
         aria-labelledby="contact-form-heading"
@@ -240,11 +258,13 @@ export default function ContactForm() {
           aria-live="polite"
           className="mt-4 font-mono text-[12px] leading-[1.8] text-white/75"
         >
-          {state.reviewed
+          {reviewIsCurrent
             ? "Datos revisados. Esta demostración no envía mensajes. Para continuar, utiliza el enlace de correo."
-            : state.revision
-              ? "Revisa los campos indicados. No se ha enviado ningún mensaje."
-              : "Para enviar una consulta real, escríbeme por correo."}
+            : state.reviewed
+              ? "Los datos han cambiado. Vuelve a revisar la consulta. No se ha enviado ningún mensaje."
+              : state.revision
+                ? "Revisa los campos indicados. No se ha enviado ningún mensaje."
+                : "Para enviar una consulta real, escríbeme por correo."}
         </p>
       </form>
     </div>
