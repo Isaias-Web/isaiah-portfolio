@@ -111,7 +111,7 @@ export default function WhoAmI() {
         {/* content area */}
         <div className="relative md:flex-1">
           <div className="grid gap-14 md:h-full md:min-h-full md:grid-cols-2 md:gap-0">
-            <div className="flex flex-col md:h-full md:justify-center md:pr-4 lg:pr-6 xl:pr-14">
+            <div className="flex flex-col md:h-full md:pr-4 lg:pr-6 xl:pr-14">
               <InfoTable
                 eyebrow="El código"
                 title={`Lo que\ndesarrollo`}
@@ -119,7 +119,7 @@ export default function WhoAmI() {
               />
             </div>
 
-            <div className="flex flex-col md:h-full md:justify-center md:pl-4 lg:pl-6 xl:pl-14">
+            <div className="flex flex-col md:h-full md:pl-4 lg:pl-6 xl:pl-14">
               <InfoTable
                 eyebrow="Mi cultura"
                 title={`Lo que\nme mueve`}
