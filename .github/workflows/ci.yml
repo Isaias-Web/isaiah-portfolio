@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, feat/portfolio-v2-audit]
 
 permissions:
   contents: read
@@ -26,5 +26,7 @@ jobs:
         run: npm run lint
       - name: TypeScript
         run: npx tsc --noEmit
+      - name: Contact demo validation
+        run: node --experimental-strip-types --test tests/contact.test.mjs
       - name: Production build
         run: npm run build
