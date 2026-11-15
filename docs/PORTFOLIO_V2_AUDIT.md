@@ -1,5 +1,7 @@
 # Portfolio V2 — auditoría técnica, editorial y de experiencia
 
+La implementación posterior, separada del PR #3 y basada en `2443026`, se documenta en [Portfolio V2 — implementación](PORTFOLIO_V2_IMPLEMENTATION.md). El inventario siguiente conserva el estado observado durante la auditoría; consultar ese informe para las funcionalidades aprobadas e incorporadas después.
+
 ## Alcance y base
 
 Revisión del brief «PORTFOLIO V2 — Technical, Content & UX Evolution» contra los componentes y recursos reales de `Isaias-Web/isaiah-portfolio`. Rama nueva: `feat/portfolio-v2-audit`, desde `origin/main` en `eb4a8c4` (PR #2 integrado). `main` ya incluye la auditoría, HTML inicial/introReady, correcciones de Hooks y los ajustes de títulos tablet/Manifesto de los PR #1 y #2. Se leyeron `AGENTS.md`, `README.md` y `docs/TECHNICAL_AUDIT.md` antes de editar.
