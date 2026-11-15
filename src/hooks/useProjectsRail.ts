@@ -1,20 +1,49 @@
 "use client";
 
-import { RefObject, useLayoutEffect, useState } from "react";
+import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
+
+import { RefObject, useLayoutEffect, useState, useSyncExternalStore } from "react";
 import { gsap } from "@/animations/gsap-config";
+
+// GSAP owns the tween's lifecycle. React subscribes to its current handle;
+// publishing/reverting that external resource must not copy it into state
+// from a layout effect. Each mounted rail gets its own store.
+function createRailStore() {
+  let tween: gsap.core.Tween | null = null;
+  const listeners = new Set<() => void>();
+  return {
+    getSnapshot: () => tween,
+    subscribe: (listener: () => void) => {
+      listeners.add(listener);
+      return () => { listeners.delete(listener); };
+    },
+    publish: (next: gsap.core.Tween | null) => {
+      if (tween === next) return;
+      tween = next;
+      for (const listener of listeners) listener();
+    },
+  };
+}
+
+const getServerSnapshot = () => null;
 
 export function useProjectsRail(
   sectionRef: RefObject<HTMLElement | null>,
   trackRef: RefObject<HTMLDivElement | null>
 ) {
-  const [railTween, setRailTween] = useState<gsap.core.Tween | null>(null);
+  const [store] = useState(createRailStore);
+  const railTween = useSyncExternalStore(
+    store.subscribe, store.getSnapshot, getServerSnapshot
+  );
+
+  const { introReady } = useSmoothScrollControl();
 
   useLayoutEffect(() => {
+    if (!introReady) return;
     const section = sectionRef.current;
     const track = trackRef.current;
 
     if (!section || !track) {
-      setRailTween(null);
       return;
     }
 
@@ -39,14 +68,14 @@ export function useProjectsRail(
         },
       });
 
-      setRailTween(horizontalTween);
+      store.publish(horizontalTween);
     }, section);
 
     return () => {
-      setRailTween(null);
+      store.publish(null);
       ctx.revert();
     };
-  }, [sectionRef, trackRef]);
+  }, [sectionRef, trackRef, introReady, store]);
 
   return railTween;
 }

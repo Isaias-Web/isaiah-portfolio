@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "@/animations/gsap-config";
 
 type ProjectDetailShellProps = {
@@ -23,7 +23,7 @@ export default function ProjectDetailShell({
 
   const [isClosing, setIsClosing] = useState(false);
 
-  const handleRequestClose = () => {
+  const handleRequestClose = useCallback(() => {
     if (isClosing) return;
     setIsClosing(true);
 
@@ -38,7 +38,7 @@ export default function ProjectDetailShell({
     });
 
     tl.reverse();
-  };
+  }, [isClosing, onClose]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -47,7 +47,7 @@ export default function ProjectDetailShell({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [handleRequestClose]);
 
   useEffect(() => {
     if (!scrollRef) return;
@@ -125,7 +125,7 @@ export default function ProjectDetailShell({
         <div className="flex h-[100dvh] flex-col">
           <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-6 py-5 md:px-10 lg:px-16">
             <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
-              isaiasfrutosweb.site
+              isaiasfrutos.dev
             </p>
 
             <button

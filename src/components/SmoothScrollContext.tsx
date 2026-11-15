@@ -10,6 +10,8 @@ import {
 } from "react";
 
 type SmoothScrollContextValue = {
+  introReady: boolean;
+  completeIntro: () => void;
   paused: boolean;
   pauseScroll: () => void;
   resumeScroll: () => void;
@@ -23,6 +25,8 @@ export function SmoothScrollProvider({
   children: ReactNode;
 }) {
   const [paused, setPaused] = useState(false);
+  const [introReady, setIntroReady] = useState(false);
+  const completeIntro = useCallback(() => setIntroReady(true), []);
 
   const pauseScroll = useCallback(() => {
     setPaused(true);
@@ -34,11 +38,13 @@ export function SmoothScrollProvider({
 
   const value = useMemo(
     () => ({
-      paused,
+      introReady,
+      completeIntro,
+      paused: !introReady || paused,
       pauseScroll,
       resumeScroll,
     }),
-    [paused, pauseScroll, resumeScroll]
+    [introReady, completeIntro, paused, pauseScroll, resumeScroll]
   );
 
   return (

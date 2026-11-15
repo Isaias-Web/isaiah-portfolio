@@ -1,10 +1,15 @@
 "use client";
 
+import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
+
 import { RefObject, useLayoutEffect } from "react";
 import { gsap } from "@/animations/gsap-config";
 
 export function useWhoAmIReveal(ref: RefObject<HTMLElement | null>) {
+  const { introReady } = useSmoothScrollControl();
+
   useLayoutEffect(() => {
+    if (!introReady) return;
     const section = ref.current;
     if (!section) return;
 
@@ -131,5 +136,5 @@ export function useWhoAmIReveal(ref: RefObject<HTMLElement | null>) {
     }, section);
 
     return () => ctx.revert();
-  }, [ref]);
+  }, [ref, introReady]);
 }

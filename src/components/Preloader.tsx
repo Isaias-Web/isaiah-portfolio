@@ -59,7 +59,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
     lineRef,
     setProgress,
     onComplete,
-    deps: [svgWidth],
+    svgWidth,
   });
 
   const padded = String(progress).padStart(3, "0");
@@ -111,7 +111,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
           <div className="max-w-[980px]">
             <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.35em] text-[#ff2d00] md:text-[11px]">
-              isaiasfrutosweb.site / Entrando a sitio web
+              isaiasfrutos.dev / Entrando a sitio web
             </p>
           </div>
         </div>

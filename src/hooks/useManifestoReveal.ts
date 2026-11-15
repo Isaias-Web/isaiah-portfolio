@@ -1,12 +1,17 @@
 "use client";
 
+import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
+
 import { useLayoutEffect } from "react";
 import { gsap, ScrollTrigger } from "@/animations/gsap-config";
 
 export function useManifestoReveal(
   ref: React.RefObject<HTMLElement | null>
 ) {
+  const { introReady } = useSmoothScrollControl();
+
   useLayoutEffect(() => {
+    if (!introReady) return;
     const section = ref.current;
     if (!section) return;
 
@@ -61,5 +66,5 @@ export function useManifestoReveal(
     }, section);
 
     return () => ctx.revert();
-  }, [ref]);
+  }, [ref, introReady]);
 }

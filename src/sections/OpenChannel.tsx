@@ -1,5 +1,5 @@
 const socialLinks = [
-  { label: "Sitio", href: "https://www.isaiasfrutosweb.site" },
+  { label: "Sitio", href: "https://isaiasfrutos.dev" },
   { label: "CV", href: "/cv-isaias-frutos.pdf" },
   { label: "GitHub", href: "https://github.com/Isaias-Web" },
   { label: "Instagram", href: "https://www.instagram.com/isaiah_sfc/" },
@@ -66,7 +66,7 @@ export default function OpenChannel() {
         {/* footer */}
         <div className="mt-auto flex flex-col gap-4 pt-16 text-[10px] uppercase tracking-[0.18em] text-white/20 md:flex-row md:items-end md:justify-between md:text-[11px]">
           <p className="font-mono">
-            © 2026 ISAÍAS FRUTOS — isaiasfrutosweb.site
+            © 2026 ISAÍAS FRUTOS — isaiasfrutos.dev
           </p>
 
           <p className="font-mono">

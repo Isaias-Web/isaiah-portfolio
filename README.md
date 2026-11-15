@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Isaías Frutos — Portfolio
 
-## Getting Started
+Portfolio personal de Isaías Frutos: desarrollo web, soluciones digitales y eCommerce.
 
-First, run the development server:
+**Producción:** https://isaiasfrutos.dev  
+**Repositorio:** https://github.com/Isaias-Web/isaiah-portfolio
+
+## Stack
+
+- Next.js 16 (App Router) + React 19 + TypeScript
+- Tailwind CSS 4
+- GSAP y ScrollTrigger para animaciones
+- Lenis para smooth scroll
+- Vercel para despliegue continuo
+
+## Desarrollo local
+
+Requisitos: Node.js compatible con Next.js 16 y npm.
 
 ```bash
+git clone https://github.com/Isaias-Web/isaiah-portfolio.git
+cd isaiah-portfolio
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Validaciones antes de publicar
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npx tsc --noEmit
+npm run build
+```
 
-## Learn More
+Estas comprobaciones deben ejecutarse localmente; la existencia de los comandos no supone que ya hayan pasado.
 
-To learn more about Next.js, take a look at the following resources:
+## Estructura principal
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/app/`: layout, página principal, estilos globales y metadatos SEO.
+- `src/sections/`: secciones narrativas del portfolio (Hero, Manifesto, WhoAmI, ProjectsRail, RightNow, OpenChannel).
+- `src/components/`: interfaz, preloader, cursor y smooth scroll.
+- `src/animations/` y `src/hooks/`: animaciones y hooks reutilizables.
+- `public/`: imágenes, archivos y recursos estáticos.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Flujo Git y Vercel
 
-## Deploy on Vercel
+1. Mantener `main` como rama de producción.
+2. Crear una rama por ajuste: `feature/...`, `fix/...` o `chore/...`.
+3. Revisar cambios y ejecutar las validaciones.
+4. Subir la rama y revisar el Preview Deployment de Vercel.
+5. Abrir Pull Request hacia `main` y fusionar solamente tras validar.
+6. Vercel despliega automáticamente los cambios integrados a la rama de producción.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+No incluir secretos, archivos `.env` ni credenciales en los commits.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## SEO y dominios
+
+- Dominio canónico: `https://isaiasfrutos.dev`.
+- `https://www.isaiasfrutos.dev` redirige con 308 al dominio principal (configurado en Vercel).
+- Los metadatos globales están en `src/app/layout.tsx`.
+- `src/app/robots.ts` genera `/robots.txt`.
+- `src/app/sitemap.ts` genera `/sitemap.xml`.
+
+**Pendiente de validar:** presentación para bots con preloader y renderizado cliente, Core Web Vitals, navegación por teclado, movimiento reducido y una imagen Open Graph personalizada.
+
+## Contacto
+
+Consultar el apartado de contacto del portfolio.
