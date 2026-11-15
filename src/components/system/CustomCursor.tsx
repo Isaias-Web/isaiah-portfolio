@@ -13,6 +13,7 @@ export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const moveCursor = (e: MouseEvent) => {
       mouse.current.x = e.clientX;
       mouse.current.y = e.clientY;
@@ -67,6 +68,7 @@ export default function CustomCursor() {
     <>
       <div
         ref={cursorRef}
+        data-custom-cursor
         className={`pointer-events-none fixed left-0 top-0 z-[9999] hidden rounded-full border border-white/85 mix-blend-difference transition-[width,height,opacity,background-color,border-color] duration-300 ease-out md:block ${
           isVisible ? "opacity-100" : "opacity-0"
         } ${isPointer ? "h-16 w-16" : "h-10 w-10"}`}
@@ -74,6 +76,7 @@ export default function CustomCursor() {
 
       <div
         ref={dotRef}
+        data-custom-cursor
         className={`pointer-events-none fixed left-0 top-0 z-[10000] hidden rounded-full bg-white mix-blend-difference transition-[opacity,transform] duration-200 ease-out md:block ${
           isVisible && !isPointer ? "opacity-100 h-1.5 w-1.5" : "opacity-0 h-1.5 w-1.5"
         }`}

@@ -12,7 +12,7 @@ import HookahGtCaseStudy from "@/components/projects/case-studies/HookahGtCaseSt
 import HookahPartnerCaseStudy from "@/components/projects/case-studies/HookahPartnerCaseStudy";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
-import type { CaseStudySlug } from "@/data/caseStudies";
+import { caseStudies, type CaseStudySlug } from "@/data/caseStudies";
 
 export type ProjectKey = "trademate" | "tryfum" | "onda" | "sectravision" | "vapemate" | "hookahgt" | "hookahpartner" | null;
 
@@ -141,7 +141,7 @@ export default function ProjectOverlayHost({
   if (!isOpen) return null;
 
   return (
-    <ProjectDetailShell onClose={onClose} scrollRef={shellScrollRef}>
+    <ProjectDetailShell title={caseStudies.find((project) => project.slug === displayedProject)?.title ?? "Proyecto"} onClose={onClose} scrollRef={shellScrollRef}>
       <div ref={contentRef}>
 
         {displayedProject === "trademate" && (

@@ -1,5 +1,6 @@
 "use client";
 
+import ProjectOpenButton from "@/components/projects/ProjectOpenButton";
 import { useRef } from "react";
 import { gsap } from "@/animations/gsap-config";
 import { useProjectPanelReveal } from "@/hooks/useProjectPanelReveal";
@@ -20,10 +21,10 @@ export default function ProjectPanelIntro({
   return (
     <section
       ref={panelRef}
-      onClick={onOpen}
       data-cursor="zoom"
       className="relative min-h-screen w-full overflow-hidden bg-[#090a09] text-white md:h-full"
     >
+      <ProjectOpenButton name="TryFüm" panelRef={panelRef} railTween={railTween} onOpen={onOpen} />
       {/* background image */}
       <div className="absolute inset-0 z-0">
         <img
