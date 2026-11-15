@@ -22,12 +22,11 @@ export default function TradeMateHero() {
             CASO DE ESTUDIO
           </p>
 
-          <button
-            type="button"
+          <p
             className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] transition-opacity duration-300 hover:opacity-70 md:text-[11px]"
           >
             Sistema de comercio B2B/B2C
-          </button>
+          </p>
         </div>
 
         {/* secondary meta */}
@@ -49,9 +48,9 @@ export default function TradeMateHero() {
         {/* hero content */}
         <div className="mt-auto flex flex-col">
           <div className="border-b border-[#6d56ff]/45 pb-4">
-            <h1 className="max-w-full text-[15vw] font-black uppercase leading-[0.9] tracking-[-0.045em] text-[#f3efe8] sm:text-[16.5vw] md:text-[15vw] md:tracking-[-0.07em] lg:text-[13vw]">
+            <h2 className="max-w-full text-[15vw] font-black uppercase leading-[0.9] tracking-[-0.045em] text-[#f3efe8] sm:text-[16.5vw] md:text-[15vw] md:tracking-[-0.07em] lg:text-[13vw]">
               TRADEMATE
-            </h1>
+            </h2>
           </div>
 
           <p className="mt-4 max-w-[720px] font-mono text-[13px] leading-[1.8] text-[#8f7cff] md:mt-5 md:text-[15px]">

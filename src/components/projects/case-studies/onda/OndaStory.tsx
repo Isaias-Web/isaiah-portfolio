@@ -10,15 +10,15 @@ export default function OndaStory() {
 
             <div className="mt-10 max-w-[930px] space-y-10">
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                ONDA fue abordado como una experiencia de marca, donde identidad visual, narrativa y producto debían sentirse coherentes y emocionales en cada punto de contacto.
+                ONDA reúne una tienda digital y una propuesta de marca dentro del segmento wellness, donde producto, contenido e identidad visual necesitan funcionar en conjunto.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                El reto no era solo construir una tienda funcional, sino transmitir una sensación clara de marca: premium, cercana y alineada al universo wellness, cuidando la estética sin perder claridad en la comunicación del producto.
+                El trabajo de eCommerce y experiencia de marca se centró en organizar la información de producto y traducir la narrativa visual a una navegación consistente.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                La solución se centró en una experiencia estructurada y visualmente consistente, integrando branding, storytelling y contenido para generar una navegación intuitiva, reforzar la percepción de marca y mejorar la conversión.
+                La implementación utiliza Shopify, Liquid, JavaScript y CSS para integrar contenido y presentación de producto.
               </p>
             </div>
           </div>

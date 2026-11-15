@@ -27,11 +27,8 @@ export default function HookahGtFeature() {
                   <div className="mt-3 h-px w-[58%] bg-[#ff2d00]" />
 
                   <p className="mt-3 max-w-[460px] font-mono text-[10px] leading-[1.8] text-white/55 md:text-[11px]">
-                    Plataforma ecommerce B2B enfocada en distribución de
-                    productos de shisha, donde catálogo, experiencia de compra
-                    mayorista y estructura comercial debían funcionar con mayor
-                    claridad, orden y escalabilidad.
-                  </p>
+              Catálogo y navegación de comercio mayorista, con información de producto organizada para el canal B2B.
+            </p>
                 </div>
 
                 <div className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-[#ff2d00]" />

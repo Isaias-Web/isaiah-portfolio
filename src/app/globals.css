@@ -14,7 +14,7 @@ body {
   color: var(--text);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
   html,
   body,
   a,
@@ -27,5 +27,30 @@ body {
   label {
     cursor: none !important;
   }
+}
+
+:is(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid #ff2d00;
+  outline-offset: 4px;
+}
+
+[data-project-open]:focus-visible {
+  outline-offset: -4px;
+}
+
+input, textarea {
+  cursor: text !important;
+}
+
+select {
+  cursor: auto !important;
+}
+
+@media (hover: none), (pointer: coarse) {
+  [data-custom-cursor] { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 

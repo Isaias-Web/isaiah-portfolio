@@ -65,7 +65,7 @@ export default function Page() {
     <>
       <noscript>
         <style>{`
-          [data-intro-layer] { display: none !important; }
+          [data-intro-layer], [data-project-open] { display: none !important; }
           html, body, a, button { cursor: auto !important; }
           .manifesto-word { opacity: 1 !important; }
           [data-projects-rail], [data-projects-track], [data-projects-track] > div {

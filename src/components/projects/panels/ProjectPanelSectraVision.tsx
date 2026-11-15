@@ -1,5 +1,6 @@
 "use client";
 
+import ProjectOpenButton from "@/components/projects/ProjectOpenButton";
 import { useRef } from "react";
 import { gsap } from "@/animations/gsap-config";
 import { useProjectPanelReveal } from "@/hooks/useProjectPanelReveal";
@@ -20,10 +21,10 @@ export default function ProjectPanelIntro({
   return (
     <section
       ref={panelRef}
-      onClick={onOpen}
       data-cursor="zoom"
       className="relative min-h-screen w-full overflow-hidden bg-[#090a09] text-white md:h-full"
     >
+      <ProjectOpenButton name="Sectra Visión" panelRef={panelRef} railTween={railTween} onOpen={onOpen} />
       {/* background image */}
       <div className="absolute inset-0 z-0">
         <img
@@ -52,9 +53,9 @@ export default function ProjectPanelIntro({
           className="flex flex-1 items-center pt-10 pb-8 sm:pt-12 md:pt-0 md:pb-0"
         >
           <div className="relative w-full overflow-visible">
-            <h1 className="max-w-full text-[18vw] font-black uppercase leading-[0.92] tracking-[-0.04em] text-[#f3efe8] sm:text-[16.5vw] md:text-[17vw] md:tracking-[-0.07em] lg:text-[15vw]">
+            <h3 className="max-w-full text-[18vw] font-black uppercase leading-[0.92] tracking-[-0.04em] text-[#f3efe8] sm:text-[16.5vw] md:text-[17vw] md:tracking-[-0.07em] lg:text-[15vw]">
               Sectra Visión
-            </h1>
+            </h3>
           </div>
         </div>
 
@@ -67,13 +68,12 @@ export default function ProjectPanelIntro({
               Infraestructura web orientada a marketing digital
             </p>
 
-            <h3 className="mt-3 font-mono text-[22px] font-semibold leading-[1.08] tracking-[-0.03em] text-[#b79cff] sm:text-[24px] md:mt-4 md:text-[34px]">
+            <p className="mt-3 font-mono text-[22px] font-semibold leading-[1.08] tracking-[-0.03em] text-[#b79cff] sm:text-[24px] md:mt-4 md:text-[34px]">
               Infraestructura web para marketing y crecimiento digital
-            </h3>
+            </p>
 
             <p className="mt-4 max-w-[760px] font-mono text-[12px] leading-[1.8] tracking-[0.01em] text-white/65 md:text-[13px] md:text-white/55">
-              Desarrollo y gestión de sitios web integrados a CRM y campañas digitales,
-              optimizados para rendimiento, estabilidad y conversión.
+              Desarrollo y gestión de sitios y landings con WordPress, integraciones de CRM y herramientas de analítica para apoyar campañas y contenidos.
             </p>
           </div>
         </div>

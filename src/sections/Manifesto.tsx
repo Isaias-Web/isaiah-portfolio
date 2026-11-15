@@ -68,7 +68,7 @@ export default function Manifesto() {
             />
 
             <RevealLine
-              text="No lo haz hecho."
+              text="No lo has hecho."
               accent
               className="mt-4 text-[14vw] font-black leading-[0.9] tracking-[-0.06em] uppercase sm:text-[12vw] md:text-[9vw] lg:text-[8vw]"
             />

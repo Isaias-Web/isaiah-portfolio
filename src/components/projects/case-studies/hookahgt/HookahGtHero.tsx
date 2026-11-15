@@ -21,12 +21,11 @@ export default function HookahGtHero() {
             CASO DE ESTUDIO
           </p>
 
-          <button
-            type="button"
+          <p
             className="max-w-[170px] text-right font-mono text-[9px] uppercase leading-[1.5] tracking-[0.18em] text-[#ff2d00] transition-opacity duration-300 hover:opacity-70 sm:max-w-none sm:text-[10px] sm:tracking-[0.28em] md:text-[11px]"
           >
             B2B ECOMMERCE · UX/UI · DIGITAL CATALOG
-          </button>
+          </p>
         </div>
 
         <div className="mt-12 flex min-w-0 items-start justify-between gap-5 md:mt-16">
@@ -47,9 +46,9 @@ export default function HookahGtHero() {
 
         <div className="mt-auto flex min-w-0 flex-col">
           <div className="border-b border-[#6d56ff]/45 pb-4">
-            <h1 className="w-full max-w-full whitespace-normal break-words font-black uppercase leading-[0.86] tracking-[-0.065em] text-[#f3efe8] text-[clamp(3.4rem,17vw,11rem)] md:text-[clamp(5rem,12vw,13rem)] [text-wrap:balance]">
+            <h2 className="w-full max-w-full whitespace-normal break-words font-black uppercase leading-[0.86] tracking-[-0.065em] text-[#f3efe8] text-[clamp(3.4rem,17vw,11rem)] md:text-[clamp(5rem,12vw,13rem)] [text-wrap:balance]">
               HOOKAH GT
-            </h1>
+            </h2>
           </div>
 
           <p className="mt-4 max-w-[720px] font-mono text-[11px] leading-[1.8] text-[#8f7cff] sm:text-[13px] md:mt-5 md:text-[15px]">

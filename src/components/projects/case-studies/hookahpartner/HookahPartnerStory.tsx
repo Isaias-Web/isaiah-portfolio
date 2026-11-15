@@ -10,23 +10,15 @@ export default function HookahPartnerStory() {
 
             <div className="mt-10 max-w-[930px] space-y-10">
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                Hookah Partner fue trabajado como una tienda ecommerce orientada
-                al consumidor final, donde navegación, presentación de producto
-                y conversión debían sentirse claras dentro de una experiencia de
-                compra más directa.
+                Hookah Partner es una tienda de comercio directo al consumidor, donde las colecciones y la información de producto organizan el recorrido de compra.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                El enfoque estuvo en optimizar la experiencia desde Shopify,
-                mejorar estructura de colecciones, reforzar contenido visual y
-                facilitar la exploración del catálogo para impulsar el canal
-                digital.
+                La participación como webmaster y en gestión de datos, UX/UI y soporte creativo se centró en la estructura de colecciones, el contenido visual y la exploración del catálogo.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                La solución se centró en construir una interfaz más clara y
-                atractiva, alineando UX/UI, contenido y estructura comercial
-                para fortalecer la compra online.
+                La implementación en Shopify y Liquid utiliza JavaScript, CSS y recursos gráficos para conectar la presentación de marca con la tienda.
               </p>
             </div>
           </div>

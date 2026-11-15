@@ -4,12 +4,14 @@ import { ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } 
 import { gsap } from "@/animations/gsap-config";
 
 type ProjectDetailShellProps = {
+  title: string;
   onClose: () => void;
   children: ReactNode;
   scrollRef?: React.MutableRefObject<HTMLDivElement | null>;
 };
 
 export default function ProjectDetailShell({
+  title,
   onClose,
   children,
   scrollRef,
@@ -22,6 +24,37 @@ export default function ProjectDetailShell({
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   const [isClosing, setIsClosing] = useState(false);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const previous = document.activeElement;
+    root.querySelector<HTMLButtonElement>("button")?.focus({ preventScroll: true });
+    const trapTab = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+      const targets = Array.from(root.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex="0"]')).filter((node) => node.getClientRects().length && getComputedStyle(node).visibility !== "hidden");
+      const first = targets[0];
+      const last = targets[targets.length - 1];
+      if (!first) { event.preventDefault(); root.focus(); return; }
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === root)) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || document.activeElement === root)) { event.preventDefault(); first.focus(); }
+    };
+    root.addEventListener("keydown", trapTab);
+    return () => {
+      root.removeEventListener("keydown", trapTab);
+      if (previous instanceof HTMLElement && previous.isConnected) {
+        previous.setAttribute("data-focus-return", "");
+        previous.focus({ preventScroll: true });
+        previous.removeAttribute("data-focus-return");
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    // A case change removes its navigation button. Keep focus in the dialog.
+    if (root && !root.contains(document.activeElement)) root.querySelector<HTMLButtonElement>("button")?.focus({ preventScroll: true });
+  }, [children]);
 
   const handleRequestClose = useCallback(() => {
     if (isClosing) return;
@@ -114,7 +147,7 @@ export default function ProjectDetailShell({
   }, []);
 
   return (
-    <div ref={rootRef} className="fixed inset-0 z-[999] text-white">
+    <div ref={rootRef} id="project-dialog" role="dialog" aria-modal="true" aria-label={`Caso de estudio: ${title}`} tabIndex={-1} className="fixed inset-0 z-[999] text-white">
       <div
         ref={backdropRef}
         className="absolute inset-0 bg-black/60 backdrop-blur-[6px]"

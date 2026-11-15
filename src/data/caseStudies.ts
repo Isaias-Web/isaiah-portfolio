@@ -12,7 +12,7 @@ export const caseStudies: CaseStudyItem[] = [
   },
   {
     slug: "tryfum",
-    title: "TryFum",
+    title: "TryFüm",
   },
   {
     slug: "onda",
@@ -20,18 +20,18 @@ export const caseStudies: CaseStudyItem[] = [
   },
   {
     slug: "sectravision",
-    title: "SectraVision",
+    title: "Sectra Visión",
   },
   {
     slug: "vapemate",
-    title: "VapeMate",
+    title: "Vape Mate",
   },
   {
     slug: "hookahgt",
-    title: "HookahGt",
+    title: "Hookah GT",
   },
   {
     slug: "hookahpartner",
-    title: "HookahPartner",
+    title: "Hookah Partner",
   },
 ];

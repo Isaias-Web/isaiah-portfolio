@@ -1,0 +1,381 @@
+{
+  "baseline": "a8eb9bc",
+  "reversible_commit": "28fbc64",
+  "browser": "Chromium / Playwright local",
+  "glow": [
+    {
+      "width": 390,
+      "fine": false,
+      "interpolation": [],
+      "form": "clicks, Tab, selection, validation and retained data; no delivery",
+      "requests": [],
+      "cleanup": [
+        {
+          "root": 0,
+          "window": 4
+        },
+        {
+          "root": 0,
+          "window": 4
+        },
+        {
+          "root": 0,
+          "window": 4
+        }
+      ],
+      "errors": []
+    },
+    {
+      "width": 768,
+      "fine": true,
+      "interpolation": [
+        {
+          "during": {
+            "opacity": 1,
+            "x": 273.68341064453125,
+            "y": 328.4385070800781,
+            "pointer": "none",
+            "z": "0",
+            "bg": "rgb(9, 10, 9)",
+            "aria": "true"
+          },
+          "settled": {
+            "opacity": 1,
+            "x": 614.4000244140625,
+            "y": 530.0937805175781,
+            "pointer": "none",
+            "z": "0",
+            "bg": "rgb(9, 10, 9)",
+            "aria": "true"
+          }
+        },
+        {
+          "syntheticMoves": 500,
+          "eventCostMs": 9.900000002235174,
+          "reactCommits": 0,
+          "maxTweens": 3
+        }
+      ],
+      "form": "clicks, Tab, selection, validation and retained data; no delivery",
+      "requests": [],
+      "cleanup": [
+        {
+          "root": 0,
+          "window": 4
+        },
+        {
+          "root": 0,
+          "window": 4
+        },
+        {
+          "root": 0,
+          "window": 4
+        }
+      ],
+      "errors": []
+    },
+    {
+      "width": 1024,
+      "fine": true,
+      "interpolation": [
+        {
+          "during": {
+            "opacity": 1,
+            "x": 315.8414001464844,
+            "y": 306.9849853515625,
+            "pointer": "none",
+            "z": "0",
+            "bg": "rgb(9, 10, 9)",
+            "aria": "true"
+          },
+          "settled": {
+            "opacity": 1,
+            "x": 819.1999816894531,
+            "y": 530.421875,
+            "pointer": "none",
+            "z": "0",
+            "bg": "rgb(9, 10, 9)",
+            "aria": "true"
+          }
+        },
+        {
+          "syntheticMoves": 500,
+          "eventCostMs": 14.899999998509884,
+          "reactCommits": 0,
+          "maxTweens": 3
+        }
+      ],
+      "form": "clicks, Tab, selection, validation and retained data; no delivery",
+      "requests": [],
+      "cleanup": [
+        {
+          "root": 0,
+          "window": 4
+        },
+        {
+          "root": 0,
+          "window": 4
+        },
+        {
+          "root": 0,
+          "window": 4
+        }
+      ],
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "fine": true,
+      "interpolation": [
+        {
+          "during": {
+            "opacity": 1,
+            "x": 448.6213073730469,
+            "y": 307.9739074707031,
+            "pointer": "none",
+            "z": "0",
+            "bg": "rgb(9, 10, 9)",
+            "aria": "true"
+          },
+          "settled": {
+            "opacity": 1,
+            "x": 1152,
+            "y": 530,
+            "pointer": "none",
+            "z": "0",
+            "bg": "rgb(9, 10, 9)",
+            "aria": "true"
+          }
+        },
+        {
+          "syntheticMoves": 500,
+          "eventCostMs": 9.600000001490116,
+          "reactCommits": 0,
+          "maxTweens": 3
+        }
+      ],
+      "form": "clicks, Tab, selection, validation and retained data; no delivery",
+      "requests": [],
+      "cleanup": [
+        {
+          "root": 0,
+          "window": 4
+        },
+        {
+          "root": 0,
+          "window": 4
+        },
+        {
+          "root": 0,
+          "window": 4
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "geometry": [
+    {
+      "width": 390,
+      "height": 13462,
+      "heightDelta": 0,
+      "rightNowDelta": 0,
+      "contactDelta": 0,
+      "pinsEqual": true,
+      "contactRectEqual": true,
+      "formEqual": true,
+      "fieldsEqual": true,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "height": 14654,
+      "heightDelta": 0,
+      "rightNowDelta": 0,
+      "contactDelta": 0,
+      "pinsEqual": true,
+      "contactRectEqual": true,
+      "formEqual": true,
+      "fieldsEqual": true,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "height": 15681,
+      "heightDelta": 0,
+      "rightNowDelta": 0,
+      "contactDelta": 0,
+      "pinsEqual": true,
+      "contactRectEqual": true,
+      "formEqual": true,
+      "fieldsEqual": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 18257,
+      "heightDelta": 0,
+      "rightNowDelta": 0,
+      "contactDelta": 0,
+      "pinsEqual": true,
+      "contactRectEqual": true,
+      "formEqual": true,
+      "fieldsEqual": true,
+      "overflow": false
+    }
+  ],
+  "html": {
+    "main": 1,
+    "h1": 1,
+    "sections": 6,
+    "glows": 1,
+    "targets": 44,
+    "lang": "es-MX",
+    "canonical": "https://isaiasfrutos.dev"
+  },
+  "optimized_acceptance": [
+    {
+      "width": 390,
+      "mode": "nojs",
+      "readable": true,
+      "glow": "disabled",
+      "errors": []
+    },
+    {
+      "width": 390,
+      "mode": "reduce",
+      "readable": true,
+      "glow": "disabled",
+      "errors": []
+    },
+    {
+      "width": 390,
+      "mode": "standard",
+      "readable": true,
+      "glow": "disabled",
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "mode": "nojs",
+      "readable": true,
+      "glow": "disabled",
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "mode": "reduce",
+      "readable": true,
+      "glow": "disabled",
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "mode": "standard",
+      "readable": true,
+      "glow": "active",
+      "errors": []
+    }
+  ],
+  "other_sections": [
+    {
+      "width": 390,
+      "heroHover": {
+        "x": -14,
+        "y": 10
+      },
+      "words": [
+        {
+          "distance": 0,
+          "active": 0,
+          "total": 12
+        },
+        {
+          "distance": 660,
+          "active": 6,
+          "total": 12
+        },
+        {
+          "distance": 1321,
+          "active": 12,
+          "total": 12
+        }
+      ],
+      "whoRows": 18,
+      "whoVisible": true,
+      "pins": 3,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "heroHover": {
+        "x": -14,
+        "y": 10
+      },
+      "words": [
+        {
+          "distance": 0,
+          "active": 0,
+          "total": 12
+        },
+        {
+          "distance": 660,
+          "active": 6,
+          "total": 12
+        },
+        {
+          "distance": 1321,
+          "active": 12,
+          "total": 12
+        }
+      ],
+      "whoRows": 18,
+      "whoVisible": true,
+      "pins": 3,
+      "errors": []
+    }
+  ],
+  "rail_overlay": [
+    {
+      "viewport": "desktop",
+      "panels": 7,
+      "cases": 7,
+      "wheelDelta": 450,
+      "errors": [],
+      "resize": "rail and open overlay passed",
+      "rapidNavigation": "first selection retained",
+      "closeDuringOpening": "recovered",
+      "closeDuringFade": "recovered"
+    },
+    {
+      "viewport": "mobile",
+      "panels": 7,
+      "cases": 7,
+      "wheelDelta": 450,
+      "errors": [],
+      "resize": "rail and open overlay passed",
+      "rapidNavigation": "first selection retained",
+      "closeDuringOpening": "recovered",
+      "closeDuringFade": "recovered"
+    }
+  ],
+  "commands": {
+    "npm run lint": {
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 21
+    },
+    "npx tsc --noEmit": {
+      "exit_code": 0
+    },
+    "npm run build": {
+      "exit_code": 0
+    },
+    "git diff --check": {
+      "exit_code": 0
+    }
+  },
+  "limits": [
+    "Local tests; visual preview review, Safari/Firefox, physical touch devices and virtual keyboards pending.",
+    "Pointer burst and React Profiler observations do not certify Core Web Vitals or FPS."
+  ]
+}

@@ -10,24 +10,15 @@ export default function SectraVisionStory() {
 
             <div className="mt-10 max-w-[930px] space-y-10">
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                Sectra Visión es un proyecto enfocado en la gestión y optimización
-                de activos digitales para marketing, donde el objetivo principal
-                fue mantener, mejorar y escalar distintos sitios web y puntos de
-                contacto digitales dentro de un entorno operativo real.
+                Sectra Visión reúne trabajo de desarrollo y gestión de sitios, landings y puntos de contacto digitales para marketing.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                Se trabajó sobre múltiples sitios en CMS como WordPress,
-                desarrollando landing pages orientadas a conversión, mejorando la
-                estructura de navegación y asegurando el correcto funcionamiento
-                técnico en temas como velocidad, seguridad y estabilidad.
+                La participación como webmaster y en UX/UI y desarrollo incluyó mantenimiento de sitios WordPress, estructura de navegación y soporte a necesidades de contenido y campañas.
               </p>
 
               <p className="font-mono text-[16px] leading-[1.95] text-white/62 md:text-[17px] lg:text-[18px]">
-                El proyecto también involucró la integración de herramientas de
-                CRM, analítica y automatización, permitiendo generar reportes,
-                optimizar campañas y tomar decisiones basadas en datos para mejorar
-                el rendimiento digital de la marca.
+                La implementación incorpora HTML, CSS y JavaScript, junto con integraciones de CRM y herramientas de analítica como Google Analytics y Tag Manager.
               </p>
             </div>
           </div>

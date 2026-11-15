@@ -28,10 +28,12 @@ export default function ProjectsRail() {
   return (
     <>
       <section
+        aria-labelledby="projects-heading"
         data-projects-rail
         ref={sectionRef}
         className="relative h-screen overflow-hidden bg-[#090a09]"
       >
+        <h2 id="projects-heading" className="sr-only">Proyectos seleccionados</h2>
         <div data-projects-track ref={trackRef} className="flex h-screen w-max">
           <div className="h-screen w-screen shrink-0">
             <ProjectPanelTradeMate

@@ -1,0 +1,576 @@
+{
+  "code_commit": "639be53",
+  "baseline_commit": "36215e2",
+  "browser": "Chromium / Playwright local",
+  "motion_environment": "next dev / React Strict Mode",
+  "regression_environment": "optimized next build / next start",
+  "commands": {
+    "npm run lint": {
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 21
+    },
+    "npx tsc --noEmit": {
+      "exit_code": 0
+    },
+    "npm run build": {
+      "exit_code": 0
+    },
+    "git diff --check": {
+      "exit_code": 0
+    }
+  },
+  "motion": [
+    {
+      "width": 390,
+      "fine": false,
+      "hover": [
+        {
+          "i": 0,
+          "x": 0,
+          "y": 0,
+          "r": 0
+        },
+        {
+          "i": 6,
+          "x": 0,
+          "y": 0,
+          "r": 0
+        }
+      ],
+      "overflow": false,
+      "errors": [],
+      "entrances": [
+        "[data-right-now-reveal=\"label\"]",
+        "[data-right-now-reveal=\"uic-label\"]",
+        "[data-right-now-reveal=\"uic-intro\"]",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(1)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(2)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(3)",
+        "[data-right-now-reveal=\"ai-label\"]",
+        "[data-right-now-reveal=\"step\"]:nth-child(1)",
+        "[data-right-now-reveal=\"step\"]:nth-child(2)",
+        "[data-right-now-reveal=\"step\"]:nth-child(3)",
+        "[data-right-now-reveal=\"automation\"]:nth-child(1)",
+        "[data-right-now-reveal=\"automation\"]:nth-child(2)"
+      ]
+    },
+    {
+      "width": 768,
+      "fine": true,
+      "hover": [
+        {
+          "i": 0,
+          "x": -14,
+          "y": 10,
+          "r": -4.000001701562397
+        },
+        {
+          "i": 6,
+          "x": 6,
+          "y": -8,
+          "r": 3.0000011085596214
+        }
+      ],
+      "overflow": false,
+      "errors": [],
+      "entrances": [
+        "[data-right-now-reveal=\"label\"]",
+        "[data-right-now-reveal=\"uic-label\"]",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(1)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(2)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(3)",
+        "[data-right-now-reveal=\"ai-label\"]",
+        "[data-right-now-reveal=\"step\"]:nth-child(2)",
+        "[data-right-now-reveal=\"step\"]:nth-child(3)",
+        "[data-right-now-reveal=\"automation\"]:nth-child(1)"
+      ]
+    },
+    {
+      "width": 913,
+      "fine": true,
+      "hover": [
+        {
+          "i": 0,
+          "x": -14,
+          "y": 10,
+          "r": -4.000001701562397
+        },
+        {
+          "i": 6,
+          "x": 6,
+          "y": -8,
+          "r": 3.0000011085596214
+        }
+      ],
+      "overflow": false,
+      "errors": [],
+      "entrances": [
+        "[data-right-now-reveal=\"label\"]",
+        "[data-right-now-reveal=\"uic-label\"]",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(1)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(2)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(3)",
+        "[data-right-now-reveal=\"ai-label\"]",
+        "[data-right-now-reveal=\"step\"]:nth-child(2)",
+        "[data-right-now-reveal=\"step\"]:nth-child(3)",
+        "[data-right-now-reveal=\"automation\"]:nth-child(1)"
+      ]
+    },
+    {
+      "width": 1024,
+      "fine": true,
+      "hover": [
+        {
+          "i": 0,
+          "x": -14,
+          "y": 10,
+          "r": -4.000001701562397
+        },
+        {
+          "i": 6,
+          "x": 6,
+          "y": -8,
+          "r": 3.0000011085596214
+        }
+      ],
+      "overflow": false,
+      "errors": [],
+      "entrances": [
+        "[data-right-now-reveal=\"label\"]",
+        "[data-right-now-reveal=\"uic-label\"]",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(1)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(2)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(3)",
+        "[data-right-now-reveal=\"ai-label\"]",
+        "[data-right-now-reveal=\"step\"]:nth-child(2)",
+        "[data-right-now-reveal=\"step\"]:nth-child(3)",
+        "[data-right-now-reveal=\"automation\"]:nth-child(1)"
+      ]
+    },
+    {
+      "width": 1280,
+      "fine": true,
+      "hover": [
+        {
+          "i": 0,
+          "x": -14,
+          "y": 10,
+          "r": -4.000001701562397
+        },
+        {
+          "i": 6,
+          "x": 6,
+          "y": -8,
+          "r": 3.0000011085596214
+        }
+      ],
+      "overflow": false,
+      "errors": [],
+      "entrances": [
+        "[data-right-now-reveal=\"label\"]",
+        "[data-right-now-reveal=\"uic-label\"]",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(1)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(2)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(3)",
+        "[data-right-now-reveal=\"ai-label\"]",
+        "[data-right-now-reveal=\"step\"]:nth-child(2)",
+        "[data-right-now-reveal=\"step\"]:nth-child(3)",
+        "[data-right-now-reveal=\"automation\"]:nth-child(1)"
+      ]
+    },
+    {
+      "width": 1440,
+      "fine": true,
+      "hover": [
+        {
+          "i": 0,
+          "x": -14,
+          "y": 10,
+          "r": -4.000001701562397
+        },
+        {
+          "i": 1,
+          "x": 8,
+          "y": -12,
+          "r": 3.0000011085596214
+        },
+        {
+          "i": 2,
+          "x": 14,
+          "y": 8,
+          "r": 4.000001701562397
+        },
+        {
+          "i": 3,
+          "x": -8,
+          "y": -10,
+          "r": -3.0000011085596214
+        },
+        {
+          "i": 4,
+          "x": 10,
+          "y": 4,
+          "r": 1.999999842926156
+        },
+        {
+          "i": 5,
+          "x": -12,
+          "y": 6,
+          "r": -1.999999842926156
+        },
+        {
+          "i": 6,
+          "x": 6,
+          "y": -8,
+          "r": 3.0000011085596214
+        },
+        {
+          "i": 7,
+          "x": 12,
+          "y": -6,
+          "r": 1.999999842926156
+        },
+        {
+          "i": 8,
+          "x": -14,
+          "y": 10,
+          "r": -4.000001701562397
+        },
+        {
+          "i": 9,
+          "x": 8,
+          "y": -12,
+          "r": 3.0000011085596214
+        },
+        {
+          "i": 10,
+          "x": 14,
+          "y": 8,
+          "r": 4.000001701562397
+        },
+        {
+          "i": 11,
+          "x": -8,
+          "y": -10,
+          "r": -3.0000011085596214
+        }
+      ],
+      "overflow": false,
+      "errors": [],
+      "entrances": [
+        "[data-right-now-reveal=\"label\"]",
+        "[data-right-now-reveal=\"uic-label\"]",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(1)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(2)",
+        "[data-right-now-reveal=\"responsibility\"]:nth-child(3)",
+        "[data-right-now-reveal=\"ai-label\"]",
+        "[data-right-now-reveal=\"step\"]:nth-child(2)",
+        "[data-right-now-reveal=\"step\"]:nth-child(3)",
+        "[data-right-now-reveal=\"automation\"]:nth-child(1)"
+      ]
+    }
+  ],
+  "geometry": [
+    {
+      "width": 390,
+      "pageHeight": 13462,
+      "pageDelta": 0,
+      "sectionDelta": 0,
+      "headingDelta": 0,
+      "aiDelta": 0,
+      "pinsEqual": true,
+      "maxTextWidthDelta": 0.0625,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "pageHeight": 14654,
+      "pageDelta": 0,
+      "sectionDelta": 0,
+      "headingDelta": 0,
+      "aiDelta": 0,
+      "pinsEqual": true,
+      "maxTextWidthDelta": 0.0625,
+      "overflow": false
+    },
+    {
+      "width": 913,
+      "pageHeight": 15244,
+      "pageDelta": 0,
+      "sectionDelta": 0,
+      "headingDelta": 0,
+      "aiDelta": 0,
+      "pinsEqual": true,
+      "maxTextWidthDelta": 0.0625,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "pageHeight": 15681,
+      "pageDelta": 0,
+      "sectionDelta": 0,
+      "headingDelta": 0,
+      "aiDelta": 0,
+      "pinsEqual": true,
+      "maxTextWidthDelta": 0.046875,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "pageHeight": 17150,
+      "pageDelta": 0,
+      "sectionDelta": 0,
+      "headingDelta": 0,
+      "aiDelta": 0,
+      "pinsEqual": true,
+      "maxTextWidthDelta": 0.078125,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "pageHeight": 18257,
+      "pageDelta": 0,
+      "sectionDelta": 0,
+      "headingDelta": 0,
+      "aiDelta": 0,
+      "pinsEqual": true,
+      "maxTextWidthDelta": 0.0625,
+      "overflow": false
+    }
+  ],
+  "html": {
+    "main": 1,
+    "h1": 1,
+    "main_sections": 6,
+    "lang": "es-MX",
+    "canonical": "https://isaiasfrutos.dev",
+    "visible_motion_targets_in_SSR": 44
+  },
+  "strict_mode_cleanup": [
+    {
+      "label": "initial",
+      "triggers": 12,
+      "hover_listeners": 24,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "unmount-0",
+      "triggers": 0,
+      "hover_listeners": 0,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "remount-strict-0",
+      "triggers": 12,
+      "hover_listeners": 24,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "unmount-1",
+      "triggers": 0,
+      "hover_listeners": 0,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "remount-strict-1",
+      "triggers": 12,
+      "hover_listeners": 24,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "unmount-2",
+      "triggers": 0,
+      "hover_listeners": 0,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "remount-strict-2",
+      "triggers": 12,
+      "hover_listeners": 24,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "unmount-3",
+      "triggers": 0,
+      "hover_listeners": 0,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "remount-strict-3",
+      "triggers": 12,
+      "hover_listeners": 24,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "resize",
+      "triggers": 12,
+      "hover_listeners": 24,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "reduce-0",
+      "triggers": 0,
+      "hover_listeners": 0,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "motion-0",
+      "triggers": 12,
+      "hover_listeners": 24,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "reduce-1",
+      "triggers": 0,
+      "hover_listeners": 0,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "motion-1",
+      "triggers": 12,
+      "hover_listeners": 24,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "reduce-2",
+      "triggers": 0,
+      "hover_listeners": 0,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "motion-2",
+      "triggers": 12,
+      "hover_listeners": 24,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "partial-timeline-failure",
+      "triggers": 0,
+      "hover_listeners": 0,
+      "tweens_on_detached_nodes": 0
+    },
+    {
+      "label": "recovered-after-remount",
+      "triggers": 12,
+      "hover_listeners": 24,
+      "tweens_on_detached_nodes": 0
+    }
+  ],
+  "existing_sections": [
+    {
+      "width": 390,
+      "heroHover": {
+        "x": -14,
+        "y": 10
+      },
+      "words": [
+        {
+          "distance": 0,
+          "active": 0,
+          "total": 12
+        },
+        {
+          "distance": 660,
+          "active": 6,
+          "total": 12
+        },
+        {
+          "distance": 1321,
+          "active": 12,
+          "total": 12
+        }
+      ],
+      "whoRows": 18,
+      "whoVisible": true,
+      "pins": 3,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "heroHover": {
+        "x": -14,
+        "y": 10
+      },
+      "words": [
+        {
+          "distance": 0,
+          "active": 0,
+          "total": 12
+        },
+        {
+          "distance": 660,
+          "active": 6,
+          "total": 12
+        },
+        {
+          "distance": 1321,
+          "active": 12,
+          "total": 12
+        }
+      ],
+      "whoRows": 18,
+      "whoVisible": true,
+      "pins": 3,
+      "errors": []
+    }
+  ],
+  "rail_overlay": [
+    {
+      "viewport": "desktop",
+      "height": 18257,
+      "panels_tested": 7,
+      "cases_tested": 7,
+      "wheel_delta": 450,
+      "errors": [],
+      "rapid_navigation": "first selection retained",
+      "repeat_escape": "closed",
+      "close_during_opening": "recovered",
+      "close_during_fade": "recovered",
+      "resize": "rail and open overlay passed"
+    },
+    {
+      "viewport": "mobile",
+      "height": 13462,
+      "panels_tested": 7,
+      "cases_tested": 7,
+      "wheel_delta": 450,
+      "errors": [],
+      "rapid_navigation": "first selection retained",
+      "repeat_escape": "closed",
+      "close_during_opening": "recovered",
+      "close_during_fade": "recovered",
+      "resize": "rail and open overlay passed"
+    }
+  ],
+  "fallbacks": [
+    {
+      "test": "reduced motion from initial load",
+      "readable": true,
+      "hover": "disabled"
+    },
+    {
+      "test": "no JavaScript",
+      "readable": true
+    },
+    {
+      "test": "local measurement setup failure",
+      "readable": true,
+      "pins": 3,
+      "expectedDiagnostics": [
+        "RightNow motion recovered: Error: injected RightNow measurement setup failure"
+      ]
+    },
+    {
+      "test": "runtime error during title entrance",
+      "readable": true,
+      "pins": 3,
+      "hover": "removed",
+      "mediaReentry": "stays readable"
+    }
+  ],
+  "scope_limits": [
+    "Global React or shared-engine failures are not recovered by this section hook.",
+    "Physical devices, Safari, Firefox, screen readers and aesthetic preview review remain pending."
+  ]
+}

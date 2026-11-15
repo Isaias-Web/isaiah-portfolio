@@ -1,0 +1,458 @@
+[
+  {
+    "width": 390,
+    "entries": [
+      {
+        "id": "right-now-title",
+        "duration": 1.215,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-uic",
+        "duration": 1.21,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-engineering",
+        "duration": 1.05,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-uic-intro-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-2",
+        "duration": 0.69,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-2",
+        "duration": 0.69,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-automation-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-automation-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      }
+    ],
+    "hover": {
+      "x": 0,
+      "y": 0
+    },
+    "fastScroll": true,
+    "resize": true,
+    "cleanup": [
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      },
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      },
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      }
+    ],
+    "reducedMotion": true,
+    "errors": []
+  },
+  {
+    "width": 768,
+    "entries": [
+      {
+        "id": "right-now-title",
+        "duration": 1.215,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-uic",
+        "duration": 1.21,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-engineering",
+        "duration": 1.05,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-uic-intro-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-2",
+        "duration": 0.69,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-2",
+        "duration": 0.69,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-automation-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-automation-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      }
+    ],
+    "hover": {
+      "x": -14,
+      "y": 10
+    },
+    "fastScroll": true,
+    "resize": true,
+    "cleanup": [
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      },
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      },
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      }
+    ],
+    "reducedMotion": true,
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "entries": [
+      {
+        "id": "right-now-title",
+        "duration": 1.215,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-uic",
+        "duration": 1.21,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-engineering",
+        "duration": 1.05,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-uic-intro-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-2",
+        "duration": 0.69,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-2",
+        "duration": 0.69,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-automation-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-automation-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      }
+    ],
+    "hover": {
+      "x": -14,
+      "y": 10
+    },
+    "fastScroll": true,
+    "resize": true,
+    "cleanup": [
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      },
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      },
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      }
+    ],
+    "reducedMotion": true,
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "entries": [
+      {
+        "id": "right-now-title",
+        "duration": 1.215,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-uic",
+        "duration": 1.21,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-engineering",
+        "duration": 1.05,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-uic-intro-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-responsibility-2",
+        "duration": 0.69,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-step-2",
+        "duration": 0.69,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-automation-0",
+        "duration": 0.55,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      },
+      {
+        "id": "right-now-automation-1",
+        "duration": 0.62,
+        "cycles": 2,
+        "hysteresis": true,
+        "reverseMonotonic": true
+      }
+    ],
+    "hover": {
+      "x": -14,
+      "y": 10
+    },
+    "fastScroll": true,
+    "resize": true,
+    "cleanup": [
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      },
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      },
+      {
+        "triggers": 0,
+        "hover": 0,
+        "tweens": 0
+      }
+    ],
+    "reducedMotion": true,
+    "errors": []
+  }
+]

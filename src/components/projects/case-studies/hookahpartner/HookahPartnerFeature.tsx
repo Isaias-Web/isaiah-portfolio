@@ -27,10 +27,8 @@ export default function HookahPartnerFeature() {
                   <div className="mt-3 h-px w-[58%] bg-[#ff2d00]" />
 
                   <p className="mt-3 max-w-[460px] font-mono text-[10px] leading-[1.8] text-white/55 md:text-[11px]">
-                    Ecommerce enfocado en consumidor final, donde navegación,
-                    estructura de colecciones y presentación de producto debían
-                    impulsar una experiencia de compra más clara y efectiva.
-                  </p>
+              Colecciones, contenido visual y presentación de producto para una tienda de comercio directo al consumidor en Shopify.
+            </p>
                 </div>
 
                 <div className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-[#ff2d00]" />

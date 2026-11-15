@@ -27,10 +27,8 @@ export default function SectraVisionFeature() {
                   <div className="mt-3 h-px w-[58%] bg-[#ff2d00]" />
 
                   <p className="mt-3 max-w-[460px] font-mono text-[10px] leading-[1.8] text-white/55 md:text-[11px]">
-                    Gestión y optimización de activos digitales enfocados en
-                    conversión, mantenimiento web, soporte operativo y mejora
-                    continua para campañas, sitios y presencia digital de marca.
-                  </p>
+              Sitios y landings en WordPress, soporte técnico y conexiones con CRM y analítica para las necesidades de marketing.
+            </p>
                 </div>
 
                 <div className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-[#ffb000]" />

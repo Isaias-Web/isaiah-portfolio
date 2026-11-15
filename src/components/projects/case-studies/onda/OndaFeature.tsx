@@ -27,8 +27,8 @@ export default function OndaFeature() {
                   <div className="mt-3 h-px w-[58%] bg-[#ff2d00]" />
 
                   <p className="mt-3 max-w-[460px] font-mono text-[10px] leading-[1.8] text-white/55 md:text-[11px]">
-                    Experiencia ecommerce enfocada en branding emocional, claridad de producto y storytelling, diseñada para conectar con el usuario y reforzar la identidad de marca dentro del segmento wellness.
-                  </p>
+              Identidad visual, contenido y producto organizados dentro de una experiencia de eCommerce en Shopify.
+            </p>
                 </div>
 
                 <div className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-[#ff2d00]" />

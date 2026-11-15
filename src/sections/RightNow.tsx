@@ -1,107 +1,229 @@
-const topItems = [
-  {
-    label: "ESPECIALIDAD",
-    title: "Desarrollo Web & Soluciones Digitales",
-    note: "frontend, backend y arquitectura funcional",
-  },
-  {
-    label: "ENFOQUE",
-    title: "E-commerce / UX/UI / Integraciones",
-    note: "tiendas, sistemas y experiencias digitales",
-  },
-  {
-    label: "STACK",
-    title: "JavaScript, React, Node.js, Shopify",
-    note: "bases sólidas para productos escalables",
-  },
-  {
-    label: "HERRAMIENTAS",
-    title: "Liquid, APIs, Webhooks, WordPress",
-    note: "implementación, conexión y optimización",
-  },
-  {
-    label: "UBICACIÓN",
-    title: "CDMX",
-    note: "disponible para proyectos y colaboración",
-  },
+"use client";
+
+import { useRef } from "react";
+import { useRightNowReveal } from "@/hooks/useRightNowReveal";
+
+const responsibilities = [
+  "Desarrollo y evolución de sitios, landings y funcionalidades con WordPress, PHP, HTML, CSS y JavaScript.",
+  "Integración y mantenimiento de formularios conectados a CRM, servicios externos y mecanismos de validación.",
+  "Diagnóstico de incidencias, administración técnica de CMS y documentación de cambios en coordinación con distintas áreas.",
 ];
 
-const bottomItems = [
+const workflow = [
   {
-    label: "ACTUALMENTE",
-    title: "Full-Stack Developer & Digital Solutions Architect",
-    note: "desarrollo, diseño e integración de sistemas",
+    title: "Problema",
+    text: "Reviso el contexto, el código y las restricciones para definir qué necesita cambiar y cómo comprobarlo.",
+  },
+  {
+    title: "Implementación",
+    text: "Desarrollo la solución con apoyo de ChatGPT y Codex para analizar, planificar, refactorizar y documentar. Las decisiones técnicas se revisan durante el proceso.",
+  },
+  {
+    title: "Validación",
+    text: "Compruebo el comportamiento con pruebas, revisión de cambios y control de versiones mediante GitHub y CI antes de integrar una implementación.",
   },
 ];
-
-function RightNowCard({
-  label,
-  title,
-  note,
-}: {
-  label: string;
-  title: string;
-  note: string;
-}) {
-  return (
-    <div className="min-w-0">
-      <div className="flex items-center gap-3">
-        <span className="h-[6px] w-[6px] rounded-full bg-[#ff2d00]" />
-        <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[#ff2d00] md:text-[11px]">
-          {label}
-        </p>
-      </div>
-
-      <div className="mt-4 pl-[18px]">
-        <p className="font-mono text-[14px] leading-[1.45] tracking-[0.01em] text-[#e8e3db] md:text-[15px]">
-          {title}
-        </p>
-        <p className="mt-1 font-mono text-[12px] italic leading-[1.45] text-white/25">
-          {note}
-        </p>
-      </div>
-    </div>
-  );
-}
 
 export default function RightNow() {
+  const sectionRef = useRef<HTMLElement>(null);
+  useRightNowReveal(sectionRef);
+
   return (
-    <section className="relative overflow-hidden bg-[#090a09] text-white">
+    <section
+      ref={sectionRef}
+      id="experiencia"
+      aria-labelledby="experience-heading"
+      className="relative overflow-hidden bg-[#090a09] text-white"
+    >
       <div className="relative px-6 py-10 md:px-10 md:py-12 lg:px-16 lg:py-14">
-        <div className="max-w-[620px]">
-          <h2 className="font-black uppercase leading-[0.84] tracking-[-0.07em] text-[#f3efe8] text-[24vw] sm:text-[20vw] md:text-[15vw] lg:text-[13vw]">
-            <span className="block">PERFIL</span>
-            <span className="block text-[#ff2d00]">ACTUAL</span>
-          </h2>
-        </div>
-
-        <div className="mt-16 h-px w-full bg-white/10 md:mt-20" />
-
-        <div className="grid gap-x-8 gap-y-10 py-8 md:grid-cols-2 lg:grid-cols-5">
-          {topItems.map((item) => (
-            <RightNowCard
-              key={item.label}
-              label={item.label}
-              title={item.title}
-              note={item.note}
-            />
+        <p
+          data-right-now-reveal="label"
+          className="mb-8 font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]"
+        >
+          / experiencia y método / p. 005
+        </p>
+        <h2
+          id="experience-heading"
+          aria-label="Perfil actual"
+          className="max-w-[620px] font-black uppercase leading-[0.84] tracking-[-0.07em] text-[#f3efe8] text-[24vw] sm:text-[20vw] md:text-[15vw] lg:text-[13vw]"
+        >
+          {["PERFIL", "ACTUAL"].map((line, lineIndex) => (
+            <span
+              key={line}
+              aria-hidden="true"
+              className={
+                lineIndex
+                  ? "block whitespace-nowrap text-[#ff2d00]"
+                  : "block whitespace-nowrap"
+              }
+            >
+              {line.split("").map((letter, index) => (
+                <span
+                  key={`${line}-${index}`}
+                  data-right-now-reveal="letter"
+                  className="inline-block"
+                >
+                  <span data-right-now-letter className="inline-block">
+                    {letter}
+                  </span>
+                </span>
+              ))}
+            </span>
           ))}
-        </div>
-
-        <div className="h-px w-full bg-white/10" />
-
-        <div className="grid gap-x-8 gap-y-10 py-8 md:grid-cols-2 lg:grid-cols-5">
-          <div className="lg:col-span-2">
-            {bottomItems.map((item) => (
-              <RightNowCard
-                key={item.label}
-                label={item.label}
-                title={item.title}
-                note={item.note}
-              />
-            ))}
+        </h2>
+        <article
+          aria-labelledby="uic-heading"
+          className="mt-16 border-t border-white/15 py-10 md:mt-20 md:py-14"
+        >
+          <div className="grid min-w-0 gap-8 md:grid-cols-[1.1fr_1fr] md:gap-12 lg:gap-20">
+            <div className="min-w-0">
+              <p
+                data-right-now-reveal="uic-label"
+                className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#ff2d00]"
+              >
+                Experiencia institucional / UIC
+              </p>
+              <h3
+                id="uic-heading"
+                data-right-now-reveal="uic-title"
+                className="mt-6 max-w-[750px] text-[clamp(2.2rem,5.2vw,5.5rem)] font-black uppercase leading-[0.95] tracking-[-0.05em]"
+              >
+                Web Master
+                <br />
+                Institucional
+              </h3>
+              <p
+                data-right-now-reveal="uic-meta"
+                className="mt-6 font-mono text-[14px] leading-relaxed text-white/80"
+              >
+                Universidad Intercontinental
+              </p>
+              <p
+                data-right-now-reveal="uic-meta"
+                className="mt-1 font-mono text-[12px] leading-relaxed text-white/55"
+              >
+                Comunicación Social
+              </p>
+              <p
+                data-right-now-reveal="uic-date"
+                className="mt-4 font-mono text-[11px] leading-relaxed text-[#ff2d00]"
+              >
+                <time dateTime="2026-08-18">18 de agosto de 2026</time> —
+                actualidad
+              </p>
+            </div>
+            <div className="min-w-0">
+              <p
+                data-right-now-reveal="uic-intro"
+                className="max-w-[650px] text-[clamp(1.2rem,2.2vw,1.8rem)] leading-[1.45] tracking-[-0.02em] text-[#f3efe8]"
+              >
+                Desarrollo y administro plataformas web institucionales, integro
+                servicios y automatizo tareas técnicas.
+              </p>
+              <ul className="mt-8 divide-y divide-white/10 border-t border-white/10">
+                {responsibilities.map((text, index) => (
+                  <li
+                    key={text}
+                    data-right-now-reveal="responsibility"
+                    className="grid grid-cols-[2rem_minmax(0,1fr)] gap-4 py-5 font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px]"
+                  >
+                    <span aria-hidden="true" className="text-[#ff2d00]">
+                      0{index + 1}
+                    </span>
+                    <span>{text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
+        </article>
+        <article
+          aria-labelledby="engineering-heading"
+          className="border-t border-[#ff2d00]/70 py-10 md:py-14"
+        >
+          <div className="grid min-w-0 gap-10 md:grid-cols-[1.1fr_1fr] md:gap-12 lg:gap-20">
+            <div className="min-w-0">
+              <p
+                data-right-now-reveal="ai-label"
+                className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#ff2d00]"
+              >
+                Ingeniería asistida y automatización
+              </p>
+              <h3
+                id="engineering-heading"
+                lang="en"
+                className="mt-6 text-[clamp(2rem,4.5vw,4.5rem)] font-black uppercase leading-[0.98] tracking-[-0.04em]"
+              >
+                <span data-right-now-reveal="ai-line" className="inline-block">
+                  AI-Assisted
+                </span>
+                <br />
+                <span data-right-now-reveal="ai-line" className="inline-block">
+                  Engineering
+                </span>
+                <br />
+                <span
+                  data-right-now-reveal="ai-line"
+                  className="inline-block text-[#ff2d00]"
+                >
+                  &amp; Automation
+                </span>
+              </h3>
+              <p
+                data-right-now-reveal="ai-intro"
+                className="mt-6 max-w-[540px] font-mono text-[12px] leading-[1.8] text-white/60 md:text-[13px]"
+              >
+                Aplico IA al trabajo de ingeniería y combino scripts e
+                integraciones para resolver tareas repetitivas. Cada flujo
+                necesita criterios de revisión y comprobación.
+              </p>
+            </div>
+            <ol className="divide-y divide-white/10 border-t border-white/10">
+              {workflow.map((step, index) => (
+                <li
+                  key={step.title}
+                  data-right-now-reveal="step"
+                  className="grid grid-cols-[2rem_minmax(0,1fr)] gap-4 py-6"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="font-mono text-[11px] text-[#ff2d00]"
+                  >
+                    0{index + 1}
+                  </span>
+                  <div>
+                    <h4 className="text-xl font-semibold tracking-[-0.02em]">
+                      {step.title}
+                    </h4>
+                    <p className="mt-3 font-mono text-[12px] leading-[1.8] text-white/60 md:text-[13px]">
+                      {step.text}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <dl className="mt-10 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-2 md:gap-12 lg:gap-20">
+            <div data-right-now-reveal="automation" className="min-w-0">
+              <dt className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff2d00]">
+                Automatización técnica / Python y PHP
+              </dt>
+              <dd className="mt-4 max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px]">
+                Scripts para actualizar múltiples páginas, generar inventarios y
+                ejecutar auditorías y validaciones de implementaciones.
+              </dd>
+            </div>
+            <div data-right-now-reveal="automation" className="min-w-0">
+              <dt className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff2d00]">
+                Automatización operativa / Power Automate
+              </dt>
+              <dd className="mt-4 max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px]">
+                Flujos que procesan correos y adjuntos según condiciones
+                definidas, con comprobaciones para evitar duplicados.
+              </dd>
+            </div>
+          </dl>
+        </article>
       </div>
     </section>
   );

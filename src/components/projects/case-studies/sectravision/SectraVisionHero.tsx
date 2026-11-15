@@ -22,12 +22,11 @@ export default function SectraVisionHero() {
             CASO DE ESTUDIO
           </p>
 
-          <button
-            type="button"
+          <p
             className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] transition-opacity duration-300 hover:opacity-70 md:text-[11px]"
           >
             Webmaster · UX/UI · Desarrollo Web
-          </button>
+          </p>
         </div>
 
         {/* secondary meta */}
@@ -49,9 +48,9 @@ export default function SectraVisionHero() {
         {/* hero content */}
         <div className="mt-auto flex flex-col">
           <div className="border-b border-[#6d56ff]/45 pb-4">
-            <h1 className="max-w-full text-[14vw] font-black uppercase leading-[0.9] tracking-[-0.045em] text-[#f3efe8] sm:text-[15vw] md:text-[13.5vw] md:tracking-[-0.07em] lg:text-[11.5vw]">
+            <h2 className="max-w-full text-[14vw] font-black uppercase leading-[0.9] tracking-[-0.045em] text-[#f3efe8] sm:text-[15vw] md:text-[13.5vw] md:tracking-[-0.07em] lg:text-[11.5vw]">
               SECTRA VISION
-            </h1>
+            </h2>
           </div>
 
           <p className="mt-4 max-w-[720px] font-mono text-[13px] leading-[1.8] text-[#8f7cff] md:mt-5 md:text-[15px]">
