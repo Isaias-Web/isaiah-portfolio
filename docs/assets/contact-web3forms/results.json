@@ -1,0 +1,28 @@
+[
+  {
+    "width": 1440,
+    "mockedRequests": 8,
+    "duplicateGuard": true,
+    "successReset": true,
+    "pendingRetainsData": true,
+    "errorsRetainData": true,
+    "autoCloseFiveSeconds": true,
+    "keyboardClose": true,
+    "fixedPortal": true,
+    "honeypot": true,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "mockedRequests": 8,
+    "duplicateGuard": true,
+    "successReset": true,
+    "pendingRetainsData": true,
+    "errorsRetainData": true,
+    "autoCloseFiveSeconds": true,
+    "keyboardClose": true,
+    "fixedPortal": true,
+    "honeypot": true,
+    "errors": []
+  }
+]

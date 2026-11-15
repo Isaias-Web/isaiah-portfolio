@@ -1,58 +1,39 @@
-# Formulario de contacto — configuración y activación
+# Contacto — Web3Forms
 
-## Estado actual
+El navegador envía `FormData` por `fetch` a `https://api.web3forms.com/submit`. No hay endpoint propio, SDK de correo ni widget externo. Se retiraron la ruta anterior, sus switches, credenciales e instrucciones. El diseño de los cuatro campos, validaciones y glow permanecen intactos.
 
-La rama `feat/contact-email-delivery` implementa una API de Next.js (`POST /api/contact`), un formulario real y una notificación de éxito fija en la esquina superior derecha. **Por defecto el envío queda desactivado** hasta configurar las credenciales; el correo directo sigue funcionando. No realizar merge antes de probar una entrega real.
+## Activación
 
-El destinatario está fijado en el servidor a **isaiahweb333@gmail.com**. El visitante nunca determina el destinatario ni la dirección remitente. El formulario envía nombre, correo, tipo de consulta y mensaje, en texto plano; el correo del visitante se usa como `reply_to`.
+1. En tu cuenta Web3Forms, verifica que la Access Key corresponda a **isaiahweb333@gmail.com**. El destinatario se resuelve en el proveedor; el navegador no envía un campo `to` ni decide el buzón. `email` se usa como dirección de respuesta del visitante.
+2. Configura `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` en `.env.local` para desarrollo o en las variables de **Preview** del proyecto. `.env.example` deja el valor vacío: sin configuración el botón permanece deshabilitado y el correo directo disponible.
+3. Reconstruye la aplicación/preview después de cambiar la variable. Next.js incorpora `NEXT_PUBLIC_*` en el bundle: esta Access Key es pública por diseño del proveedor; no es una clave secreta de servidor. No escribir valores reales en commits, documentación, capturas o logs.
+4. Retira de la configuración externa las variables antiguas que ya no usa esta rama. No se cambiaron automáticamente los ajustes de Vercel.
+5. Desde la preview configurada, realiza **una prueba controlada** y confirma recepción en Gmail, carpeta spam y respuesta al visitante. `success: true` significa aceptación del proveedor; no garantiza llegada a bandeja principal. **No fusionar a main ni publicar antes de esa comprobación.** En esta entrega solo se usan mocks y no se generan correos reales.
 
-## 1. Proveedor de envío (Resend)
+No necesitas verificar un remitente con DNS, configurar un backend o instalar un CAPTCHA de pago.
 
-1. Crea una cuenta en [Resend](https://resend.com) y agrega `isaiasfrutos.dev` como dominio remitente (o un subdominio específico, por ejemplo `mail.isaiasfrutos.dev`).
-2. Completa la verificación del dominio en Resend. Agrega los registros DNS SPF/DKIM que el proveedor te indique en Vercel DNS. **No sustituyas los MX de un servicio de correo existente.**
-3. Crea una API key limitada a envío, de preferencia restringida al dominio.
-4. Usa un remitente del dominio verificado, por ejemplo `Portfolio Isaías <contacto@isaiasfrutos.dev>`. No uses la cuenta Gmail del destinatario como dirección `from` sin verificar su dominio.
+## Envío y errores
 
-## 2. Protección antispam (Cloudflare Turnstile)
+Se conserva nombre 2–100, email válido hasta 254 caracteres, consulta de lista cerrada y mensaje 20–3000. El guard síncrono evita doble envío, incluso antes del render de pending. Los cuatro valores permanecen durante la espera, con controles temporalmente deshabilitados. No hay reintentos automáticos.
 
-1. Crea un widget de Turnstile en [Cloudflare](https://dash.cloudflare.com) para `isaiasfrutos.dev` (agrega direcciones de prueba solo si las utilizarás).
-2. Obtén `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (pública) y `TURNSTILE_SECRET_KEY` (privada).
-3. El backend valida **cada token** por el endpoint Siteverify y exige acción `contact` y hostname coincidente con la página de origen. Tokens vencidos o reutilizados se rechazan.
-4. Además hay un honeypot, validación de origen, tamaño máximo de petición y validación de campos en servidor. Para un lanzamiento público, configura límites de solicitudes en Vercel Firewall/WAF o en un servicio con estado compartido y supervisa el abuso. Turnstile no sustituye el rate limit.
+Solo una respuesta HTTP correcta y JSON con `success === true` limpia los campos y muestra el aviso por portal a body, fijo arriba a la derecha y respetando safe areas. El aviso tiene entrada/salida de 200 ms, cierre manual accesible y comienza a salir a los cinco segundos; desaparece al finalizar la salida. Reduced motion elimina el desplazamiento de esa animación.
 
-## 3. Variables de entorno en Vercel
+HTTP 429 muestra el límite; errores HTTP, JSON inválido, `success: false`, respuestas ambiguas o red fallida conservan los datos y permiten reintentar. Hay timeout de 20 segundos y cancelación al desmontar. Un fallo de red después de aceptar la solicitud puede dejar entrega incierta: se advierte revisar antes de reintentar para evitar duplicados. No se imprimen respuestas del proveedor, claves o mensajes en consola.
 
-En el proyecto **isaiah-portfolio → Settings → Environment Variables**, configura:
+## Antispam y privacidad
 
-| Variable | Ejemplo / valor | Visibilidad |
-| --- | --- | --- |
-| `CONTACT_ENABLED` | `true` para activar | Servidor |
-| `NEXT_PUBLIC_CONTACT_ENABLED` | `true` para activar el botón | Pública |
-| `RESEND_API_KEY` | Clave de Resend | Secreta, servidor |
-| `CONTACT_FROM_EMAIL` | `Portfolio Isaías <contacto@isaiasfrutos.dev>` | Servidor |
-| `TURNSTILE_SECRET_KEY` | Clave privada del widget | Secreta, servidor |
-| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Clave pública del widget | Pública |
-| `CONTACT_ALLOWED_ORIGINS` | Opcional: URLs exactas de previews adicionales separadas por coma | Servidor |
+Se usa el filtro integrado de Web3Forms y su checkbox `botcheck`, oculto, sin foco ni impacto visual. Si está marcado, se rechaza localmente sin fingir éxito. La guía oficial advierte que el honeypot es antiguo y menos efectivo: **no se presenta como protección completa**, ni como un rate limit propio. Las cuotas y filtros los controla Web3Forms. No se añade ningún servicio extra; si aparece abuso, evaluar por separado el CAPTCHA compatible que el proveedor ofrece para el plan gratuito. Las restricciones de dominio y otras protecciones pueden depender del plan; no se presuponen activadas.
 
-No pegues contraseñas ni claves en commits, capturas, chats o `.env.example`. Las dos variables `NEXT_PUBLIC_*` se incluyen en el build cliente; **se necesita un nuevo despliegue tras cambiarlas**.
+La nota visible informa que Web3Forms procesa los datos para responder y pide evitar información confidencial. El portfolio no guarda mensajes en localStorage, base de datos o logs. Revisar las condiciones de privacidad del proveedor antes de activar; no se promete ausencia de registros del lado del proveedor.
 
-`POST /api/contact` devuelve 503 sin enviar nada si faltan claves o si `CONTACT_ENABLED` no está en `true`.
+## Pruebas de esta entrega
 
-## 4. Comprobaciones antes de producción
+Resultados detallados y límites: [CONTACT_WEB3FORMS_VALIDATION.md](CONTACT_WEB3FORMS_VALIDATION.md). Los mocks interceptan el dominio oficial y usan una configuración ficticia solo en el proceso de pruebas. No se usa ni registra una Access Key real. Gmail permanece pendiente de verificación manual.
 
-1. Completar la verificación DNS del remitente y de Turnstile.
-2. Configurar variables en Preview en un entorno controlado y hacer un nuevo despliegue.
-3. Enviar una consulta real desde el formulario y confirmar recepción en `isaiahweb333@gmail.com`; verificar spam y que `reply-to` sea el visitante.
-4. Probar datos incompletos, correo inválido, token vencido/reutilizado, honeypot, error de Resend, conexión lenta y doble envío. **No debe aparecer la notificación de éxito ante un fallo.**
-5. Verificar notificación en móvil y escritorio: arriba a la derecha, `position: fixed`, cierra manualmente o desaparece tras 5 segundos.
-6. Revisar accesibilidad, privacidad y política de tratamiento de datos antes de recopilar consultas reales. El proveedor de correo puede procesar o retener datos según sus condiciones.
-7. Activar reglas de abuso/rate limit y comprobar las condiciones de uso del plan de Vercel. Hobby está sujeto a uso personal no comercial; un formulario para captar servicios remunerados puede requerir Pro.
+## Fuentes oficiales revisadas
 
-No modificar `main` ni desplegar en producción hasta que el usuario apruebe la prueba de correo y las condiciones operativas.
-
-## Referencias
-
-- [Resend — envío por API](https://resend.com/docs/api-reference/emails/send-email)
-- [Cloudflare Turnstile — validación en el servidor](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/)
-- [Cloudflare Turnstile — embed](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-- [Vercel Hobby — límites](https://vercel.com/docs/plans/hobby)
+- [API y códigos de respuesta](https://docs.web3forms.com/getting-started/api-reference)
+- [React y FormData](https://docs.web3forms.com/how-to-guides/js-frameworks/react-js/simple-react-contact-form)
+- [Filtro integrado](https://docs.web3forms.com/getting-started/customizations/spam-protection)
+- [botcheck y advertencia del honeypot](https://docs.web3forms.com/getting-started/customizations/spam-protection/spam-protection)
+- [Access Key pública y privacidad](https://docs.web3forms.com/getting-started/faq)
