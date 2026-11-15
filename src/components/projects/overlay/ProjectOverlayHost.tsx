@@ -38,6 +38,18 @@ export default function ProjectOverlayHost({
     useState<ProjectKey>(activeProject);
   const [pendingFadeIn, setPendingFadeIn] = useState(false);
 
+  // Initialize the first selection before committing children, rather than
+  // committing an empty case study and copying the prop in an effect.
+  // This converges on the next render; subsequent selections still wait for
+  // GSAP's exit callback so the outgoing content remains mounted.
+  if (activeProject && displayedProject === null) {
+    setDisplayedProject(activeProject);
+    setPendingFadeIn(true);
+  }
+  if (!isOpen && pendingFadeIn) {
+    setPendingFadeIn(false);
+  }
+
   useBodyScrollLock(isOpen);
 
   useEffect(() => {
@@ -51,13 +63,6 @@ export default function ProjectOverlayHost({
       resumeScroll();
     };
   }, [isOpen, pauseScroll, resumeScroll]);
-
-  useEffect(() => {
-    if (activeProject && displayedProject === null) {
-      setDisplayedProject(activeProject);
-      setPendingFadeIn(true);
-    }
-  }, [activeProject, displayedProject]);
 
   useEffect(() => {
     const el = contentRef.current;
@@ -82,6 +87,7 @@ export default function ProjectOverlayHost({
 
     return () => {
       tween.kill();
+      isTransitioningRef.current = false;
     };
   }, [activeProject, displayedProject]);
 
@@ -89,23 +95,26 @@ export default function ProjectOverlayHost({
     const el = contentRef.current;
     const scroller = shellScrollRef.current;
 
-    if (!el) return;
+    if (!isOpen || !el) return;
     if (!displayedProject) return;
     if (!pendingFadeIn) return;
 
+    isTransitioningRef.current = true;
     gsap.set(el, { autoAlpha: 0 });
 
-    requestAnimationFrame(() => {
+    let secondFrame = 0;
+    let tween: gsap.core.Tween | null = null;
+    const firstFrame = requestAnimationFrame(() => {
       if (scroller) {
         scroller.scrollTop = 0;
       }
 
-      requestAnimationFrame(() => {
+      secondFrame = requestAnimationFrame(() => {
         if (scroller) {
           scroller.scrollTop = 0;
         }
 
-        const tween = gsap.to(el, {
+        tween = gsap.to(el, {
           autoAlpha: 1,
           duration: 0.28,
           ease: "power2.out",
@@ -114,13 +123,15 @@ export default function ProjectOverlayHost({
             isTransitioningRef.current = false;
           },
         });
-
-        return () => {
-          tween.kill();
-        };
       });
     });
-  }, [displayedProject, pendingFadeIn]);
+    return () => {
+      cancelAnimationFrame(firstFrame);
+      cancelAnimationFrame(secondFrame);
+      tween?.kill();
+      isTransitioningRef.current = false;
+    };
+  }, [isOpen, displayedProject, pendingFadeIn]);
 
   const handleNavigate = (slug: CaseStudySlug) => {
     if (isTransitioningRef.current) return;
