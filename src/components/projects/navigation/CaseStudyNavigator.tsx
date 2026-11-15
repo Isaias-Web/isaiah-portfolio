@@ -38,7 +38,7 @@ export default function CaseStudyNavigator({
             type="button"
             onClick={() => onNavigate(prevCase.slug)}
             className="group min-w-0 w-full text-left opacity-60 transition-opacity duration-300 hover:opacity-100"
-            aria-label={`Go to previous case study: ${prevCase.title}`}
+            aria-label={`Ver proyecto anterior: ${prevCase.title}`}
           >
             <p className={labelClass}>← Proyecto Anterior</p>
 
@@ -49,7 +49,7 @@ export default function CaseStudyNavigator({
             type="button"
             onClick={() => onNavigate(nextCase.slug)}
             className="group min-w-0 w-full text-left opacity-60 transition-opacity duration-300 hover:opacity-100 md:text-right"
-            aria-label={`Go to next case study: ${nextCase.title}`}
+            aria-label={`Ver proyecto siguiente: ${nextCase.title}`}
           >
             <p className={labelClass}>Siguiente Proyecto →</p>
 
