@@ -36,7 +36,10 @@ export default function RightNow() {
       className="relative overflow-hidden bg-[#090a09] text-white"
     >
       <div className="relative px-6 py-10 md:px-10 md:py-12 lg:px-16 lg:py-14">
-        <p data-right-now-reveal="label" className="mb-8 font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]">
+        <p
+          data-right-now-reveal="label"
+          className="mb-8 font-mono text-[10px] uppercase tracking-[0.28em] text-[#ff2d00] md:text-[11px]"
+        >
           / experiencia y método / p. 005
         </p>
         <h2
@@ -45,10 +48,24 @@ export default function RightNow() {
           className="max-w-[620px] font-black uppercase leading-[0.84] tracking-[-0.07em] text-[#f3efe8] text-[24vw] sm:text-[20vw] md:text-[15vw] lg:text-[13vw]"
         >
           {["PERFIL", "ACTUAL"].map((line, lineIndex) => (
-            <span key={line} aria-hidden="true" className={lineIndex ? "block whitespace-nowrap text-[#ff2d00]" : "block whitespace-nowrap"}>
+            <span
+              key={line}
+              aria-hidden="true"
+              className={
+                lineIndex
+                  ? "block whitespace-nowrap text-[#ff2d00]"
+                  : "block whitespace-nowrap"
+              }
+            >
               {line.split("").map((letter, index) => (
-                <span key={`${line}-${index}`} data-right-now-reveal="letter" className="inline-block">
-                  <span data-right-now-letter className="inline-block">{letter}</span>
+                <span
+                  key={`${line}-${index}`}
+                  data-right-now-reveal="letter"
+                  className="inline-block"
+                >
+                  <span data-right-now-letter className="inline-block">
+                    {letter}
+                  </span>
                 </span>
               ))}
             </span>
@@ -60,30 +77,46 @@ export default function RightNow() {
         >
           <div className="grid min-w-0 gap-8 md:grid-cols-[1.1fr_1fr] md:gap-12 lg:gap-20">
             <div className="min-w-0">
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#ff2d00]">
+              <p
+                data-right-now-reveal="uic-label"
+                className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#ff2d00]"
+              >
                 Experiencia institucional / UIC
               </p>
               <h3
                 id="uic-heading"
+                data-right-now-reveal="uic-title"
                 className="mt-6 max-w-[750px] text-[clamp(2.2rem,5.2vw,5.5rem)] font-black uppercase leading-[0.95] tracking-[-0.05em]"
               >
                 Web Master
                 <br />
                 Institucional
               </h3>
-              <p className="mt-6 font-mono text-[14px] leading-relaxed text-white/80">
+              <p
+                data-right-now-reveal="uic-meta"
+                className="mt-6 font-mono text-[14px] leading-relaxed text-white/80"
+              >
                 Universidad Intercontinental
               </p>
-              <p className="mt-1 font-mono text-[12px] leading-relaxed text-white/55">
+              <p
+                data-right-now-reveal="uic-meta"
+                className="mt-1 font-mono text-[12px] leading-relaxed text-white/55"
+              >
                 Comunicación Social
               </p>
-              <p className="mt-4 font-mono text-[11px] leading-relaxed text-[#ff2d00]">
+              <p
+                data-right-now-reveal="uic-date"
+                className="mt-4 font-mono text-[11px] leading-relaxed text-[#ff2d00]"
+              >
                 <time dateTime="2026-08-18">18 de agosto de 2026</time> —
                 actualidad
               </p>
             </div>
             <div className="min-w-0">
-              <p className="max-w-[650px] text-[clamp(1.2rem,2.2vw,1.8rem)] leading-[1.45] tracking-[-0.02em] text-[#f3efe8]">
+              <p
+                data-right-now-reveal="uic-intro"
+                className="max-w-[650px] text-[clamp(1.2rem,2.2vw,1.8rem)] leading-[1.45] tracking-[-0.02em] text-[#f3efe8]"
+              >
                 Desarrollo y administro plataformas web institucionales, integro
                 servicios y automatizo tareas técnicas.
               </p>
@@ -91,6 +124,7 @@ export default function RightNow() {
                 {responsibilities.map((text, index) => (
                   <li
                     key={text}
+                    data-right-now-reveal="responsibility"
                     className="grid grid-cols-[2rem_minmax(0,1fr)] gap-4 py-5 font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px]"
                   >
                     <span aria-hidden="true" className="text-[#ff2d00]">
@@ -109,7 +143,10 @@ export default function RightNow() {
         >
           <div className="grid min-w-0 gap-10 md:grid-cols-[1.1fr_1fr] md:gap-12 lg:gap-20">
             <div className="min-w-0">
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#ff2d00]">
+              <p
+                data-right-now-reveal="ai-label"
+                className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#ff2d00]"
+              >
                 Ingeniería asistida y automatización
               </p>
               <h3
@@ -117,13 +154,25 @@ export default function RightNow() {
                 lang="en"
                 className="mt-6 text-[clamp(2rem,4.5vw,4.5rem)] font-black uppercase leading-[0.98] tracking-[-0.04em]"
               >
-                AI-Assisted
+                <span data-right-now-reveal="ai-line" className="inline-block">
+                  AI-Assisted
+                </span>
                 <br />
-                Engineering
+                <span data-right-now-reveal="ai-line" className="inline-block">
+                  Engineering
+                </span>
                 <br />
-                <span className="text-[#ff2d00]">&amp; Automation</span>
+                <span
+                  data-right-now-reveal="ai-line"
+                  className="inline-block text-[#ff2d00]"
+                >
+                  &amp; Automation
+                </span>
               </h3>
-              <p className="mt-6 max-w-[540px] font-mono text-[12px] leading-[1.8] text-white/60 md:text-[13px]">
+              <p
+                data-right-now-reveal="ai-intro"
+                className="mt-6 max-w-[540px] font-mono text-[12px] leading-[1.8] text-white/60 md:text-[13px]"
+              >
                 Aplico IA al trabajo de ingeniería y combino scripts e
                 integraciones para resolver tareas repetitivas. Cada flujo
                 necesita criterios de revisión y comprobación.
@@ -133,6 +182,7 @@ export default function RightNow() {
               {workflow.map((step, index) => (
                 <li
                   key={step.title}
+                  data-right-now-reveal="step"
                   className="grid grid-cols-[2rem_minmax(0,1fr)] gap-4 py-6"
                 >
                   <span
@@ -154,7 +204,7 @@ export default function RightNow() {
             </ol>
           </div>
           <dl className="mt-10 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-2 md:gap-12 lg:gap-20">
-            <div className="min-w-0">
+            <div data-right-now-reveal="automation" className="min-w-0">
               <dt className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff2d00]">
                 Automatización técnica / Python y PHP
               </dt>
@@ -163,7 +213,7 @@ export default function RightNow() {
                 ejecutar auditorías y validaciones de implementaciones.
               </dd>
             </div>
-            <div className="min-w-0">
+            <div data-right-now-reveal="automation" className="min-w-0">
               <dt className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff2d00]">
                 Automatización operativa / Power Automate
               </dt>

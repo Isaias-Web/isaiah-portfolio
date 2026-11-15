@@ -18,9 +18,10 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
     const targets = section.querySelectorAll<HTMLElement>(
       "[data-right-now-reveal], [data-right-now-letter]",
     );
-    const originalStyles = Array.from(targets, (target) => [
-      target, target.getAttribute("style"),
-    ] as const);
+    const originalStyles = Array.from(
+      targets,
+      (target) => [target, target.getAttribute("style")] as const,
+    );
     let failed = false;
 
     const restoreStyles = () => {
@@ -38,6 +39,8 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
         hoverCleanups.forEach((cleanup) => cleanup());
         media.revert();
         ctx.revert();
+      } catch (error) {
+        console.error("RightNow motion cleanup recovered:", error);
       } finally {
         restoreStyles();
       }
@@ -51,82 +54,184 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
       // advances in em so responsive font sizes keep the approved spacing.
       const measure = document.createElement("canvas").getContext("2d");
       if (measure) {
-        section.querySelectorAll<HTMLElement>("#experience-heading > span").forEach((line) => {
-          const style = getComputedStyle(line);
-          measure.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
-          measure.fontKerning = style.fontKerning === "none" ? "none" : "normal";
-          const text = line.textContent || "";
-          line.querySelectorAll<HTMLElement>("[data-right-now-reveal='letter']").forEach((letter, index) => {
-            if (!index) return;
-            const kerning = measure.measureText(text.slice(0, index + 1)).width
-              - measure.measureText(text.slice(0, index)).width
-              - measure.measureText(text[index]).width;
-            letter.style.marginInlineStart = `${kerning / parseFloat(style.fontSize)}em`;
+        section
+          .querySelectorAll<HTMLElement>("#experience-heading > span")
+          .forEach((line) => {
+            const style = getComputedStyle(line);
+            measure.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+            measure.fontKerning =
+              style.fontKerning === "none" ? "none" : "normal";
+            const text = line.textContent || "";
+            line
+              .querySelectorAll<HTMLElement>("[data-right-now-reveal='letter']")
+              .forEach((letter, index) => {
+                if (!index) return;
+                const kerning =
+                  measure.measureText(text.slice(0, index + 1)).width -
+                  measure.measureText(text.slice(0, index)).width -
+                  measure.measureText(text[index]).width;
+                letter.style.marginInlineStart = `${kerning / parseFloat(style.fontSize)}em`;
+              });
           });
-        });
       }
       ctx.add(() => {
         media.add("(prefers-reduced-motion: no-preference)", () => {
           if (failed) return;
-          const label = section.querySelector('[data-right-now-reveal="label"]');
-          const letters = section.querySelectorAll('[data-right-now-reveal="letter"]');
-          const title = gsap.timeline({
-            defaults: { ease: "power3.out", duration: 0.55 },
-            scrollTrigger: {
-              id: "right-now-title",
-              trigger: label,
-              start: "top 92%",
-              toggleActions: "play none none none",
-              once: true,
-            },
-          });
-          // Deferring the from-state until playback keeps unvisited content
-          // visible if ScrollTrigger never runs. Layout is never changed.
-          title
-            .fromTo(label, { opacity: 0, y: 18 }, {
-              opacity: 1, y: 0, immediateRender: false,
-            })
-            .fromTo(letters, { opacity: 0, y: 18 }, {
-              opacity: 1, y: 0, duration: 0.65, stagger: 0.035,
-              immediateRender: false,
-            }, 0.18);
-
-          const hover = gsap.matchMedia();
-          hover.add("(hover: hover) and (pointer: fine)", (hoverContext) => {
-            const cleanups: Array<() => void> = [];
-            section.querySelectorAll<HTMLElement>("[data-right-now-letter]").forEach((letter, index) => {
-              const offset = letterOffsets[index % letterOffsets.length];
-              const animate = (returning: boolean) => {
-                if (failed) return;
-                try {
-                  hoverContext.add(() => {
-                    gsap.to(letter, {
-                      ...(returning ? { x: 0, y: 0, rotation: 0 } : offset),
-                      duration: returning ? 0.45 : 0.28,
-                      ease: returning ? "power3.out" : "power2.out",
-                      overwrite: "auto",
-                    });
-                  });
-                } catch (error) {
-                  failOpen();
-                  console.error("RightNow motion recovered:", error);
-                }
-              };
-              const enter = () => animate(false);
-              const leave = () => animate(true);
-              letter.addEventListener("mouseenter", enter);
-              letter.addEventListener("mouseleave", leave);
-              const cleanup = () => {
-                letter.removeEventListener("mouseenter", enter);
-                letter.removeEventListener("mouseleave", leave);
-                hoverCleanups.delete(cleanup);
-              };
-              hoverCleanups.add(cleanup);
-              cleanups.push(cleanup);
+          try {
+            const label = section.querySelector(
+              '[data-right-now-reveal="label"]',
+            );
+            const letters = section.querySelectorAll(
+              '[data-right-now-reveal="letter"]',
+            );
+            const title = gsap.timeline({
+              defaults: { ease: "power3.out", duration: 0.55 },
+              scrollTrigger: {
+                id: "right-now-title",
+                trigger: label,
+                start: "top 92%",
+                toggleActions: "play none none none",
+                once: true,
+              },
             });
-            return () => cleanups.forEach((cleanup) => cleanup());
-          });
-          return () => hover.revert();
+            // Deferring the from-state until playback keeps unvisited content
+            // visible if ScrollTrigger never runs. Layout is never changed.
+            title
+              .fromTo(
+                label,
+                { opacity: 0, y: 18 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  immediateRender: false,
+                },
+              )
+              .fromTo(
+                letters,
+                { opacity: 0, y: 18 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.65,
+                  stagger: 0.035,
+                  immediateRender: false,
+                },
+                0.18,
+              );
+
+            const sequence = (id: string, trigger: Element) =>
+              gsap.timeline({
+                defaults: { ease: "power3.out", duration: 0.55 },
+                scrollTrigger: {
+                  id: `right-now-${id}`,
+                  trigger,
+                  start: "top 92%",
+                  toggleActions: "play none none none",
+                  once: true,
+                },
+              });
+            const reveal = (
+              timeline: gsap.core.Timeline,
+              selector: string,
+              position: number,
+              stagger = 0,
+            ) =>
+              timeline.fromTo(
+                section.querySelectorAll(
+                  `[data-right-now-reveal="${selector}"]`,
+                ),
+                { opacity: 0, y: 18 },
+                { opacity: 1, y: 0, immediateRender: false, stagger },
+                position,
+              );
+
+            const uicLabel = section.querySelector(
+              '[data-right-now-reveal="uic-label"]',
+            );
+            if (uicLabel) {
+              const uic = sequence("uic", uicLabel);
+              reveal(uic, "uic-label", 0);
+              reveal(uic, "uic-title", 0.16);
+              reveal(uic, "uic-meta", 0.4, 0.08);
+              reveal(uic, "uic-date", 0.66);
+            }
+            const aiLabel = section.querySelector(
+              '[data-right-now-reveal="ai-label"]',
+            );
+            if (aiLabel) {
+              const ai = sequence("engineering", aiLabel);
+              reveal(ai, "ai-label", 0);
+              reveal(ai, "ai-line", 0.16, 0.1);
+              reveal(ai, "ai-intro", 0.5);
+            }
+
+            // Long mobile columns enter when each item actually approaches the
+            // viewport; they must not finish offscreen with their desktop sibling.
+            for (const group of [
+              "uic-intro",
+              "responsibility",
+              "step",
+              "automation",
+            ]) {
+              section
+                .querySelectorAll(`[data-right-now-reveal="${group}"]`)
+                .forEach((item, index) => {
+                  sequence(`${group}-${index}`, item).fromTo(
+                    item,
+                    { opacity: 0, y: 18 },
+                    {
+                      opacity: 1,
+                      y: 0,
+                      immediateRender: false,
+                      delay: index * 0.07,
+                    },
+                  );
+                });
+            }
+
+            const hover = gsap.matchMedia();
+            hover.add("(hover: hover) and (pointer: fine)", (hoverContext) => {
+              const cleanups: Array<() => void> = [];
+              section
+                .querySelectorAll<HTMLElement>("[data-right-now-letter]")
+                .forEach((letter, index) => {
+                  const offset = letterOffsets[index % letterOffsets.length];
+                  const animate = (returning: boolean) => {
+                    if (failed) return;
+                    hoverContext.add(() => {
+                      try {
+                        gsap.to(letter, {
+                          ...(returning ? { x: 0, y: 0, rotation: 0 } : offset),
+                          duration: returning ? 0.45 : 0.28,
+                          ease: returning ? "power3.out" : "power2.out",
+                          overwrite: "auto",
+                        });
+                      } catch (error) {
+                        failOpen();
+                        console.error("RightNow motion recovered:", error);
+                      }
+                    });
+                  };
+                  const enter = () => animate(false);
+                  const leave = () => animate(true);
+                  letter.addEventListener("mouseenter", enter);
+                  letter.addEventListener("mouseleave", leave);
+                  const cleanup = () => {
+                    letter.removeEventListener("mouseenter", enter);
+                    letter.removeEventListener("mouseleave", leave);
+                    hoverCleanups.delete(cleanup);
+                  };
+                  hoverCleanups.add(cleanup);
+                  cleanups.push(cleanup);
+                });
+              return () => cleanups.forEach((cleanup) => cleanup());
+            });
+            return () => hover.revert();
+          } catch (error) {
+            // Catch inside GSAP's callback so its active context is restored.
+            failOpen();
+            console.error("RightNow motion recovered:", error);
+          }
         });
       });
     } catch (error) {
@@ -137,10 +242,7 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
     return () => {
       window.removeEventListener("error", failOpen);
       window.removeEventListener("unhandledrejection", failOpen);
-      hoverCleanups.forEach((cleanup) => cleanup());
-      media.revert();
-      ctx.revert();
-      restoreStyles();
+      failOpen();
     };
   }, [introReady, ref]);
 }
