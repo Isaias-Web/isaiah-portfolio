@@ -63,13 +63,13 @@ function InfoTable({
           <div
             key={row.label}
             data-reveal="row"
-            className="group grid grid-cols-[84px_1fr] gap-4 border-b border-white/10 py-4 transition-colors duration-300 sm:grid-cols-[92px_1fr] md:grid-cols-[84px_minmax(0,1fr)] md:gap-3 xl:grid-cols-[96px_minmax(0,1fr)] xl:gap-7"
+            className="group grid min-w-0 grid-cols-[7rem_minmax(0,1fr)] gap-x-6 border-b border-white/10 py-4 transition-colors duration-300 xl:gap-x-7"
           >
-            <span className="font-mono text-[10px] uppercase leading-[1.4] tracking-[0.2em] text-[#ff2d00] md:text-[11px]">
+            <span className="min-w-0 font-mono text-[10px] uppercase leading-[1.4] tracking-[0.2em] text-[#ff2d00] md:text-[11px]">
               {row.label}
             </span>
 
-            <span className="font-mono text-[13px] leading-[1.8] tracking-[0.01em] text-white/72 md:text-[15px] md:leading-relaxed md:text-white/62 md:transition-all md:duration-300 md:ease-out md:group-hover:translate-x-[4px] md:group-hover:text-white/92">
+            <span className="min-w-0 font-mono text-[13px] leading-[1.8] tracking-[0.01em] text-white/72 [overflow-wrap:anywhere] md:text-[15px] md:leading-relaxed md:text-white/62 md:transition-all md:duration-300 md:ease-out md:group-hover:translate-x-[4px] md:group-hover:text-white/92">
               {row.value}
             </span>
           </div>
