@@ -73,15 +73,11 @@ export default function ProjectPanelIntro({
             </p>
 
             <p className="mt-4 max-w-[760px] font-mono text-[12px] leading-[1.8] tracking-[0.01em] text-white/65 md:text-[13px] md:text-white/55">
-              Desarrollo y optimización de la tienda digital de ONDA, enfocada
-              en construir una identidad clara, emocional y alineada al producto
-              dentro del mercado wellness.
+              Desarrollo de la tienda digital de ONDA, conectando la identidad de marca con la presentación de producto en el mercado wellness.
             </p>
 
             <p className="mt-4 max-w-[760px] font-mono text-[12px] leading-[1.8] tracking-[0.01em] text-white/65 md:text-[13px] md:text-white/55">
-              Se diseñó una experiencia estructurada que integra branding,
-              storytelling y contenido visual para mejorar la navegación,
-              fortalecer la percepción de marca y optimizar la conversión.
+              Implementación de contenido y narrativa visual en Shopify para organizar la exploración de la tienda.
             </p>
           </div>
         </div>

@@ -73,15 +73,11 @@ export default function ProjectPanelIntro({
             </p>
 
             <p className="mt-4 max-w-[760px] font-mono text-[12px] leading-[1.8] tracking-[0.01em] text-white/65 md:text-[13px] md:text-white/55">
-              Desarrollo y optimización de la tienda digital de FÜM en México,
-              enfocada en comunicar el valor del producto, mejorar la conversión
-              y adaptar la marca al mercado local.
+              Desarrollo de la tienda digital de FÜM en México: adaptación de la presentación de producto y de la marca al mercado local.
             </p>
 
             <p className="mt-4 max-w-[760px] font-mono text-[12px] leading-[1.8] tracking-[0.01em] text-white/65 md:text-[13px] md:text-white/55">
-              Se construyó una experiencia clara y estructurada, alineando
-              branding, contenido y performance para fortalecer la conexión
-              entre producto, usuario y marca.
+              Implementación de secciones en Shopify y Liquid, con jerarquía de contenido, narrativa visual y navegación de producto.
             </p>
           </div>
         </div>

@@ -73,8 +73,7 @@ export default function ProjectPanelIntro({
             </p>
 
             <p className="mt-4 max-w-[760px] font-mono text-[12px] leading-[1.8] tracking-[0.01em] text-white/65 md:text-[13px] md:text-white/55">
-              Desarrollo y gestión de sitios web integrados a CRM y campañas digitales,
-              optimizados para rendimiento, estabilidad y conversión.
+              Desarrollo y gestión de sitios y landings con WordPress, integraciones de CRM y herramientas de analítica para apoyar campañas y contenidos.
             </p>
           </div>
         </div>

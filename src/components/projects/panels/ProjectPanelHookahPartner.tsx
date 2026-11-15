@@ -70,9 +70,7 @@ export default function ProjectPanelIntro({
             </p>
 
             <p className="mt-4 max-w-[760px] font-mono text-[12px] leading-[1.8] tracking-[0.01em] text-white/65 md:text-[13px] md:text-white/55">
-              Desarrollo y optimización de ecommerce enfocado en navegación clara,
-              estructura de catálogo y presentación de producto para impulsar la
-              conversión dentro del canal digital.
+              Desarrollo de colecciones y presentación de producto en Shopify para un canal de venta directa al consumidor, con trabajo de UX/UI y contenido visual.
             </p>
           </div>
         </div>

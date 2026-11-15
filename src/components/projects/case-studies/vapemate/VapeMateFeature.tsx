@@ -27,11 +27,8 @@ export default function VapeMateFeature() {
                   <div className="mt-3 h-px w-[58%] bg-[#ff2d00]" />
 
                   <p className="mt-3 max-w-[460px] font-mono text-[10px] leading-[1.8] text-white/55 md:text-[11px]">
-                    Operación ecommerce enfocada en catálogo, contenido,
-                    experiencia de usuario y soporte visual, diseñada para
-                    fortalecer la presencia digital de la marca y optimizar su
-                    comunicación comercial.
-                  </p>
+              Gestión de catálogo y contenido visual para una operación de eCommerce, con trabajo de UX/UI y soporte a la presentación del producto.
+            </p>
                 </div>
 
                 <div className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-[#ffb000]" />

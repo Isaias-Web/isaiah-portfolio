@@ -27,11 +27,8 @@ export default function TradeMateFeature() {
                   <div className="mt-3 h-px w-[58%] bg-[#ff2d00]" />
 
                   <p className="mt-3 max-w-[460px] font-mono text-[10px] leading-[1.8] text-white/55 md:text-[11px]">
-                    Plataforma enfocada en centralizar inventario, órdenes y
-                    operación comercial entre canales B2B y B2C, con una
-                    arquitectura pensada para escalabilidad, control y
-                    sincronización.
-                  </p>
+              Catálogo, inventario y órdenes integrados para una operación de comercio B2B y B2C con Shopify y servicios backend.
+            </p>
                 </div>
 
                 <div className="absolute right-3 top-3 h-1.5 w-1.5 rounded-full bg-[#ffb000]" />

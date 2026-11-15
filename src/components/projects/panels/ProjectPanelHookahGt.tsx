@@ -70,9 +70,7 @@ export default function ProjectPanelIntro({
             </p>
 
             <p className="mt-4 max-w-[760px] font-mono text-[12px] leading-[1.8] tracking-[0.01em] text-white/65 md:text-[13px] md:text-white/55">
-              Optimización de la experiencia de compra mayorista mediante una
-              estructura digital enfocada en catálogo, navegación y soporte
-              comercial para distribución B2B en EE.UU. y LATAM.
+              Estructura de catálogo y navegación en Shopify para compra mayorista B2B, con gestión de datos y soporte visual a la comunicación del producto.
             </p>
           </div>
         </div>

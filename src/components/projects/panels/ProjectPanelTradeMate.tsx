@@ -70,10 +70,7 @@ export default function ProjectPanelIntro({
             </p>
 
             <p className="mt-4 max-w-[760px] font-mono text-[12px] leading-[1.8] tracking-[0.01em] text-white/65 md:text-[13px] md:text-white/55">
-              Una plataforma de comercio diseñada para unificar operaciones
-              mayoristas y minoristas en un sistema escalable. TradeMate conecta
-              inventario, órdenes y múltiples canales de venta a través de una
-              arquitectura centralizada pensada para el crecimiento.
+              Comercio B2B y B2C con inventario, productos y órdenes conectados entre canales. Desarrollo full-stack e integración de Shopify con servicios backend para coordinar la operación.
             </p>
           </div>
         </div>

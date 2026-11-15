@@ -76,9 +76,7 @@ export default function ProjectPanelIntro({
             </p>
 
             <p className="mt-4 max-w-[780px] font-mono text-[12px] leading-[1.8] tracking-[0.01em] text-white/65 md:text-[13px] md:text-white/55">
-              Gestión de catálogo, contenido y experiencia web para una marca
-              distribuidora con presencia internacional, alineando operación
-              digital, producto y comunicación comercial.
+              Gestión de catálogo, contenido y experiencia web en Shopify, con soporte gráfico y de producto para una marca de distribución.
             </p>
           </div>
         </div>
