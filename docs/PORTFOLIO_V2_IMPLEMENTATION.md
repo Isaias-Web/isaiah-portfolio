@@ -49,7 +49,7 @@ Los campos son controlados. Se cancela el reset automático del formulario de Re
 
 Los datos solo existen en memoria de la página: sin fetch, API, localStorage, analítica de campos o registro de mensajes. Sin JavaScript, se oculta la demo y se mantienen el email y contenido principal. No se presenta una confirmación de envío ficticia ni se promete un plazo de respuesta.
 
-**Integración futura, todavía propuesta:** `POST /api/contact` en Route Handler Node.js → proveedor transaccional como Resend. Antes de activarla: validar independientemente en servidor, limitar payload, destinatario/remitente fijos del servidor, dominio verificado, `reply_to` validado, rate limit compartido, honeypot/protección antispam, idempotencia, errores y privacidad aprobados. No usar contadores en memoria como rate limit distribuido ni reenviar HTML o encabezados arbitrarios. Ver las fuentes oficiales y la propuesta detallada en [la auditoría V2](PORTFOLIO_V2_AUDIT.md#7-formulario-dentro-de-openchannel-solo-propuesta). No se configura un proveedor ni se cambia Vercel en esta entrega.
+La propuesta histórica de backend se sustituyó por Web3Forms directo desde el navegador. Ver [configuración vigente](CONTACT_DELIVERY_SETUP.md).
 
 ### Accesibilidad y estabilidad
 

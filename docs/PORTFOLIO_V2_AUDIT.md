@@ -195,27 +195,9 @@ Cuéntame qué necesitas construir
 [Enviar consulta]              [O escríbeme por correo]
 ```
 
-Propuesta técnica: `ContactForm` cliente → `POST /api/contact` en Route Handler Node.js → API transaccional Resend. Se recomienda ese recorrido por su separación explícita de UI, validación y envío. Server Actions es otra opción compatible; no es necesario introducir ambas. La documentación oficial de Resend ofrece integración Next.js con clave de API y dominio verificado; Vercel dispone de runtime Node para Functions. No se crearon cuentas ni se instalaron SDKs.
+La propuesta de correo de esta auditoría fue sustituida por Web3Forms. Ver [configuración vigente](CONTACT_DELIVERY_SETUP.md).
 
-Contrato sugerido, por revisar al implementar:
-
-- Nombre requerido (2–100 caracteres), correo válido (máximo 254), tipo de consulta de una lista cerrada y mensaje de 20–3000 caracteres. Validar tanto cliente como servidor; limitar tamaño del cuerpo, rechazar campos inesperados y no aceptar adjuntos inicialmente.
-- Labels persistentes, `autocomplete` apropiado, errores vinculados mediante `aria-describedby`, foco en el primer error, estado pendiente y resultado anunciado. Los valores deben conservarse ante un fallo. Estados de foco visibles con los colores actuales; revisar cursor global sobre inputs.
-- Honeypot fuera del foco y del árbol accesible, protección contra repetición y límites de envío con estado compartido o capa gestionada a elegir. Un contador en memoria dentro de una función serverless no es un rate limit fiable entre instancias. Verificar Origin según dominios aprobados, sin usarlo como única protección antispam.
-- Claves y destinatario solo en servidor; remitente fijo de dominio verificado y `reply_to` con correo validado. El visitante no elige el `to` ni el `from`. Usar texto plano o escapar datos en la plantilla; no reenviar HTML arbitrario ni permitir encabezados inyectados.
-- No configurar respuesta automática al visitante por defecto; puede convertirse en un vector de spam. Idempotencia, timeout y manejo de cuotas/fallos antes de reintentar; no duplicar consultas por dobles clicks.
-- Éxito solo tras confirmación de aceptación por el proveedor: «Tu consulta fue recibida». No equivale a entrega garantizada ni a una respuesta humana. Error: «No pudimos enviar tu consulta. Intenta de nuevo o escríbeme por correo»; límite temporal con mensaje claro sin exponer detalles internos.
-- Aprobar texto de privacidad, finalidad y conservación de los datos. No registrar mensajes completos ni claves en logs; definir acceso y retención antes de recopilar información. Evitar almacenar consultas si el correo basta.
-
-**Condiciones antes de activar:** destinatario confirmado, proveedor aprobado, dominio/remitente verificados, secretos configurados de forma segura por el flujo autorizado, protección antispam elegida, cuotas/coste revisados y pruebas con sandbox o destinatario controlado. La viabilidad técnica en Functions no garantiza elegibilidad para cualquier uso de Hobby: revisar el caso con las condiciones vigentes del plan antes de activar un servicio comercial. No cambiar Vercel ni activar envíos en esta entrega.
-
-Fuentes oficiales consultadas para esta propuesta, sin copiar sus ejemplos al producto:
-
-- [Resend: Next.js](https://resend.com/docs/send-with-nextjs) — SDK/API del lado servidor, clave y dominio verificado.
-- [Resend: Send Email](https://resend.com/docs/api-reference/emails/send-email) — contrato de remitente, destinatario y respuesta.
-- [Resend: planes](https://resend.com/pricing) — cuotas sujetas al plan; verificar vigencia antes de activar.
-- [Next.js: Route Handlers](https://nextjs.org/docs/app/api-reference/file-conventions/route) y [formularios](https://nextjs.org/docs/app/guides/forms) — alternativas de implementación; adaptar a Next 16.2.1 del proyecto, sin asumir que toda la documentación «latest» es idéntica.
-- [Vercel: Node.js Runtime](https://vercel.com/docs/functions/runtimes/node-js), [Hobby](https://vercel.com/docs/plans/hobby) y [condiciones](https://vercel.com/legal/terms) — revisar límites y adecuación del plan, sin asumir coste cero ni modificar la cuenta.
+La configuración, privacidad, protección del proveedor, validación y pruebas vigentes se documentan en [CONTACT_DELIVERY_SETUP.md](CONTACT_DELIVERY_SETUP.md). La propuesta de backend propio queda retirada.
 
 ## 8. Auditoría técnica complementaria y prioridades
 

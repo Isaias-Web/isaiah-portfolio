@@ -13,7 +13,7 @@ export type ContactValues = {
 };
 export type ContactErrors = Partial<Record<keyof ContactValues, string>>;
 
-// Pure client-side demo validation. A future endpoint must validate independently.
+// Client field validation. Web3Forms applies its own provider-side checks.
 export function validateContact(values: ContactValues): ContactErrors {
   const errors: ContactErrors = {};
   if (values.name.trim().length < 2 || values.name.trim().length > 100)
