@@ -54,3 +54,24 @@ select {
   html { scroll-behavior: auto; }
 }
 
+/* Project rail: brighten only the photographic layer, never the text. */
+[data-project-hover-bg] {
+  filter: brightness(1);
+  transition: filter 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-cursor="zoom"]:hover [data-project-hover-bg] {
+    filter: brightness(4.5);
+  }
+}
+
+[data-cursor="zoom"]:has([data-project-open]:focus-visible) [data-project-hover-bg] {
+  filter: brightness(4.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-project-hover-bg] {
+    transition: none;
+  }
+}
