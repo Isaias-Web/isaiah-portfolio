@@ -1,13 +1,24 @@
-# Vista integral del portfolio — 18 de noviembre de 2026
+# Preview de referencia — Portfolio V2
 
-Esta rama de **Preview** fue creada desde `main` después de fusionar los cambios revisados:
+**Última sincronización:** 18 de noviembre de 2026
 
-- PR #3: auditoría SEO y estructura inicial.
-- PR #4: Portfolio V2 (experiencia UIC, IA, movimiento, glow y contacto).
-- PR #6: títulos de WhoAmI equilibrados en escritorio.
-- PR #7: cursor con leyenda y brillo de fondos al hover.
-- PR #5: formulario Web3Forms con validación y aviso temporal.
+**Producción de referencia:** `main` en el commit `155e02807a18beef51645c7d2ef8bf1f51f6cf2c`.
 
-No añade cambios visuales ni funcionales al código de `main`. Este archivo sirve únicamente para disparar una nueva compilación Preview y distinguir la revisión integral de los despliegues individuales.
+Esta rama `preview/portfolio-completo-20261118` es una referencia visual y de comparación. Recibió los cambios de `main` mediante el PR #9. Su única diferencia deliberada de contenido es este documento de referencia.
 
-**Envío de mensajes:** requiere `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` configurada en el entorno Preview correspondiente. El correo a Gmail fue verificado manualmente en la preview de `feat/contact-email-delivery`. El envío desde Production requiere configurar esa variable también allí y ejecutar un nuevo despliegue.
+## Funcionalidades integradas
+
+- SEO, semántica, HTML inicial y preloader visual independiente.
+- Hero, Manifesto, WhoAmI, RightNow, ProjectsRail y OpenChannel.
+- Información UIC, ingeniería asistida por IA y automatización, con editoriales y reveals reversibles.
+- Ajustes responsive, títulos equilibrados y proyectos con brillo al hover.
+- Cursor personalizado con indicación «CLICK PARA INTERACTUAR».
+- Formulario Web3Forms con notificación temporal de éxito tras confirmación del proveedor.
+- **PR #8:** Perfil actual unificado, segundo artículo invertido en escritorio, tarjetas con efecto hover y eliminación completa del bloque inferior redundante de automatización.
+
+## Validación y precauciones
+
+- La rama fue creada para revisar la versión equivalente a la publicación, no para representar un futuro cambio no fusionado.
+- El envío de Web3Forms requiere `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` en el entorno que se compila (Preview o Production). Se confirmó la recepción de una consulta de prueba enviada desde una preview anterior. Eso **no** demuestra por sí mismo la activación en Production.
+- Los estados de Vercel/GitHub no sustituyen pruebas reales de accesibilidad, Core Web Vitals, certificados HTTPS y navegación en distintos dispositivos.
+- Para actualizar esta referencia a futuro: fusionar los nuevos PR en `main`, sincronizar `main` hacia esta rama de preview por un PR orientado **a preview** (nunca al revés) y actualizar aquí el commit de referencia. No modificar producción desde la preview.
