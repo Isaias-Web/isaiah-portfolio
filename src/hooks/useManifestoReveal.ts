@@ -5,9 +5,7 @@ import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
 import { useLayoutEffect } from "react";
 import { gsap, ScrollTrigger } from "@/animations/gsap-config";
 
-export function useManifestoReveal(
-  ref: React.RefObject<HTMLElement | null>
-) {
+export function useManifestoReveal(ref: React.RefObject<HTMLElement | null>) {
   const { introReady } = useSmoothScrollControl();
 
   useLayoutEffect(() => {
@@ -17,10 +15,11 @@ export function useManifestoReveal(
 
     const ctx = gsap.context(() => {
       const top = section.querySelector<HTMLElement>('[data-animate="top"]');
-      const bottom =
-        section.querySelector<HTMLElement>('[data-animate="bottom"]');
+      const bottom = section.querySelector<HTMLElement>(
+        '[data-animate="bottom"]',
+      );
       const words = gsap.utils.toArray<HTMLElement>(
-        section.querySelectorAll(".manifesto-word")
+        section.querySelectorAll(".manifesto-word"),
       );
 
       if (!words.length) return;
@@ -30,6 +29,9 @@ export function useManifestoReveal(
       if (bottom) gsap.set(bottom, { opacity: 0, y: 14 });
 
       const totalSteps = words.length;
+      let previousCount = 0;
+      let topVisible = false;
+      let bottomVisible = false;
 
       ScrollTrigger.create({
         trigger: section,
@@ -42,23 +44,29 @@ export function useManifestoReveal(
           const progress = self.progress;
           const activeCount = Math.floor(progress * totalSteps);
 
-          words.forEach((word, index) => {
-            gsap.set(word, {
-              opacity: index < activeCount ? 1 : 0.08,
-            });
-          });
-
-          if (top) {
-            gsap.set(top, {
-              opacity: progress > 0.02 ? 1 : 0,
-              y: progress > 0.02 ? 0 : 16,
-            });
+          if (activeCount !== previousCount) {
+            gsap.set(
+              words.slice(
+                Math.min(previousCount, activeCount),
+                Math.max(previousCount, activeCount),
+              ),
+              {
+                opacity: activeCount > previousCount ? 1 : 0.08,
+              },
+            );
+            previousCount = activeCount;
           }
-
-          if (bottom) {
+          const nextTop = progress > 0.02;
+          if (top && nextTop !== topVisible) {
+            topVisible = nextTop;
+            gsap.set(top, { opacity: nextTop ? 1 : 0, y: nextTop ? 0 : 16 });
+          }
+          const nextBottom = progress > 0.92;
+          if (bottom && nextBottom !== bottomVisible) {
+            bottomVisible = nextBottom;
             gsap.set(bottom, {
-              opacity: progress > 0.92 ? 1 : 0,
-              y: progress > 0.92 ? 0 : 14,
+              opacity: nextBottom ? 1 : 0,
+              y: nextBottom ? 0 : 14,
             });
           }
         },

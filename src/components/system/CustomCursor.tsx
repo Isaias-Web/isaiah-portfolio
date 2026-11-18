@@ -15,38 +15,56 @@ export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches)
+      return;
+    let visible = false;
+    let pointer = false;
+    let actionable = false;
+    let target: Element | null = null;
+    let targetPending = false;
+    const show = (next: boolean) => {
+      if (visible === next) return;
+      visible = next;
+      setIsVisible(next);
+    };
+    const updateTarget = () => {
+      if (!targetPending) return;
+      targetPending = false;
+      const nextPointer = Boolean(
+        target?.closest(
+          'a, button, [role="button"], input, textarea, select, label, summary, [data-cursor="zoom"]',
+        ),
+      );
+      const nextActionable = Boolean(
+        target?.closest(
+          'a[href], button:not(:disabled), [role="button"]:not([aria-disabled="true"]), summary, input[type="submit"]:not(:disabled), input[type="button"]:not(:disabled), [data-cursor="zoom"]',
+        ),
+      );
+      if (pointer !== nextPointer) {
+        pointer = nextPointer;
+        setIsPointer(pointer);
+      }
+      if (actionable !== nextActionable) {
+        actionable = nextActionable;
+        setIsActionable(actionable);
+      }
+    };
     const moveCursor = (e: MouseEvent) => {
       mouse.current.x = e.clientX;
       mouse.current.y = e.clientY;
-
-      setIsVisible(true);
-
-      const target = e.target instanceof Element ? e.target : null;
-      if (!target) {
-        setIsPointer(false);
-        setIsActionable(false);
-        return;
-      }
-
-      const clickable = target.closest(
-        'a, button, [role="button"], input, textarea, select, label, summary, [data-cursor="zoom"]'
-      );
-
-      setIsPointer(Boolean(clickable));
-
-      // Only show the hint on actual actions, not editable form fields.
-      const actionable = target.closest(
-        'a[href], button:not(:disabled), [role="button"]:not([aria-disabled="true"]), summary, input[type="submit"]:not(:disabled), input[type="button"]:not(:disabled), [data-cursor="zoom"]'
-      );
-      setIsActionable(Boolean(actionable));
+      show(true);
+      target = e.target instanceof Element ? e.target : null;
+      targetPending = true;
     };
-
     const handleMouseLeave = () => {
-      setIsVisible(false);
-      setIsActionable(false);
+      show(false);
+      targetPending = false;
+      if (actionable) {
+        actionable = false;
+        setIsActionable(false);
+      }
     };
-    const handleMouseEnter = () => setIsVisible(true);
+    const handleMouseEnter = () => show(true);
 
     window.addEventListener("mousemove", moveCursor);
     document.addEventListener("mouseleave", handleMouseLeave);
@@ -55,6 +73,8 @@ export default function CustomCursor() {
     let animationFrame = 0;
 
     const render = () => {
+      // Coalesce hit testing to the same frame that paints the cursor.
+      updateTarget();
       pos.current.x += (mouse.current.x - pos.current.x) * 0.18;
       pos.current.y += (mouse.current.y - pos.current.y) * 0.18;
 
@@ -67,8 +87,14 @@ export default function CustomCursor() {
       }
 
       if (hintRef.current) {
-        const x = Math.max(12, Math.min(pos.current.x + 25, window.innerWidth - 212));
-        const y = Math.max(12, Math.min(pos.current.y + 24, window.innerHeight - 48));
+        const x = Math.max(
+          12,
+          Math.min(pos.current.x + 25, window.innerWidth - 212),
+        );
+        const y = Math.max(
+          12,
+          Math.min(pos.current.y + 24, window.innerHeight - 48),
+        );
         hintRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       }
 
@@ -111,7 +137,9 @@ export default function CustomCursor() {
         ref={dotRef}
         data-custom-cursor
         className={`pointer-events-none fixed left-0 top-0 z-[10000] hidden rounded-full bg-white mix-blend-difference transition-[opacity,transform] duration-200 ease-out md:block ${
-          isVisible && !isPointer ? "opacity-100 h-1.5 w-1.5" : "opacity-0 h-1.5 w-1.5"
+          isVisible && !isPointer
+            ? "opacity-100 h-1.5 w-1.5"
+            : "opacity-0 h-1.5 w-1.5"
         }`}
       />
     </>
