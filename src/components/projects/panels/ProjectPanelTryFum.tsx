@@ -28,7 +28,7 @@ export default function ProjectPanelIntro({
       {/* background image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/tryfum-bg.jpg"
+          src="/images/tryfum-bg.webp"
           alt="TryFüm background"
           data-project-hover-bg
           className="h-full w-full scale-[1.03] object-cover object-center opacity-[0.22]"

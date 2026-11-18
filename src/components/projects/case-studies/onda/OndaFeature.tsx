@@ -13,7 +13,7 @@ export default function OndaFeature() {
               <div className="relative overflow-hidden border border-[#201a3d] bg-black shadow-[0_0_0_1px_rgba(109,86,255,0.08)]">
                 <div className="aspect-[1.42/1] w-full bg-[#0a0a0a]">
                   <img
-                    src="/images/onda-bg.png"
+                    src="/images/onda-bg.webp"
                     alt="Onda project preview"
                     className="h-full w-full object-cover opacity-80"
                   />
