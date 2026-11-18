@@ -6,7 +6,7 @@ export default function OndaHero() {
       {/* background image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/onda-bg.png"
+          src="/images/onda-bg.webp"
           alt="ONDA background"
           className="h-full w-full object-cover object-center opacity-[0.22] scale-[1.03]"
         />
