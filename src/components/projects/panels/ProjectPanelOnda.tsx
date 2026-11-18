@@ -30,6 +30,7 @@ export default function ProjectPanelIntro({
         <img
           src="/images/onda-bg.png"
           alt="ONDA background"
+          data-project-hover-bg
           className="h-full w-full scale-[1.03] object-cover object-center opacity-[0.22]"
         />
       </div>
