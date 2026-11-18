@@ -45,13 +45,17 @@ const articleIntroClass =
   "max-w-[650px] text-[clamp(1.2rem,2.2vw,1.8rem)] leading-[1.45] tracking-[-0.02em] text-[#f3efe8]";
 const articleGridClass =
   "grid min-w-0 gap-8 md:grid-cols-[1.1fr_1fr] md:gap-12 lg:gap-20";
+const articleSurfaceClass =
+  "rounded-[15px] p-5 shadow-[6.95px_7.95px_23.6px_rgba(255,255,255,0.14)] sm:p-8 lg:p-[50px]";
 
 function NumberedPoints({
   items,
   reveal,
+  reverseOnDesktop = false,
 }: {
   items: EditorialPoint[];
   reveal: "responsibility" | "step";
+  reverseOnDesktop?: boolean;
 }) {
   return (
     <ol className="mt-8 divide-y divide-white/10 border-t border-white/10">
@@ -59,12 +63,12 @@ function NumberedPoints({
         <li
           key={item.title}
           data-right-now-reveal={reveal}
-          className="grid grid-cols-[2rem_minmax(0,1fr)] gap-4 py-6"
+          className={`grid grid-cols-[2rem_minmax(0,1fr)] gap-4 py-6 ${reverseOnDesktop ? "lg:grid-cols-[minmax(0,1fr)_2rem]" : ""}`}
         >
-          <span aria-hidden="true" className="font-mono text-[11px] text-[#ff2d00]">
+          <span aria-hidden="true" className={`font-mono text-[11px] text-[#ff2d00] ${reverseOnDesktop ? "lg:order-2 lg:text-right" : ""}`}>
             0{index + 1}
           </span>
-          <div className="min-w-0">
+          <div className={`min-w-0 ${reverseOnDesktop ? "lg:order-1 lg:text-right" : ""}`}>
             <h4 className="text-xl font-semibold tracking-[-0.02em]">
               {item.title}
             </h4>
@@ -128,7 +132,7 @@ export default function RightNow() {
 
         {/* Single editorial group: no full-width orange divider between pillars. */}
         <div className="mt-16 border-t border-white/15 pt-10 md:mt-20 md:pt-14">
-          <article aria-labelledby="uic-heading">
+          <article aria-labelledby="uic-heading" className={articleSurfaceClass}>
             <div className={articleGridClass}>
               <div className="min-w-0">
                 <p
@@ -175,9 +179,9 @@ export default function RightNow() {
             </div>
           </article>
 
-          <article aria-labelledby="engineering-heading" className="mt-20 md:mt-28">
-            <div className={articleGridClass}>
-              <div className="min-w-0">
+          <article aria-labelledby="engineering-heading" className={`${articleSurfaceClass} mt-10 md:mt-14`}>
+            <div className={`${articleGridClass} lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]`}>
+              <div className="min-w-0 lg:order-2 lg:text-right">
                 <p
                   data-right-now-reveal="ai-label"
                   className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#ff2d00]"
@@ -216,21 +220,21 @@ export default function RightNow() {
                   <time dateTime="2026">2026</time> — actualidad
                 </p>
               </div>
-              <div className="min-w-0">
+              <div className="min-w-0 lg:order-1 lg:text-right">
                 <p data-right-now-reveal="ai-intro" className={articleIntroClass}>
                   Aplico IA al trabajo de ingeniería y combino scripts e
                   integraciones para resolver tareas repetitivas. Cada flujo
                   necesita criterios de revisión y comprobación.
                 </p>
-                <NumberedPoints items={workflow} reveal="step" />
+                <NumberedPoints items={workflow} reveal="step" reverseOnDesktop />
               </div>
             </div>
-            <dl className="mt-10 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-2 md:gap-12 lg:gap-20">
+            <dl className="mt-10 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-2 md:gap-12 lg:gap-20 lg:text-right">
               <div data-right-now-reveal="automation" className="min-w-0">
                 <dt className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff2d00]">
                   Automatización técnica / Python y PHP
                 </dt>
-                <dd className="mt-4 max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px]">
+                <dd className="mt-4 max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px] lg:ml-auto">
                   Scripts para actualizar múltiples páginas, generar inventarios y
                   ejecutar auditorías y validaciones de implementaciones.
                 </dd>
@@ -239,7 +243,7 @@ export default function RightNow() {
                 <dt className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff2d00]">
                   Automatización operativa / Power Automate
                 </dt>
-                <dd className="mt-4 max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px]">
+                <dd className="mt-4 max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px] lg:ml-auto">
                   Flujos que procesan correos y adjuntos según condiciones
                   definidas, con comprobaciones para evitar duplicados.
                 </dd>
