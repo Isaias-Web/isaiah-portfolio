@@ -63,7 +63,7 @@ No incluir secretos, archivos `.env` ni credenciales en los commits.
 - `src/app/robots.ts` genera `/robots.txt`.
 - `src/app/sitemap.ts` genera `/sitemap.xml`.
 
-**Pendiente de validar:** presentación para bots con preloader y renderizado cliente, Core Web Vitals, navegación por teclado, movimiento reducido y una imagen Open Graph personalizada.
+La [auditoría de rendimiento V2](docs/PORTFOLIO_V2_PERFORMANCE_AUDIT.md) verifica el HTML inicial, SEO y recorridos locales de teclado. Quedan pendientes métricas de campo, movimiento reducido global, revisión remota de producción y una imagen Open Graph personalizada. La [migración de imágenes](docs/IMAGE_OPTIMIZATION_INVENTORY.md) tiene inventario y plan, sin sustituciones de assets.
 
 ## Contacto
 
