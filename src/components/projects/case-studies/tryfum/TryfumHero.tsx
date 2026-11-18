@@ -6,7 +6,7 @@ export default function TryfumHero() {
       {/* background image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/tryfum-bg.jpg"
+          src="/images/tryfum-bg.webp"
           alt="TryFüm background"
           className="h-full w-full object-cover object-center opacity-[0.22] scale-[1.03]"
         />
