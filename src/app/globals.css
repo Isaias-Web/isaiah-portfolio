@@ -62,12 +62,12 @@ select {
 
 @media (hover: hover) and (pointer: fine) {
   [data-cursor="zoom"]:hover [data-project-hover-bg] {
-    filter: brightness(4.5);
+    filter: brightness(1.5);
   }
 }
 
 [data-cursor="zoom"]:has([data-project-open]:focus-visible) [data-project-hover-bg] {
-  filter: brightness(4.5);
+  filter: brightness(1.5);
 }
 
 @media (prefers-reduced-motion: reduce) {
