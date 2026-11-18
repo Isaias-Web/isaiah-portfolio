@@ -75,3 +75,23 @@ select {
     transition: none;
   }
 }
+
+/* RightNow: articles remain clean at rest; the glow only appears on hover. */
+.right-now-article {
+  filter: brightness(1);
+  box-shadow: none;
+  transition: filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .right-now-article:hover {
+    filter: brightness(1.08);
+    box-shadow: 6.95px 7.95px 23.6px rgba(255, 255, 255, 0.14);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .right-now-article {
+    transition: none;
+  }
+}
