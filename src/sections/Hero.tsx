@@ -250,9 +250,6 @@ export default function Hero() {
           className="object-cover object-center"
         />
 
-        {/* dark base */}
-        <div className="absolute inset-0 bg-black/55" />
-
         {/* stronger bottom readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/40" />
 
