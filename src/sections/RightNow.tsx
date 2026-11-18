@@ -46,7 +46,7 @@ const articleIntroClass =
 const articleGridClass =
   "grid min-w-0 gap-8 md:grid-cols-[1.1fr_1fr] md:gap-12 lg:gap-20";
 const articleSurfaceClass =
-  "rounded-[15px] p-5 shadow-[6.95px_7.95px_23.6px_rgba(255,255,255,0.14)] sm:p-8 lg:p-[50px]";
+  "right-now-article rounded-[15px] p-5 sm:p-8 lg:p-[50px]";
 
 function NumberedPoints({
   items,
@@ -229,26 +229,20 @@ export default function RightNow() {
                 <NumberedPoints items={workflow} reveal="step" reverseOnDesktop />
               </div>
             </div>
-            <dl className="mt-10 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-2 md:gap-12 lg:gap-20 lg:text-right">
+            <div className="mt-10 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-2 md:gap-12 lg:gap-20 lg:text-right">
               <div data-right-now-reveal="automation" className="min-w-0">
-                <dt className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff2d00]">
-                  Automatización técnica / Python y PHP
-                </dt>
-                <dd className="mt-4 max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px] lg:ml-auto">
+                <p className="max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px] lg:ml-auto">
                   Scripts para actualizar múltiples páginas, generar inventarios y
                   ejecutar auditorías y validaciones de implementaciones.
-                </dd>
+                </p>
               </div>
               <div data-right-now-reveal="automation" className="min-w-0">
-                <dt className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#ff2d00]">
-                  Automatización operativa / Power Automate
-                </dt>
-                <dd className="mt-4 max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px] lg:ml-auto">
+                <p className="max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px] lg:ml-auto">
                   Flujos que procesan correos y adjuntos según condiciones
                   definidas, con comprobaciones para evitar duplicados.
-                </dd>
+                </p>
               </div>
-            </dl>
+            </div>
           </article>
         </div>
       </div>
