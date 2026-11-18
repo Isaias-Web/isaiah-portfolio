@@ -2,9 +2,9 @@
 
 **Última sincronización:** 18 de noviembre de 2026
 
-**Producción de referencia:** `main` en el commit `155e02807a18beef51645c7d2ef8bf1f51f6cf2c`.
+**Producción de referencia:** `main` en el commit `8de685105bfd4d712fe4d564a2c3dedbfb921b04`.
 
-Esta rama `preview/portfolio-completo-20261118` es una referencia visual y de comparación. Recibió los cambios de `main` mediante el PR #9. Su única diferencia deliberada de contenido es este documento de referencia.
+Esta rama `preview/portfolio-completo-20261118` es una referencia visual y de comparación. Recibió los cambios de `main` mediante los PR #9 y #11. Su única diferencia deliberada de contenido es este documento de referencia.
 
 ## Funcionalidades integradas
 
@@ -15,6 +15,7 @@ Esta rama `preview/portfolio-completo-20261118` es una referencia visual y de co
 - Cursor personalizado con indicación «CLICK PARA INTERACTUAR».
 - Formulario Web3Forms con notificación temporal de éxito tras confirmación del proveedor.
 - **PR #8:** Perfil actual unificado, segundo artículo invertido en escritorio, tarjetas con efecto hover y eliminación completa del bloque inferior redundante de automatización.
+- **PR #10:** Next.js 16.4.6 y correcciones de seguridad, optimizaciones medidas de cursor, Manifesto y RightNow, accesibilidad de WhatsApp, inventario de imágenes, pruebas y evidencias de Lighthouse.
 
 ## Validación y precauciones
 
