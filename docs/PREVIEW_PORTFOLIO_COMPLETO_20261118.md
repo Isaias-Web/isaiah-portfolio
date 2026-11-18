@@ -2,9 +2,9 @@
 
 **Última sincronización:** 18 de noviembre de 2026
 
-**Producción de referencia:** `main` en el commit `2d4de80bca7df7acff72202640c8954adce5ee5c`.
+**Producción de referencia:** `main` en el commit `2cb77b88ffb1b014b345dc235a102cc712ff5eeb`.
 
-Esta rama `preview/portfolio-completo-20261118` es una referencia visual y de comparación. Recibió los cambios de `main` mediante los PR #9, #11 y #13. Su única diferencia deliberada de contenido es este documento de referencia.
+Esta rama `preview/portfolio-completo-20261118` es una referencia visual y de comparación. Recibió los cambios de `main` mediante los PR #9, #11, #13 y #15. Su única diferencia deliberada de contenido es este documento de referencia.
 
 ## Funcionalidades integradas
 
@@ -17,6 +17,7 @@ Esta rama `preview/portfolio-completo-20261118` es una referencia visual y de co
 - **PR #8:** Perfil actual unificado, segundo artículo invertido en escritorio, tarjetas con efecto hover y eliminación completa del bloque inferior redundante de automatización.
 - **PR #10:** Next.js 16.4.6 y correcciones de seguridad, optimizaciones medidas de cursor, Manifesto y RightNow, accesibilidad de WhatsApp, inventario de imágenes, pruebas y evidencias de Lighthouse.
 - **PR #12:** Seis WebP optimizados, referencias actualizadas en Hero y paneles/casos; se mantienen originales hasta una revisión de limpieza posterior.
+- **PR #14:** Hover de proyectos ajustado a brightness(1.5), eliminación de overlay plano bg-black/55 en Hero y limpieza de ambos assets Skyline no usados.
 
 ## Validación y precauciones
 
