@@ -225,27 +225,42 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
             });
 
             const hover = gsap.matchMedia();
-            hover.add("(hover: hover) and (pointer: fine)", (hoverContext) => {
+            hover.add("(hover: hover) and (pointer: fine)", () => {
               const cleanups: Array<() => void> = [];
               section
                 .querySelectorAll<HTMLElement>("[data-right-now-letter]")
                 .forEach((letter, index) => {
                   const offset = letterOffsets[index % letterOffsets.length];
+                  const originalStyle = letter.getAttribute("style");
+                  // Reuse a fixed pair: context-safe callbacks otherwise retain
+                  // every historical hover tween until this section unmounts.
+                  const enterTween = gsap.to(letter, {
+                    ...offset,
+                    duration: 0.28,
+                    ease: "power2.out",
+                    overwrite: "auto",
+                    paused: true,
+                  });
+                  const leaveTween = gsap.to(letter, {
+                    x: 0,
+                    y: 0,
+                    rotation: 0,
+                    duration: 0.45,
+                    ease: "power3.out",
+                    overwrite: "auto",
+                    paused: true,
+                  });
                   const animate = (returning: boolean) => {
                     if (failed) return;
-                    hoverContext.add(() => {
-                      try {
-                        gsap.to(letter, {
-                          ...(returning ? { x: 0, y: 0, rotation: 0 } : offset),
-                          duration: returning ? 0.45 : 0.28,
-                          ease: returning ? "power3.out" : "power2.out",
-                          overwrite: "auto",
-                        });
-                      } catch (error) {
-                        failOpen();
-                        console.error("RightNow motion recovered:", error);
-                      }
-                    });
+                    try {
+                      (returning ? enterTween : leaveTween).pause();
+                      (returning ? leaveTween : enterTween)
+                        .invalidate()
+                        .restart();
+                    } catch (error) {
+                      failOpen();
+                      console.error("RightNow motion recovered:", error);
+                    }
                   };
                   const enter = () => animate(false);
                   const leave = () => animate(true);
@@ -254,6 +269,10 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
                   const cleanup = () => {
                     letter.removeEventListener("mouseenter", enter);
                     letter.removeEventListener("mouseleave", leave);
+                    enterTween.kill();
+                    leaveTween.kill();
+                    if (originalStyle === null) letter.removeAttribute("style");
+                    else letter.setAttribute("style", originalStyle);
                     hoverCleanups.delete(cleanup);
                   };
                   hoverCleanups.add(cleanup);
