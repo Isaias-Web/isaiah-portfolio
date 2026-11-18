@@ -13,7 +13,7 @@ export default function VapeMateFeature() {
               <div className="relative overflow-hidden border border-[#201a3d] bg-black shadow-[0_0_0_1px_rgba(109,86,255,0.08)]">
                 <div className="aspect-[1.42/1] w-full bg-[#0a0a0a]">
                   <img
-                    src="/images/vapemate-bg.jpg"
+                    src="/images/vapemate-bg.webp"
                     alt="Vape Mate project preview"
                     className="h-full w-full object-cover opacity-80"
                   />
