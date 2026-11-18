@@ -1,0 +1,1312 @@
+{
+  "lighthouseVersion": "13.6.0",
+  "settings": {
+    "output": [
+      "json"
+    ],
+    "maxWaitForFcp": 30000,
+    "maxWaitForLoad": 45000,
+    "pauseAfterFcpMs": 1000,
+    "pauseAfterLoadMs": 1000,
+    "networkQuietThresholdMs": 1000,
+    "cpuQuietThresholdMs": 1000,
+    "formFactor": "mobile",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    },
+    "throttlingMethod": "simulate",
+    "screenEmulation": {
+      "mobile": true,
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 1.75,
+      "disabled": false
+    },
+    "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+    "auditMode": false,
+    "gatherMode": false,
+    "clearStorageTypes": [
+      "file_systems",
+      "shader_cache",
+      "service_workers",
+      "cache_storage"
+    ],
+    "disableStorageReset": false,
+    "debugNavigation": false,
+    "channel": "cli",
+    "usePassiveGathering": false,
+    "disableFullPageScreenshot": false,
+    "skipAboutBlank": false,
+    "blankPage": "about:blank",
+    "ignoreStatusCode": false,
+    "locale": "en-US",
+    "blockedUrlPatterns": null,
+    "additionalTraceCategories": null,
+    "extraHeaders": null,
+    "precomputedLanternData": null,
+    "onlyAudits": null,
+    "onlyCategories": [
+      "performance",
+      "accessibility",
+      "best-practices",
+      "seo"
+    ],
+    "skipAudits": null
+  },
+  "categories": {
+    "performance": 1,
+    "accessibility": 0.98,
+    "best-practices": 1,
+    "seo": 1
+  },
+  "metrics": {
+    "first-contentful-paint": 928.4158,
+    "largest-contentful-paint": 928.4158,
+    "total-blocking-time": 56.5,
+    "cumulative-layout-shift": 0,
+    "speed-index": 2788.567651828951
+  },
+  "diagnostics": {
+    "long-tasks": {
+      "id": "long-tasks",
+      "title": "Avoid long main-thread tasks",
+      "description": "Lists the longest tasks on the main thread, useful for identifying worst contributors to input delay. [Learn how to avoid long main-thread tasks](https://web.dev/articles/optimize-long-tasks)",
+      "score": 1,
+      "scoreDisplayMode": "informative",
+      "displayValue": "4 long tasks found",
+      "metricSavings": {
+        "TBT": 50
+      },
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "startTime",
+            "valueType": "ms",
+            "granularity": 1,
+            "label": "Start Time"
+          },
+          {
+            "key": "duration",
+            "valueType": "ms",
+            "granularity": 1,
+            "label": "Duration"
+          }
+        ],
+        "items": [
+          {
+            "url": "http://localhost:3180/",
+            "duration": 189,
+            "startTime": 668.2079
+          },
+          {
+            "url": "http://localhost:3180/_next/static/chunks/092r-mewpaf3q.js",
+            "duration": 109,
+            "startTime": 8846.6237
+          },
+          {
+            "url": "http://localhost:3180/_next/static/chunks/0kqziy-7_gy73.js",
+            "duration": 104,
+            "startTime": 8742.6237
+          },
+          {
+            "url": "Unattributable",
+            "duration": 53,
+            "startTime": 614.2079
+          }
+        ],
+        "sortedBy": [
+          "duration"
+        ],
+        "skipSumming": [
+          "startTime"
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "urls": [
+            "http://localhost:3180/",
+            "http://localhost:3180/_next/static/chunks/092r-mewpaf3q.js",
+            "http://localhost:3180/_next/static/chunks/0kqziy-7_gy73.js",
+            "Unattributable"
+          ],
+          "tasks": [
+            {
+              "urlIndex": 0,
+              "startTime": 668.2,
+              "duration": 189,
+              "other": 189,
+              "paintCompositeRender": 0,
+              "scriptEvaluation": 0,
+              "styleLayout": 0
+            },
+            {
+              "urlIndex": 1,
+              "startTime": 8846.6,
+              "duration": 109,
+              "other": 109
+            },
+            {
+              "urlIndex": 2,
+              "startTime": 8742.6,
+              "duration": 104,
+              "other": 104,
+              "scriptEvaluation": 0
+            },
+            {
+              "urlIndex": 3,
+              "startTime": 614.2,
+              "duration": 53,
+              "other": 53,
+              "scriptEvaluation": 0
+            }
+          ]
+        }
+      },
+      "guidanceLevel": 1
+    },
+    "color-contrast": {
+      "id": "color-contrast",
+      "title": "Background and foreground colors have a sufficient contrast ratio",
+      "description": "Low-contrast text is difficult or impossible for many users to read. [Learn how to provide sufficient color contrast](https://dequeuniversity.com/rules/axe/4.14/color-contrast).",
+      "score": 1,
+      "scoreDisplayMode": "binary",
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "node",
+            "valueType": "node",
+            "subItemsHeading": {
+              "key": "relatedNode",
+              "valueType": "node"
+            },
+            "label": "Failing Elements"
+          }
+        ],
+        "items": []
+      }
+    },
+    "font-display-insight": {
+      "id": "font-display-insight",
+      "title": "Font display",
+      "description": "Consider setting [font-display](https://developer.chrome.com/docs/performance/insights/font-display) to swap or optional to ensure text is consistently visible. swap can be further optimized to mitigate layout shifts with [font metric overrides](https://developer.chrome.com/blog/font-fallbacks).",
+      "score": 1,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 0,
+      "numericUnit": "millisecond",
+      "metricSavings": {
+        "INP": 0
+      },
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "ms",
+            "label": "Est Savings"
+          }
+        ],
+        "items": [],
+        "skipSumming": [
+          "wastedMs"
+        ]
+      },
+      "guidanceLevel": 3
+    },
+    "forced-reflow-insight": {
+      "id": "forced-reflow-insight",
+      "title": "Forced reflow",
+      "description": "A forced reflow occurs when JavaScript queries geometric properties (such as offsetWidth) after styles have been invalidated by a change to the DOM state. This can result in poor performance. Learn more about [forced reflows](https://developer.chrome.com/docs/performance/insights/forced-reflow) and possible mitigations.",
+      "score": 0,
+      "scoreDisplayMode": "numeric",
+      "details": {
+        "type": "list",
+        "items": [
+          {
+            "type": "table",
+            "headings": [
+              {
+                "key": "source",
+                "valueType": "source-location",
+                "label": "Source"
+              },
+              {
+                "key": "reflowTime",
+                "valueType": "ms",
+                "granularity": 1,
+                "label": "Total reflow time"
+              }
+            ],
+            "items": [
+              {
+                "source": {
+                  "type": "text",
+                  "value": "[unattributed]"
+                },
+                "reflowTime": 53.815
+              }
+            ]
+          }
+        ]
+      },
+      "guidanceLevel": 3
+    },
+    "legacy-javascript-insight": {
+      "id": "legacy-javascript-insight",
+      "title": "Legacy JavaScript",
+      "description": "Polyfills and transforms enable older browsers to use new JavaScript features. However, many aren\u2019t necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/articles/baseline-and-polyfills) features, unless you know you must support older browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://developer.chrome.com/docs/performance/insights/legacy-javascript).",
+      "score": 0.5,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 13910,
+      "numericUnit": "byte",
+      "displayValue": "Est savings of 14\u00a0KiB",
+      "metricSavings": {
+        "FCP": 0,
+        "LCP": 0
+      },
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "subItemsHeading": {
+              "key": "location",
+              "valueType": "source-location"
+            },
+            "label": "URL"
+          },
+          {
+            "key": null,
+            "valueType": "code",
+            "subItemsHeading": {
+              "key": "signal"
+            },
+            "label": ""
+          },
+          {
+            "key": "wastedBytes",
+            "valueType": "bytes",
+            "label": "Wasted bytes"
+          }
+        ],
+        "items": [
+          {
+            "url": "http://localhost:3180/_next/static/chunks/092r-mewpaf3q.js",
+            "wastedBytes": 13910,
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "signal": "Array.prototype.at",
+                  "location": {
+                    "type": "source-location",
+                    "url": "http://localhost:3180/_next/static/chunks/092r-mewpaf3q.js",
+                    "urlProvider": "network",
+                    "line": 0,
+                    "column": 1116
+                  }
+                },
+                {
+                  "signal": "Array.prototype.flat",
+                  "location": {
+                    "type": "source-location",
+                    "url": "http://localhost:3180/_next/static/chunks/092r-mewpaf3q.js",
+                    "urlProvider": "network",
+                    "line": 0,
+                    "column": 504
+                  }
+                },
+                {
+                  "signal": "Array.prototype.flatMap",
+                  "location": {
+                    "type": "source-location",
+                    "url": "http://localhost:3180/_next/static/chunks/092r-mewpaf3q.js",
+                    "urlProvider": "network",
+                    "line": 0,
+                    "column": 617
+                  }
+                },
+                {
+                  "signal": "Object.fromEntries",
+                  "location": {
+                    "type": "source-location",
+                    "url": "http://localhost:3180/_next/static/chunks/092r-mewpaf3q.js",
+                    "urlProvider": "network",
+                    "line": 0,
+                    "column": 993
+                  }
+                },
+                {
+                  "signal": "Object.hasOwn",
+                  "location": {
+                    "type": "source-location",
+                    "url": "http://localhost:3180/_next/static/chunks/092r-mewpaf3q.js",
+                    "urlProvider": "network",
+                    "line": 0,
+                    "column": 1251
+                  }
+                },
+                {
+                  "signal": "String.prototype.trimEnd",
+                  "location": {
+                    "type": "source-location",
+                    "url": "http://localhost:3180/_next/static/chunks/092r-mewpaf3q.js",
+                    "urlProvider": "network",
+                    "line": 0,
+                    "column": 246
+                  }
+                },
+                {
+                  "signal": "String.prototype.trimStart",
+                  "location": {
+                    "type": "source-location",
+                    "url": "http://localhost:3180/_next/static/chunks/092r-mewpaf3q.js",
+                    "urlProvider": "network",
+                    "line": 0,
+                    "column": 161
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "debugData": {
+          "type": "debugdata",
+          "wastedBytes": 13910
+        }
+      },
+      "guidanceLevel": 2
+    },
+    "network-dependency-tree-insight": {
+      "id": "network-dependency-tree-insight",
+      "title": "Network dependency tree",
+      "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/performance/insights/network-dependency-tree) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load",
+      "score": 0,
+      "scoreDisplayMode": "numeric",
+      "metricSavings": {
+        "LCP": 0
+      },
+      "details": {
+        "type": "list",
+        "items": [
+          {
+            "type": "list-section",
+            "value": {
+              "type": "network-tree",
+              "chains": {
+                "A9F81451C93C94BD368230177DDD1F8C": {
+                  "url": "http://localhost:3180/",
+                  "navStartToEndTime": 72,
+                  "transferSize": 13646,
+                  "isLongest": true,
+                  "children": {
+                    "10457.10": {
+                      "url": "http://localhost:3180/_next/static/chunks/0tfghw2b6xx_5.css",
+                      "navStartToEndTime": 136,
+                      "transferSize": 9873,
+                      "isLongest": true,
+                      "children": {}
+                    },
+                    "10457.11": {
+                      "url": "http://localhost:3180/_next/static/chunks/06c4r2p5w16yd.css",
+                      "navStartToEndTime": 105,
+                      "transferSize": 978,
+                      "children": {}
+                    }
+                  }
+                }
+              },
+              "longestChain": {
+                "duration": 136
+              }
+            }
+          },
+          {
+            "type": "list-section",
+            "title": "Preconnected origins",
+            "description": "[preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.",
+            "value": {
+              "type": "text",
+              "value": "No origins were preconnected"
+            }
+          },
+          {
+            "type": "list-section",
+            "title": "Preconnect candidates",
+            "description": "Add [preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints to your most important origins, but try to use no more than 4",
+            "value": {
+              "type": "text",
+              "value": "No additional origins are good candidates for preconnecting"
+            }
+          }
+        ]
+      },
+      "guidanceLevel": 1
+    },
+    "render-blocking-insight": {
+      "id": "render-blocking-insight",
+      "title": "Render-blocking requests",
+      "description": "Requests are blocking the page\u2019s initial render, which may delay LCP. [Deferring or inlining](https://developer.chrome.com/docs/performance/insights/render-blocking) can move these network requests out of the critical path.",
+      "score": 0,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 99,
+      "numericUnit": "millisecond",
+      "displayValue": "Est savings of 100\u00a0ms",
+      "metricSavings": {
+        "FCP": 100,
+        "LCP": 100
+      },
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "totalBytes",
+            "valueType": "bytes",
+            "label": "Transfer Size"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "timespanMs",
+            "label": "Duration"
+          }
+        ],
+        "items": [
+          {
+            "url": "http://localhost:3180/_next/static/chunks/0tfghw2b6xx_5.css",
+            "totalBytes": 9873,
+            "wastedMs": 164
+          },
+          {
+            "url": "http://localhost:3180/_next/static/chunks/06c4r2p5w16yd.css",
+            "totalBytes": 978,
+            "wastedMs": 314
+          }
+        ]
+      },
+      "guidanceLevel": 3
+    }
+  },
+  "scriptResources": {
+    "count": 9,
+    "resourceSize": 772656,
+    "transferSize": 225311
+  },
+  "responsive": {
+    "performance": {
+      "lcp": [
+        {
+          "time": 808,
+          "tag": "SPAN",
+          "preloader": false
+        }
+      ],
+      "cls": 0,
+      "longTasks": [
+        182,
+        70
+      ]
+    },
+    "results": [
+      {
+        "width": 390,
+        "height": 13590,
+        "pins": [
+          {
+            "top": 844,
+            "left": 0,
+            "width": 390,
+            "height": 2164
+          },
+          {
+            "top": 3008,
+            "left": 0,
+            "width": 390,
+            "height": 3208
+          },
+          {
+            "top": 6216,
+            "left": 0,
+            "width": 390,
+            "height": 3184
+          }
+        ],
+        "rightNow": {
+          "top": 9400,
+          "left": 0,
+          "width": 390,
+          "height": 2460.109375
+        },
+        "contact": {
+          "top": 11860.109375,
+          "left": 0,
+          "width": 390,
+          "height": 1730.09375
+        },
+        "reverseDesktop": false,
+        "rows": [
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          }
+        ],
+        "overflow": false,
+        "h1": 1
+      },
+      {
+        "width": 768,
+        "height": 14871,
+        "pins": [
+          {
+            "top": 900,
+            "left": 0,
+            "width": 768,
+            "height": 2220
+          },
+          {
+            "top": 3120,
+            "left": 0,
+            "width": 768,
+            "height": 2507
+          },
+          {
+            "top": 5627,
+            "left": 0,
+            "width": 768,
+            "height": 5508
+          }
+        ],
+        "rightNow": {
+          "top": 11135,
+          "left": 0,
+          "width": 768,
+          "height": 2265.03125
+        },
+        "contact": {
+          "top": 13400.03125,
+          "left": 0,
+          "width": 768,
+          "height": 1471.1875
+        },
+        "reverseDesktop": false,
+        "rows": [
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          }
+        ],
+        "overflow": false,
+        "h1": 1
+      },
+      {
+        "width": 1024,
+        "height": 16103,
+        "pins": [
+          {
+            "top": 900,
+            "left": 0,
+            "width": 1024,
+            "height": 2220
+          },
+          {
+            "top": 3120,
+            "left": 0,
+            "width": 1024,
+            "height": 2445
+          },
+          {
+            "top": 5565,
+            "left": 0,
+            "width": 1024,
+            "height": 7044
+          }
+        ],
+        "rightNow": {
+          "top": 12609,
+          "left": 0,
+          "width": 1024,
+          "height": 2253.796875
+        },
+        "contact": {
+          "top": 14862.796875,
+          "left": 0,
+          "width": 1024,
+          "height": 1240.40625
+        },
+        "reverseDesktop": true,
+        "rows": [
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          }
+        ],
+        "overflow": false,
+        "h1": 1
+      },
+      {
+        "width": 1440,
+        "height": 18540,
+        "pins": [
+          {
+            "top": 900,
+            "left": 0,
+            "width": 1440,
+            "height": 2220
+          },
+          {
+            "top": 3120,
+            "left": 0,
+            "width": 1440,
+            "height": 2387
+          },
+          {
+            "top": 5507,
+            "left": 0,
+            "width": 1440,
+            "height": 9540
+          }
+        ],
+        "rightNow": {
+          "top": 15047,
+          "left": 0,
+          "width": 1440,
+          "height": 2127.46875
+        },
+        "contact": {
+          "top": 17174.46875,
+          "left": 0,
+          "width": 1440,
+          "height": 1365.578125
+        },
+        "reverseDesktop": true,
+        "rows": [
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          }
+        ],
+        "overflow": false,
+        "h1": 1
+      },
+      {
+        "width": 1920,
+        "height": 21422,
+        "pins": [
+          {
+            "top": 900,
+            "left": 0,
+            "width": 1920,
+            "height": 2220
+          },
+          {
+            "top": 3120,
+            "left": 0,
+            "width": 1920,
+            "height": 2396
+          },
+          {
+            "top": 5516,
+            "left": 0,
+            "width": 1920,
+            "height": 12420
+          }
+        ],
+        "rightNow": {
+          "top": 17936,
+          "left": 0,
+          "width": 1920,
+          "height": 2143.75
+        },
+        "contact": {
+          "top": 20079.75,
+          "left": 0,
+          "width": 1920,
+          "height": 1341.828125
+        },
+        "reverseDesktop": true,
+        "rows": [
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          },
+          {
+            "collision": false,
+            "overflow": false
+          }
+        ],
+        "overflow": false,
+        "h1": 1
+      }
+    ],
+    "axe": [
+      {
+        "width": 390,
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".lowercase"
+                ]
+              },
+              {
+                "target": [
+                  ".text-white\\/40 > p:nth-child(1)"
+                ]
+              },
+              {
+                "target": [
+                  ".text-white\\/40 > p:nth-child(2)"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "width": 1440,
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".lowercase"
+                ]
+              },
+              {
+                "target": [
+                  ".text-white\\/40 > p:nth-child(1)"
+                ]
+              },
+              {
+                "target": [
+                  ".text-white\\/40 > p:nth-child(2)"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "errors": []
+  },
+  "trace": {
+    "scenario": "1440px forward/reverse scroll and resize to1024; unthrottled local Chromium",
+    "layouts": 29,
+    "layoutTotalMs": 86.82200000000003,
+    "maxLayoutMs": 75.796,
+    "stackSamples": [],
+    "pins": 3,
+    "limitation": "Layout events include normal rendering; not all are forced synchronous reflows"
+  },
+  "contactMocks": [
+    {
+      "width": 1440,
+      "mockedRequests": 8,
+      "duplicateGuard": true,
+      "successReset": true,
+      "pendingRetainsData": true,
+      "errorsRetainData": true,
+      "autoCloseFiveSeconds": true,
+      "keyboardClose": true,
+      "fixedPortal": true,
+      "honeypot": true,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "mockedRequests": 8,
+      "duplicateGuard": true,
+      "successReset": true,
+      "pendingRetainsData": true,
+      "errorsRetainData": true,
+      "autoCloseFiveSeconds": true,
+      "keyboardClose": true,
+      "fixedPortal": true,
+      "honeypot": true,
+      "errors": []
+    }
+  ],
+  "rail": [
+    {
+      "name": "desktop",
+      "height": 18540,
+      "panels": [
+        {
+          "x": -9.996500015258789,
+          "opacity": 1
+        },
+        {
+          "x": -9.9993896484375,
+          "opacity": 1
+        },
+        {
+          "x": -10.002197265625,
+          "opacity": 1
+        },
+        {
+          "x": -9.99658203125,
+          "opacity": 1
+        },
+        {
+          "x": -9.99951171875,
+          "opacity": 1
+        },
+        {
+          "x": -10.00244140625,
+          "opacity": 1
+        },
+        {
+          "x": 0,
+          "opacity": 1
+        }
+      ],
+      "titles": [
+        "TRYFUM",
+        "ONDA",
+        "SECTRAVISION",
+        "VAPEMATE",
+        "HOOKAHGT",
+        "HOOKAHPARTNER",
+        "TRADEMATE"
+      ],
+      "wheelDelta": 450,
+      "rapidNavigation": "first selection retained",
+      "repeatEscape": "closed",
+      "closeDuringOpening": "recovered",
+      "closeDuringFade": "recovered",
+      "resize": "rail and open overlay passed",
+      "errors": []
+    },
+    {
+      "name": "mobile",
+      "height": 13590,
+      "panels": [
+        {
+          "x": -10.001199722290039,
+          "opacity": 1
+        },
+        {
+          "x": -9.999603271484375,
+          "opacity": 1
+        },
+        {
+          "x": -10.00042724609375,
+          "opacity": 1
+        },
+        {
+          "x": -10.001220703125,
+          "opacity": 1
+        },
+        {
+          "x": -9.9996337890625,
+          "opacity": 1
+        },
+        {
+          "x": -10.0003662109375,
+          "opacity": 1
+        },
+        {
+          "x": 0,
+          "opacity": 1
+        }
+      ],
+      "titles": [
+        "TRYFUM",
+        "ONDA",
+        "SECTRAVISION",
+        "VAPEMATE",
+        "HOOKAHGT",
+        "HOOKAHPARTNER",
+        "TRADEMATE"
+      ],
+      "wheelDelta": 450,
+      "rapidNavigation": "first selection retained",
+      "repeatEscape": "closed",
+      "closeDuringOpening": "recovered",
+      "closeDuringFade": "recovered",
+      "resize": "rail and open overlay passed",
+      "errors": []
+    }
+  ],
+  "keyboard": [
+    {
+      "width": 390,
+      "enterOpens": true,
+      "focusClose": true,
+      "tabWrap": true,
+      "escapeCloses": true,
+      "focusReturns": true
+    },
+    {
+      "width": 1440,
+      "enterOpens": true,
+      "focusClose": true,
+      "tabWrap": true,
+      "escapeCloses": true,
+      "focusReturns": true
+    }
+  ]
+}
