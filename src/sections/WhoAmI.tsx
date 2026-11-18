@@ -31,12 +31,10 @@ function InfoTable({
   eyebrow,
   title,
   rows,
-  compactDesktopTitle = false,
 }: {
   eyebrow: string;
   title: string;
   rows: { label: string; value: string }[];
-  compactDesktopTitle?: boolean;
 }) {
   return (
     <div className="flex flex-col">
@@ -50,7 +48,7 @@ function InfoTable({
       <div className="mt-8 sm:mt-10 md:mt-16 lg:mt-20">
         <h3
           data-reveal="title"
-          className={`font-black uppercase leading-[0.9] tracking-[-0.06em] text-[#f3efe8] text-[15vw] sm:text-[13vw] md:text-[4.8vw] lg:text-[5.2vw] ${compactDesktopTitle ? "xl:text-[clamp(3.5rem,5.2vw,5rem)]" : "xl:text-[6.6vw]"}`}
+          className="font-black uppercase leading-[0.9] tracking-[-0.06em] text-[#f3efe8] text-[15vw] sm:text-[13vw] md:text-[4.8vw] lg:text-[5.2vw] xl:text-[clamp(3.5rem,5.2vw,5rem)]"
         >
           {title.split("\n").map((line) => (
             <span key={line} className="block">
@@ -120,7 +118,6 @@ export default function WhoAmI() {
                 eyebrow="El código"
                 title={`Lo que\ndesarrollo`}
                 rows={buildRows}
-                compactDesktopTitle
               />
             </div>
 
