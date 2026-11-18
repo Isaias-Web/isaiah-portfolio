@@ -160,17 +160,19 @@ export function useRightNowReveal(ref: RefObject<HTMLElement | null>) {
               const ai = sequence(
                 "engineering",
                 aiLabel,
-                targetsFor("ai-label", "ai-line", "ai-intro"),
+                targetsFor("ai-label", "ai-line", "ai-meta", "ai-date"),
               );
               reveal(ai, "ai-label", 0);
               reveal(ai, "ai-line", 0.16, 0.1);
-              reveal(ai, "ai-intro", 0.5);
+              reveal(ai, "ai-meta", 0.46, 0.08);
+              reveal(ai, "ai-date", 0.72);
             }
 
             // Long mobile columns enter when each item actually approaches the
             // viewport; they must not finish offscreen with their desktop sibling.
             for (const group of [
               "uic-intro",
+              "ai-intro",
               "responsibility",
               "step",
               "automation",
