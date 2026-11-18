@@ -229,20 +229,6 @@ export default function RightNow() {
                 <NumberedPoints items={workflow} reveal="step" reverseOnDesktop />
               </div>
             </div>
-            <div className="mt-10 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-2 md:gap-12 lg:gap-20 lg:text-right">
-              <div data-right-now-reveal="automation" className="min-w-0">
-                <p className="max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px] lg:ml-auto">
-                  Scripts para actualizar múltiples páginas, generar inventarios y
-                  ejecutar auditorías y validaciones de implementaciones.
-                </p>
-              </div>
-              <div data-right-now-reveal="automation" className="min-w-0">
-                <p className="max-w-[580px] font-mono text-[12px] leading-[1.8] text-white/65 md:text-[13px] lg:ml-auto">
-                  Flujos que procesan correos y adjuntos según condiciones
-                  definidas, con comprobaciones para evitar duplicados.
-                </p>
-              </div>
-            </div>
           </article>
         </div>
       </div>
