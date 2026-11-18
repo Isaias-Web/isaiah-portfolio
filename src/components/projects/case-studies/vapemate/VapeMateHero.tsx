@@ -6,7 +6,7 @@ export default function VapeMateHero() {
       {/* background image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/vapemate-bg.jpg"
+          src="/images/vapemate-bg.webp"
           alt="Vape Mate background"
           className="h-full w-full object-cover object-center opacity-[0.22] scale-[1.03]"
         />
