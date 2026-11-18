@@ -30,6 +30,7 @@ export default function ProjectPanelIntro({
         <img
           src="/images/hookahgt-bg.webp"
           alt="Hookah GT background"
+          data-project-hover-bg
           className="h-full w-full scale-[1.03] object-cover object-center opacity-[0.22]"
         />
       </div>
