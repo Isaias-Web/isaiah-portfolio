@@ -166,7 +166,7 @@ export default function RecentActivityDock() {
         aria-controls="recent-activity-panel"
         aria-expanded={isOpen}
         aria-label="Trabajando. Ver las actualizaciones de hoy"
-        className="fixed bottom-[88px] right-5 z-[9500] flex h-14 w-[190px] items-center justify-center rounded-full border border-[#ff2d00] bg-[#ff2d00] px-4 text-[#090a09] transition-colors duration-300 hover:bg-[#ff4d2a]"
+        className={`fixed bottom-[88px] right-5 z-[9500] flex h-14 w-[190px] items-center justify-center rounded-full border border-[#ff2d00] bg-[#ff2d00] px-4 text-[#090a09] transition-[background-color,opacity] duration-300 hover:bg-[#ff4d2a] ${!introReady || paused ? "pointer-events-none opacity-0" : "opacity-100"}`}
       >
         <span className="flex items-center text-[14px] font-bold tracking-[-0.03em]">
           Trabajando
@@ -210,7 +210,7 @@ export default function RecentActivityDock() {
                     RECENT ACTIVITY<span className="text-[#ff2d00]">.</span>
                   </h2>
                   <p className="mt-2 text-[13px] text-white/50">
-                    Trabajos y avances del día.
+                    Trabajos y avances del día. Datos de demostración.
                   </p>
                 </div>
                 <button
