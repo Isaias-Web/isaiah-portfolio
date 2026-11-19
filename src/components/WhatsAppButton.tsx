@@ -15,7 +15,7 @@ export default function WhatsAppButton() {
         rel="noopener noreferrer"
         aria-label="Hablemos por WhatsApp"
         inert={introReady && paused}
-        className="group fixed bottom-5 right-5 z-[9999] flex h-14 items-center gap-4 rounded-full border border-white/25 bg-[#090a09]/90 px-3 pr-6 text-[#f5f5f5] shadow-[0_0_28px_rgba(255,85,55,0.12)] backdrop-blur-md transition-all duration-300 hover:border-[#ff5f55] hover:shadow-[0_0_38px_rgba(255,85,55,0.22)]"
+        className="group fixed bottom-5 right-5 z-[9500] flex h-14 w-[190px] items-center justify-center gap-2 rounded-full border border-white/25 bg-[#090a09]/90 px-3 text-[#f5f5f5] shadow-[0_0_28px_rgba(255,85,55,0.12)] backdrop-blur-md transition-all duration-300 hover:border-[#ff5f55] hover:shadow-[0_0_38px_rgba(255,85,55,0.22)]"
       >
         <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-[18px] text-[#f5f5f5] transition-transform duration-300 group-hover:scale-105">
           <svg
@@ -39,11 +39,11 @@ export default function WhatsAppButton() {
           </svg>
         </span>
 
-        <span className="hidden text-[15px] font-bold tracking-[-0.03em] sm:inline">
+        <span className="text-[14px] font-bold tracking-[-0.03em]">
           Hablemos
         </span>
 
-        <span className="pointer-events-none absolute bottom-[calc(100%+16px)] right-0 hidden w-[260px] rounded-lg border border-white/20 bg-[#090a09]/95 px-4 py-3 text-center text-[13px] leading-[1.4] text-[#f5f5f5] opacity-0 shadow-[0_0_24px_rgba(0,0,0,0.35)] backdrop-blur-md transition-opacity duration-300 before:absolute before:-bottom-2 before:right-10 before:h-4 before:w-4 before:rotate-45 before:border-b before:border-r before:border-white/20 before:bg-[#090a09] group-hover:opacity-100 sm:block">
+        <span className="pointer-events-none absolute bottom-[calc(100%+84px)] right-0 hidden w-[260px] rounded-lg border border-white/20 bg-[#090a09]/95 px-4 py-3 text-center text-[13px] leading-[1.4] text-[#f5f5f5] opacity-0 shadow-[0_0_24px_rgba(0,0,0,0.35)] backdrop-blur-md transition-opacity duration-300 before:absolute before:-bottom-2 before:right-10 before:h-4 before:w-4 before:rotate-45 before:border-b before:border-r before:border-white/20 before:bg-[#090a09] group-hover:opacity-100 sm:block">
           Es más sencillo enviar un mensaje para comenzar
         </span>
       </a>
