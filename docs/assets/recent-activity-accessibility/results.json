@@ -1,0 +1,692 @@
+{
+  "base": "ec6eab43339a862956a7457f3704de971d47e1b2",
+  "scope": "Phase 1 only; local Chromium; mocked activity/Web3Forms; no publication",
+  "baseline": {
+    "focus": {
+      "name": "focus-return-and-repeated-close",
+      "cases": [
+        {
+          "delay": 900,
+          "focusedIn": "Cerrar panel",
+          "returned": false,
+          "active": {
+            "tag": "BODY",
+            "label": null
+          },
+          "overflow": ""
+        },
+        {
+          "delay": 20,
+          "focusedIn": "Cerrar panel",
+          "returned": false,
+          "active": {
+            "tag": "BODY",
+            "label": null
+          },
+          "overflow": ""
+        },
+        {
+          "delay": 0,
+          "focusedIn": "Cerrar panel",
+          "returned": false,
+          "active": {
+            "tag": "BODY",
+            "label": null
+          },
+          "overflow": ""
+        },
+        {
+          "delay": 900,
+          "focusedIn": "Cerrar panel",
+          "returned": false,
+          "active": {
+            "tag": "BODY",
+            "label": null
+          },
+          "overflow": ""
+        }
+      ],
+      "errors": []
+    },
+    "expiry": {
+      "beforeFocusedItem": true,
+      "afterRemoval": "BODY",
+      "afterTab": {
+        "tag": "BUTTON",
+        "label": "Ver caso de estudio: TradeMate",
+        "inside": false
+      },
+      "dialogStillOpen": 1
+    },
+    "label": {
+      "buttonText": "😴\nzzz...",
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "nodes": [
+            {
+              "target": [
+                ".bottom-\\[58px\\]"
+              ],
+              "summary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "productionBrowser": [
+    {
+      "width": 360,
+      "reduced": false,
+      "closeMethods": 3,
+      "consecutiveCycles": 1,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "reduced": false,
+      "closeMethods": 3,
+      "consecutiveCycles": 12,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    },
+    {
+      "width": 768,
+      "reduced": false,
+      "closeMethods": 3,
+      "consecutiveCycles": 1,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "reduced": false,
+      "closeMethods": 3,
+      "consecutiveCycles": 1,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "reduced": true,
+      "closeMethods": 3,
+      "consecutiveCycles": 12,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "reduced": true,
+      "closeMethods": 3,
+      "consecutiveCycles": 1,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    }
+  ],
+  "developmentBrowser": [
+    {
+      "width": 360,
+      "reduced": false,
+      "closeMethods": 3,
+      "consecutiveCycles": 1,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "reduced": false,
+      "closeMethods": 3,
+      "consecutiveCycles": 12,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    },
+    {
+      "width": 768,
+      "reduced": false,
+      "closeMethods": 3,
+      "consecutiveCycles": 1,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "reduced": false,
+      "closeMethods": 3,
+      "consecutiveCycles": 1,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "reduced": true,
+      "closeMethods": 3,
+      "consecutiveCycles": 12,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "reduced": true,
+      "closeMethods": 3,
+      "consecutiveCycles": 1,
+      "feedRemoval": true,
+      "stateTransitions": true,
+      "tabWrap": true,
+      "backgroundInert": true,
+      "laterPortalInert": true,
+      "inertRestored": true,
+      "toastOpenerFallback": true,
+      "errors": []
+    }
+  ],
+  "zeroProgressClose": [
+    {
+      "stage": "before",
+      "initial": {
+        "open": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 561.594)"
+      },
+      "stillOpen": 1
+    },
+    {
+      "stage": "after",
+      "initial": {
+        "open": true,
+        "transform": "matrix(1, 0, 0, 1, 0, 561.594)"
+      },
+      "stillOpen": 0
+    }
+  ],
+  "cleanup": {
+    "before": {
+      "window": {
+        "mousemove": 2,
+        "pointerdown": 2,
+        "pointerup": 1,
+        "touchstart": 2,
+        "touchend": 2,
+        "touchcancel": 1,
+        "mousedown": 1,
+        "mouseup": 1,
+        "click": 1,
+        "auxclick": 1,
+        "dblclick": 1,
+        "contextmenu": 1,
+        "scrollend": 1,
+        "pagehide": 1,
+        "pageshow": 2,
+        "wheel": 4,
+        "load": 1,
+        "resize": 3,
+        "__playwright_global_listeners_check__": 1,
+        "scroll": 1,
+        "touchmove": 1,
+        "error": 2,
+        "unhandledrejection": 2,
+        "popstate": 1
+      },
+      "document": {
+        "input": 2,
+        "compositionstart": 2,
+        "compositionupdate": 2,
+        "compositionend": 2,
+        "drop": 2,
+        "paste": 2,
+        "keydown": 2,
+        "keyup": 2,
+        "keypress": 2,
+        "abort": 1,
+        "auxclick": 2,
+        "beforetoggle": 1,
+        "cancel": 1,
+        "canplay": 1,
+        "canplaythrough": 1,
+        "click": 2,
+        "close": 1,
+        "contextmenu": 2,
+        "copy": 2,
+        "cut": 2,
+        "drag": 2,
+        "dragend": 2,
+        "dragenter": 2,
+        "dragexit": 2,
+        "dragleave": 2,
+        "dragover": 2,
+        "dragstart": 2,
+        "durationchange": 1,
+        "emptied": 1,
+        "encrypted": 1,
+        "ended": 1,
+        "error": 1,
+        "fullscreenchange": 2,
+        "fullscreenerror": 2,
+        "gotpointercapture": 2,
+        "invalid": 1,
+        "load": 1,
+        "loadeddata": 1,
+        "loadedmetadata": 1,
+        "loadstart": 1,
+        "lostpointercapture": 2,
+        "mousedown": 3,
+        "mousemove": 2,
+        "mouseout": 2,
+        "mouseover": 2,
+        "mouseup": 3,
+        "pause": 1,
+        "play": 1,
+        "playing": 1,
+        "pointercancel": 2,
+        "pointerdown": 3,
+        "pointermove": 2,
+        "pointerout": 2,
+        "pointerover": 2,
+        "pointerup": 3,
+        "progress": 1,
+        "ratechange": 1,
+        "reset": 2,
+        "resize": 1,
+        "seeked": 1,
+        "seeking": 1,
+        "stalled": 1,
+        "submit": 2,
+        "suspend": 1,
+        "timeupdate": 1,
+        "touchcancel": 3,
+        "touchend": 3,
+        "touchstart": 3,
+        "volumechange": 1,
+        "scroll": 2,
+        "toggle": 1,
+        "touchmove": 2,
+        "waiting": 1,
+        "wheel": 2,
+        "scrollend": 1,
+        "animationcancel": 2,
+        "animationend": 2,
+        "animationiteration": 2,
+        "animationstart": 2,
+        "dblclick": 2,
+        "focusin": 2,
+        "focusout": 2,
+        "transitionrun": 2,
+        "transitionstart": 2,
+        "transitioncancel": 2,
+        "transitionend": 2,
+        "change": 2,
+        "textInput": 2,
+        "visibilitychange": 2,
+        "DOMContentLoaded": 1,
+        "mouseleave": 1,
+        "mouseenter": 1
+      }
+    },
+    "after": {
+      "window": {
+        "mousemove": 2,
+        "pointerdown": 2,
+        "pointerup": 1,
+        "touchstart": 2,
+        "touchend": 2,
+        "touchcancel": 1,
+        "mousedown": 1,
+        "mouseup": 1,
+        "click": 1,
+        "auxclick": 1,
+        "dblclick": 1,
+        "contextmenu": 1,
+        "scrollend": 1,
+        "pagehide": 1,
+        "pageshow": 2,
+        "wheel": 4,
+        "load": 1,
+        "resize": 3,
+        "__playwright_global_listeners_check__": 1,
+        "scroll": 1,
+        "touchmove": 1,
+        "error": 2,
+        "unhandledrejection": 2,
+        "popstate": 1
+      },
+      "document": {
+        "input": 2,
+        "compositionstart": 2,
+        "compositionupdate": 2,
+        "compositionend": 2,
+        "drop": 2,
+        "paste": 2,
+        "keydown": 2,
+        "keyup": 2,
+        "keypress": 2,
+        "abort": 1,
+        "auxclick": 2,
+        "beforetoggle": 1,
+        "cancel": 1,
+        "canplay": 1,
+        "canplaythrough": 1,
+        "click": 2,
+        "close": 1,
+        "contextmenu": 2,
+        "copy": 2,
+        "cut": 2,
+        "drag": 2,
+        "dragend": 2,
+        "dragenter": 2,
+        "dragexit": 2,
+        "dragleave": 2,
+        "dragover": 2,
+        "dragstart": 2,
+        "durationchange": 1,
+        "emptied": 1,
+        "encrypted": 1,
+        "ended": 1,
+        "error": 1,
+        "fullscreenchange": 2,
+        "fullscreenerror": 2,
+        "gotpointercapture": 2,
+        "invalid": 1,
+        "load": 1,
+        "loadeddata": 1,
+        "loadedmetadata": 1,
+        "loadstart": 1,
+        "lostpointercapture": 2,
+        "mousedown": 3,
+        "mousemove": 2,
+        "mouseout": 2,
+        "mouseover": 2,
+        "mouseup": 3,
+        "pause": 1,
+        "play": 1,
+        "playing": 1,
+        "pointercancel": 2,
+        "pointerdown": 3,
+        "pointermove": 2,
+        "pointerout": 2,
+        "pointerover": 2,
+        "pointerup": 3,
+        "progress": 1,
+        "ratechange": 1,
+        "reset": 2,
+        "resize": 1,
+        "seeked": 1,
+        "seeking": 1,
+        "stalled": 1,
+        "submit": 2,
+        "suspend": 1,
+        "timeupdate": 1,
+        "touchcancel": 3,
+        "touchend": 3,
+        "touchstart": 3,
+        "volumechange": 1,
+        "scroll": 2,
+        "toggle": 1,
+        "touchmove": 2,
+        "waiting": 1,
+        "wheel": 2,
+        "scrollend": 1,
+        "animationcancel": 2,
+        "animationend": 2,
+        "animationiteration": 2,
+        "animationstart": 2,
+        "dblclick": 2,
+        "focusin": 2,
+        "focusout": 2,
+        "transitionrun": 2,
+        "transitionstart": 2,
+        "transitioncancel": 2,
+        "transitionend": 2,
+        "change": 2,
+        "textInput": 2,
+        "visibilitychange": 2,
+        "DOMContentLoaded": 1,
+        "mouseleave": 1,
+        "mouseenter": 1
+      }
+    },
+    "cycles": [
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      },
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      },
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      },
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      },
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      },
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      },
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      },
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      },
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      },
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      },
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      },
+      {
+        "pins": 3,
+        "htmlOverflow": "",
+        "bodyOverflow": "",
+        "active": "BUTTON"
+      }
+    ],
+    "scrollAfterWheel": 450,
+    "errors": []
+  },
+  "labelAfter": {
+    "buttonText": "😴\nzzz...",
+    "violations": []
+  },
+  "visual": [
+    {
+      "width": 360,
+      "geometryEqual": true,
+      "images": {
+        "hero": {
+          "differentChannels": 254419,
+          "totalChannels": 972000
+        },
+        "panel": {
+          "differentChannels": 6020,
+          "totalChannels": 972000
+        }
+      }
+    },
+    {
+      "width": 390,
+      "geometryEqual": true,
+      "images": {
+        "hero": {
+          "differentChannels": 251222,
+          "totalChannels": 1053000
+        },
+        "panel": {
+          "differentChannels": 5986,
+          "totalChannels": 1053000
+        }
+      }
+    },
+    {
+      "width": 768,
+      "geometryEqual": true,
+      "images": {
+        "hero": {
+          "differentChannels": 375362,
+          "totalChannels": 2073600
+        },
+        "panel": {
+          "differentChannels": 22215,
+          "totalChannels": 2073600
+        }
+      }
+    },
+    {
+      "width": 1440,
+      "geometryEqual": true,
+      "images": {
+        "hero": {
+          "differentChannels": 546203,
+          "totalChannels": 3888000
+        },
+        "panel": {
+          "differentChannels": 27467,
+          "totalChannels": 3888000
+        }
+      }
+    }
+  ],
+  "preloader": {
+    "noJavaScript": {
+      "sixSections": true,
+      "mainNotInert": true,
+      "introNotVisible": true
+    },
+    "injectedPreloaderFailure": {
+      "recovered": true,
+      "pins": 3
+    },
+    "notes": "Expected injected error; no real form submission"
+  },
+  "contact": [
+    {
+      "width": 1440,
+      "mockedRequests": 8,
+      "duplicateGuard": true,
+      "successReset": true,
+      "pendingRetainsData": true,
+      "errorsRetainData": true,
+      "autoCloseFiveSeconds": true,
+      "keyboardClose": true,
+      "fixedPortal": true,
+      "honeypot": true,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "mockedRequests": 8,
+      "duplicateGuard": true,
+      "successReset": true,
+      "pendingRetainsData": true,
+      "errorsRetainData": true,
+      "autoCloseFiveSeconds": true,
+      "keyboardClose": true,
+      "fixedPortal": true,
+      "honeypot": true,
+      "errors": []
+    }
+  ]
+}
