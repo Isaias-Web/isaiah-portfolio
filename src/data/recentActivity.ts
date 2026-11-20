@@ -27,7 +27,23 @@ export type ActivityEntry =
 
 // Publicaciones aprobadas. Nunca incluir datos privados, URLs internas,
 // información de clientes o procesos que no se hayan realizado.
-export const activityEntries: ActivityEntry[] = [];
+export const activityEntries: ActivityEntry[] = [
+  {
+    id: "activity-review-2026-11-20",
+    publishedAt: "2026-11-20T13:27:23-06:00",
+    status: "in_progress",
+    category: "WEB ENGINEERING",
+    title: "Revisión del sistema de actividad",
+    summary: "Validación de las notificaciones y el flujo de solicitudes tras el despliegue.",
+    progress: [
+      {
+        at: "2026-11-20T13:27:23-06:00",
+        stage: "Solicitud recibida",
+        note: "Se inició la revisión del módulo y de la publicación de actividades.",
+      },
+    ],
+  },
+];
 
 // Datos de prueba, exclusivos de desarrollo y preview de Vercel.
 export const previewActivityEntries: ActivityEntry[] = [
