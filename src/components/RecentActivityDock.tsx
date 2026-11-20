@@ -408,7 +408,7 @@ export default function RecentActivityDock() {
                             "overflow-hidden rounded-xl border " +
                             (completed
                               ? "border-white/15"
-                              : "border-white/10 bg-white/[0.015]")
+                              : "border-white/[0.08] bg-white/[0.02]")
                           }
                         >
                           {completed ? (
@@ -449,34 +449,52 @@ export default function RecentActivityDock() {
                             // Una solicitud abierta se ve, pero no se puede accionar ni expandir.
                             <div aria-label="Solicitud en proceso, aún sin resumen final" className="px-5 py-6 md:px-7">
                               <div className="flex flex-wrap items-center justify-between gap-2">
-                                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#ff2d00]">
-                                  {entry.category} <span className="ml-2 text-white/45">/ EN PROCESO</span>
+                                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/45">
+                                  {entry.category} <span className="ml-2 text-white/35">/ EN PROCESO</span>
                                 </span>
                                 <time dateTime={entry.updatedAt ?? entry.publishedAt} className="font-mono text-[10px] text-white/40">
                                   {dateLabel(entry.updatedAt ?? entry.publishedAt)}
                                 </time>
                               </div>
-                              <h3 className="mt-4 text-[16px] font-semibold text-white/65 md:text-[18px]">{entry.title}</h3>
-                              <p className="mt-2 text-[13px] leading-relaxed text-white/45">{entry.summary}</p>
+                              <h3 className="mt-4 text-[16px] font-semibold text-white/70 md:text-[18px]">{entry.title}</h3>
+                              <p className="mt-2 text-[13px] leading-relaxed text-white/40">{entry.summary}</p>
                               {recentSteps.length > 0 && (
                                 <div className="mt-4 space-y-2 border-t border-white/10 pt-4" aria-label="Avances registrados">
-                                  {recentSteps.map((step, index) => (
-                                    <div key={step.at} className="flex items-start gap-2">
-                                      <span className={
-                                        "mt-[5px] h-[5px] w-[5px] shrink-0 rounded-full " +
-                                        (index === recentSteps.length - 1 ? "bg-[#ff2d00]" : "bg-white/25")
-                                      } />
-                                      <div className="min-w-0">
-                                        <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/50">
-                                          {step.stage}
-                                        </p>
-                                        <p className="mt-0.5 text-[12px] leading-relaxed text-white/40">{step.note}</p>
+                                  {recentSteps.map((step, index) => {
+                                    const isCurrent = index === recentSteps.length - 1;
+                                    return (
+                                      <div key={step.at} className="flex items-start gap-2.5">
+                                        <span className="mt-[2px] flex h-[14px] w-[14px] shrink-0 items-center justify-center">
+                                          {isCurrent ? (
+                                            <span
+                                              aria-label="Etapa actual en proceso"
+                                              role="img"
+                                              className="block h-[11px] w-[11px] animate-spin rounded-full border border-white/20 border-t-white/55 motion-reduce:animate-none"
+                                            />
+                                          ) : (
+                                            <span aria-hidden="true" className="text-[11px] leading-none text-white/35">✓</span>
+                                          )}
+                                        </span>
+                                        <div className="min-w-0">
+                                          <p className={
+                                            "font-mono text-[10px] uppercase tracking-[0.12em] " +
+                                            (isCurrent ? "text-white/55" : "text-white/40")
+                                          }>
+                                            {step.stage}
+                                          </p>
+                                          <p className={
+                                            "mt-0.5 text-[12px] leading-relaxed " +
+                                            (isCurrent ? "text-white/45" : "text-white/35")
+                                          }>
+                                            {step.note}
+                                          </p>
+                                        </div>
                                       </div>
-                                    </div>
-                                  ))}
+                                    );
+                                  })}
                                 </div>
                               )}
-                              <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.1em] text-white/30">
+                              <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.1em] text-white/25">
                                 Resumen disponible al finalizar
                               </p>
                             </div>
