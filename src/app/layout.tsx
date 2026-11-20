@@ -25,11 +25,26 @@ export const metadata: Metadata = {
     siteName: "Isaías Frutos",
     title: siteTitle,
     description: siteDescription,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: "Isaías Frutos — Desarrollo Full-Stack, eCommerce e Integración con IA",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
+    images: [
+      {
+        url: "/opengraph-image",
+        alt: "Isaías Frutos — Desarrollo Full-Stack, eCommerce e Integración con IA",
+      },
+    ],
   },
   robots: {
     index: true,
