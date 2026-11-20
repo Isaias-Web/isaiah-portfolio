@@ -231,8 +231,10 @@ export default function RecentActivityDock() {
       const latest = Date.parse(entry.updatedAt ?? entry.publishedAt);
       // An alert is only shown for recently published updates.
       // The historical activity remains available via the button.
+      const previewExample = feed?.preview && entry.id.startsWith("preview-");
       const recentlyUpdated = Date.now() - latest < 60 * 60 * 1000;
-      return recentlyUpdated && !getSeenIds().includes(notificationKey(entry));
+      return (recentlyUpdated || previewExample) &&
+        !getSeenIds().includes(notificationKey(entry));
     });
     if (!newest) return;
     // Small presentation delay after receipt; no fictitious progress is generated.
