@@ -227,9 +227,13 @@ export default function RecentActivityDock() {
   // Only a new, unseen entry from the current day triggers the on-site toast.
   useEffect(() => {
     if (!introReady || paused || isOpen || toast) return;
-    const newest = feed?.entries.find(
-      (entry) => !getSeenIds().includes(notificationKey(entry))
-    );
+    const newest = feed?.entries.find((entry) => {
+      const latest = Date.parse(entry.updatedAt ?? entry.publishedAt);
+      // An alert is only shown for recently published updates.
+      // The historical activity remains available via the button.
+      const recentlyUpdated = Date.now() - latest < 60 * 60 * 1000;
+      return recentlyUpdated && !getSeenIds().includes(notificationKey(entry));
+    });
     if (!newest) return;
     // Small presentation delay after receipt; no fictitious progress is generated.
     const schedule = window.setTimeout(() => setToast(newest), 900);
@@ -394,7 +398,7 @@ export default function RecentActivityDock() {
                     {todayEntries.map((entry) => {
                       const completed = entry.status === "completed";
                       const expanded = completed && expandedId === entry.id;
-                      const latest = entry.progress?.at(-1);
+                      const recentSteps = entry.progress?.slice(-3) ?? [];
                       return (
                         <article
                           key={entry.id}
@@ -452,15 +456,22 @@ export default function RecentActivityDock() {
                               </div>
                               <h3 className="mt-4 text-[16px] font-semibold text-white/65 md:text-[18px]">{entry.title}</h3>
                               <p className="mt-2 text-[13px] leading-relaxed text-white/45">{entry.summary}</p>
-                              {latest && (
-                                <div className="mt-4 flex items-start gap-2 border-t border-white/10 pt-4">
-                                  <span className="mt-[5px] h-[5px] w-[5px] shrink-0 rounded-full bg-[#ff2d00]" />
-                                  <div className="min-w-0">
-                                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/55">
-                                      Último avance · {latest.stage}
-                                    </p>
-                                    <p className="mt-1 text-[12px] leading-relaxed text-white/40">{latest.note}</p>
-                                  </div>
+                              {recentSteps.length > 0 && (
+                                <div className="mt-4 space-y-2 border-t border-white/10 pt-4" aria-label="Avances registrados">
+                                  {recentSteps.map((step, index) => (
+                                    <div key={step.at} className="flex items-start gap-2">
+                                      <span className={
+                                        "mt-[5px] h-[5px] w-[5px] shrink-0 rounded-full " +
+                                        (index === recentSteps.length - 1 ? "bg-[#ff2d00]" : "bg-white/25")
+                                      } />
+                                      <div className="min-w-0">
+                                        <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/50">
+                                          {step.stage}
+                                        </p>
+                                        <p className="mt-0.5 text-[12px] leading-relaxed text-white/40">{step.note}</p>
+                                      </div>
+                                    </div>
+                                  ))}
                                 </div>
                               )}
                               <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.1em] text-white/30">
@@ -479,7 +490,7 @@ export default function RecentActivityDock() {
                             >
                               <div className="min-h-0 overflow-hidden">
                                 <p className="border-t border-white/10 px-5 py-6 text-[13px] leading-[1.9] text-white/65 md:px-7 md:text-[14px]">
-                                  {entry.description ?? "Resumen pendiente de aprobación."}
+                                  {entry.description}
                                 </p>
                               </div>
                             </div>
