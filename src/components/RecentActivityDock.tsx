@@ -203,7 +203,10 @@ export default function RecentActivityDock() {
   useEffect(() => {
     if (!introReady || paused || isOpen || toast) return;
     const newest = feed?.entries[0];
-    if (newest && !getSeenIds().includes(newest.id)) setToast(newest);
+    if (!newest || getSeenIds().includes(newest.id)) return;
+    // Schedule after the effect rather than synchronously cascading render.
+    const schedule = window.setTimeout(() => setToast(newest), 0);
+    return () => window.clearTimeout(schedule);
   }, [feed, introReady, paused, isOpen, toast]);
 
   useLayoutEffect(() => {
