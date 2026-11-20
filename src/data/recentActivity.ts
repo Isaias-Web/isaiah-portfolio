@@ -29,6 +29,21 @@ export type ActivityEntry =
 // información de clientes o procesos que no se hayan realizado.
 export const activityEntries: ActivityEntry[] = [
   {
+    id: "og-social-card-2026-11-20",
+    publishedAt: "2026-11-20T14:06:34-06:00",
+    status: "in_progress",
+    category: "SEO / FRONTEND",
+    title: "Integración de vista previa en redes sociales",
+    summary: "Revisión de metadatos Open Graph y de la imagen de presentación del portfolio.",
+    progress: [
+      {
+        at: "2026-11-20T14:06:34-06:00",
+        stage: "Solicitud recibida",
+        note: "Se inició la revisión del enlace compartido y de las etiquetas sociales existentes.",
+      },
+    ],
+  },
+  {
     id: "activity-review-2026-11-20",
     publishedAt: "2026-11-20T13:27:23-06:00",
     updatedAt: "2026-11-20T13:41:11-06:00",
