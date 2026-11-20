@@ -277,11 +277,18 @@ export default function RecentActivityDock() {
               <Activity size={15} strokeWidth={1.6} aria-hidden="true" />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="pr-4 text-[12px] font-semibold leading-snug">
+              <p className="font-mono text-[9px] font-medium uppercase tracking-[0.13em] text-[#ff2d00]">
+                {toast.status === "completed"
+                  ? "Trabajo finalizado"
+                  : (toast.progress?.length ?? 0) > 1
+                    ? "Avance en curso"
+                    : "Nueva solicitud en curso"}
+              </p>
+              <p className="mt-1 pr-4 text-[12px] font-semibold leading-snug">
                 {toast.title}
               </p>
               <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-[#ff2d00]">
-                {toast.category} · {dateLabel(toast.publishedAt)}
+                {toast.category} · {dateLabel(toast.updatedAt ?? toast.publishedAt)}
               </p>
               <p className="mt-2 text-[11px] leading-[1.5] text-white/60">
                 {toast.summary}
@@ -371,7 +378,7 @@ export default function RecentActivityDock() {
                     RECENT ACTIVITY<span className="text-[#ff2d00]">.</span>
                   </h2>
                   <p className="mt-2 text-[13px] text-white/50">
-                    Solicitudes en curso y trabajos completados hoy. {feed?.preview ? "Vista de prueba." : ""}
+                    Solicitudes y trabajos actualizados en las últimas 24 horas. {feed?.preview ? "Vista de prueba." : ""}
                   </p>
                 </div>
                 <button
@@ -393,7 +400,7 @@ export default function RecentActivityDock() {
               <div className="mx-auto w-full max-w-[1400px]">
                 {todayEntries.length === 0 ? (
                   <p className="py-12 text-center text-[13px] text-white/45">
-                    Aún no hay actualizaciones publicadas hoy.
+                    No hay actividad publicada en las últimas 24 horas.
                   </p>
                 ) : (
                   <div className="space-y-3">
@@ -521,10 +528,16 @@ export default function RecentActivityDock() {
                   </div>
                 )}
                 <p className="mt-9 border-t border-white/10 pt-6 text-right font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">
-                  {archivedCount} actualizaciones archivadas
+                  {archivedCount} trabajos finalizados archivados
                 </p>
               </div>
             </div>
+            <footer className="shrink-0 border-t border-white/10 px-6 py-4 text-center md:px-10 lg:px-16">
+              <p className="mx-auto max-w-[720px] font-mono text-[10px] leading-relaxed tracking-[0.02em] text-white/35">
+                Solo se muestran registros con actividad en las últimas 24 horas.
+                Después dejan de aparecer de este panel.
+              </p>
+            </footer>
           </section>
         </div>
       )}
