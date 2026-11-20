@@ -4,19 +4,26 @@ export type ActivityProgress = {
   note: string; // Breve avance publicable y verificable
 };
 
-export type ActivityEntry = {
+type ActivityBase = {
   id: string;
   publishedAt: string; // Registro inicial
-  updatedAt?: string; // Cambiar al registrar un avance o completar la tarea
-  status: "in_progress" | "completed";
+  updatedAt?: string; // Actualizar al registrar un avance o cerrar el trabajo
   category: string;
   title: string;
   summary: string;
-  // Las solicitudes en progreso no se pueden expandir.
-  description?: string;
   // Solo etapas que efectivamente se hayan realizado y autorizado.
   progress?: ActivityProgress[];
 };
+
+export type ActivityEntry =
+  | (ActivityBase & {
+      status: "in_progress";
+      description?: never; // No publicar resumen antes de finalizar
+    })
+  | (ActivityBase & {
+      status: "completed";
+      description: string; // Obligatorio para permitir el acordeón final
+    });
 
 // Publicaciones aprobadas. Nunca incluir datos privados, URLs internas,
 // información de clientes o procesos que no se hayan realizado.
