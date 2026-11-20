@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Plus, X } from "lucide-react";
+import { X } from "lucide-react";
 import { gsap } from "@/animations/gsap-config";
 import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
@@ -170,7 +170,7 @@ export default function RecentActivityDock() {
         className={`fixed bottom-[88px] right-5 z-[9500] flex h-14 w-[190px] items-center justify-center rounded-full border border-[#ff2d00] bg-[#ff2d00] px-4 text-[#090a09] transition-[background-color,opacity] duration-300 hover:bg-[#ff4d2a] ${!introReady || paused ? "pointer-events-none opacity-0" : "opacity-100"}`}
       >
         <span className="flex items-center text-[14px] font-bold tracking-[-0.03em]">
-          Trabajando
+          trabajando
           <span aria-hidden="true" className="ml-0.5 inline-block w-[3ch] font-mono text-left">
             <span className="working-dots inline-block overflow-hidden whitespace-nowrap align-bottom">
               ...
@@ -270,15 +270,21 @@ export default function RecentActivityDock() {
                                 {entry.summary}
                               </p>
                             </div>
-                            <Plus
-                              size={18}
-                              strokeWidth={1.5}
+                            <span
                               aria-hidden="true"
                               className={
-                                "shrink-0 text-[#ff2d00] transition-transform duration-500 motion-reduce:transition-none " +
+                                "relative h-[18px] w-[18px] shrink-0 text-[#ff2d00] transition-transform duration-500 motion-reduce:transition-none " +
                                 (expanded ? "rotate-180" : "rotate-0")
                               }
-                            />
+                            >
+                              <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current" />
+                              <span
+                                className={
+                                  "absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-current transition-opacity duration-300 motion-reduce:transition-none " +
+                                  (expanded ? "opacity-0" : "opacity-100")
+                                }
+                              />
+                            </span>
                           </button>
                           <div
                             id={"activity-detail-" + entry.id}
