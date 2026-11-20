@@ -34,16 +34,28 @@ export function GET() {
     process.env.VERCEL_ENV === "preview" ||
     process.env.NODE_ENV === "development";
 
+  const lastChange = (entry: ActivityEntry) => entry.updatedAt ?? entry.publishedAt;
+
   const all = (preview ? [...activityEntries, ...previewActivityEntries] : activityEntries)
     .filter((entry) => Number.isFinite(Date.parse(entry.publishedAt)))
-    .filter((entry) => Date.parse(entry.publishedAt) <= now.getTime());
+    .filter((entry) => Number.isFinite(Date.parse(lastChange(entry))))
+    .filter((entry) => Date.parse(entry.publishedAt) <= now.getTime())
+    .filter((entry) => Date.parse(lastChange(entry)) <= now.getTime());
 
+  // Trabajos pendientes permanecen visibles hasta cerrarse, incluso si
+  // comenzaron ayer. Los trabajos terminados desaparecen tras su último día
+  // de actualización. Nunca archivamos una solicitud todavía abierta.
   const entries = all
-    .filter((entry) => dateInMexico(entry.publishedAt) === date)
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+    .filter((entry) =>
+      entry.status === "in_progress" ||
+      dateInMexico(lastChange(entry)) === date
+    )
+    .sort((a, b) => lastChange(b).localeCompare(lastChange(a)));
 
   const archivedCount = all.filter(
-    (entry) => dateInMexico(entry.publishedAt) < date
+    (entry) =>
+      entry.status === "completed" &&
+      dateInMexico(lastChange(entry)) < date
   ).length;
 
   return NextResponse.json(
