@@ -20,7 +20,7 @@ function dateInMexico(value: string | Date): string {
   return [get("year"), get("month"), get("day")].join("-");
 }
 
-export type ActivityFeedResponse = {
+type ActivityFeedResponse = {
   date: string;
   entries: ActivityEntry[];
   archivedCount: number;
