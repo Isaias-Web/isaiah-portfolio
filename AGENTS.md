@@ -17,6 +17,8 @@ GitHub repository: Isaias-Web/isaiah-portfolio. Vercel deploys `main` to product
 - Keep the public activity feed separate from the private source project: publish only sanitized, verified and explicitly authorized information.
 - Keep one stable activity ID across preregistration, progress updates and completion, even if the source work spans multiple chats or clients.
 - Do not auto-publish on normal requests such as "start working"; publishing requires a specific approval. Never simulate stages or claim deployment without checking.
+- **Never switch an activity to `completed` merely because CI passed or Vercel deployed.** Keep it `in_progress` with an explicit "awaiting owner validation" step until the owner verifies the actual outcome (especially visual/social previews) and explicitly approves closing it. Build/deployment success is NOT proof of user-visible correctness.
+- Do not merge a validation/fix PR into production before owner acceptance of its preview unless the user explicitly requests a production hotfix.
 - Update only `src/data/recentActivity.ts` for routine new entries or status changes; use a feature branch, PR, CI and Vercel verification.
 
 ## Commands
