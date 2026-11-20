@@ -15,12 +15,11 @@ export default function WhatsAppButton() {
         rel="noopener noreferrer"
         aria-label="Hablemos por WhatsApp"
         inert={!introReady || paused}
-        className="group fixed bottom-5 right-5 z-[950] flex h-14 w-[190px] items-center justify-center gap-2 rounded-full border border-white/25 bg-[#090a09]/90 px-3 text-[#f5f5f5] shadow-[0_0_28px_rgba(255,85,55,0.12)] backdrop-blur-md transition-all duration-300 hover:border-[#ff5f55] hover:shadow-[0_0_38px_rgba(255,85,55,0.22)]"
+        className="group fixed bottom-3 right-3 z-[950] flex h-9 w-[138px] items-center justify-center gap-1 rounded-full border border-white/25 bg-[#090a09]/90 px-2 md:bottom-5 md:right-5 md:h-14 md:w-[190px] md:gap-2 md:px-3 text-[#f5f5f5] shadow-[0_0_28px_rgba(255,85,55,0.12)] backdrop-blur-md transition-all duration-300 hover:border-[#ff5f55] hover:shadow-[0_0_38px_rgba(255,85,55,0.22)]"
       >
-        <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-[18px] text-[#f5f5f5] transition-transform duration-300 group-hover:scale-105">
+        <span className="relative flex h-6 w-6 shrink-0 items-center justify-center rounded-[12px] md:h-11 md:w-11 md:rounded-[18px] text-[#f5f5f5] transition-transform duration-300 group-hover:scale-105">
           <svg
-            width="26"
-            height="26"
+            className="h-[18px] w-[18px] md:h-[26px] md:w-[26px]"
             viewBox="0 0 28 28"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +38,7 @@ export default function WhatsAppButton() {
           </svg>
         </span>
 
-        <span className="text-[14px] font-bold tracking-[-0.03em]">
+        <span className="text-[11px] font-bold tracking-[-0.03em] md:text-[14px]">
           Hablemos
         </span>
 
