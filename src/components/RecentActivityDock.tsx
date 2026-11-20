@@ -151,15 +151,18 @@ export default function RecentActivityDock() {
     closingRef.current = true;
 
     const timeline = timelineRef.current;
-    if (!timeline) {
+    const finishClose = () => {
       setIsOpen(false);
+      setExpandedId(null);
+    };
+    // At time zero the panel is already at its closed position. Reversing
+    // from there has no progress to complete and may never call back.
+    if (!timeline || timeline.time() === 0) {
+      finishClose();
       return;
     }
 
-    timeline.eventCallback("onReverseComplete", () => {
-      setIsOpen(false);
-      setExpandedId(null);
-    });
+    timeline.eventCallback("onReverseComplete", finishClose);
     timeline.reverse();
   }, []);
 

@@ -112,6 +112,21 @@ try {
       await trigger.getAttribute("aria-label"),
       reduced ? /zzz.*descanso/i : /trabajando/i,
     );
+    // Close before the first animation frame: reverse has no progress yet.
+    await page.clock.pauseAt(
+      new Date(await page.evaluate(() => Date.now() + 100)),
+    );
+    await trigger.focus();
+    await trigger.evaluate((element) => element.click());
+    await dialog.waitFor({ state: "attached" });
+    await page.evaluate(() =>
+      document.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+      ),
+    );
+    await page.clock.runFor(1000);
+    await closed();
+    await page.clock.resume();
     // Existing inert state must survive the modal's own isolation lifecycle.
     await page.evaluate(() => {
       const e = document.createElement("div");
@@ -198,6 +213,15 @@ try {
       () =>
         document.activeElement?.getAttribute("aria-label") === "Cerrar panel",
     );
+    entries = [];
+    await refresh();
+    await page.waitForFunction(
+      () => !document.querySelector("#recent-activity-panel article"),
+    );
+    await page.keyboard.press("Tab");
+    assert.equal(await focused(close), true);
+    await page.keyboard.press("Shift+Tab");
+    assert.equal(await focused(close), true);
     // Portals inserted later cannot introduce interactive background controls.
     await page.evaluate(() => {
       const e = document.createElement("div");
