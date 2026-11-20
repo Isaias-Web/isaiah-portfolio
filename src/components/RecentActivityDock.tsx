@@ -167,9 +167,9 @@ export default function RecentActivityDock() {
         aria-controls="recent-activity-panel"
         aria-expanded={isOpen}
         aria-label="Trabajando. Ver las actualizaciones de hoy"
-        className={`fixed bottom-[88px] right-5 z-[950] flex h-14 w-[190px] items-center justify-center rounded-full border border-[#ff2d00] bg-[#ff2d00] px-4 text-[#090a09] transition-[background-color,opacity] duration-300 hover:bg-[#ff4d2a] ${!introReady || paused ? "pointer-events-none opacity-0" : "opacity-100"}`}
+        className={`fixed bottom-[58px] right-3 z-[950] flex h-9 w-[138px] items-center justify-center rounded-full border border-[#ff2d00] bg-[#ff2d00] px-2 text-[#090a09] md:bottom-[88px] md:right-5 md:h-14 md:w-[190px] md:px-4 transition-[background-color,opacity] duration-300 hover:bg-[#ff4d2a] ${!introReady || paused ? "pointer-events-none opacity-0" : "opacity-100"}`}
       >
-        <span className="flex items-center text-[14px] font-bold tracking-[-0.03em]">
+        <span className="flex items-center text-[11px] font-bold tracking-[-0.03em] md:text-[14px]">
           trabajando
           <span aria-hidden="true" className="ml-0.5 inline-block w-[3ch] font-mono text-left">
             <span className="working-dots inline-block overflow-hidden whitespace-nowrap align-bottom">
