@@ -13,7 +13,23 @@ type ActivityFeed = {
   preview: boolean;
 };
 
-const SEEN_STORAGE_KEY = "isaias:recent-activity:seen-v1";
+const SEEN_STORAGE_KEY = "isaias:recent-activity:seen-v2";
+
+// La notificación se renueva cuando hay un avance confirmado o se cierra
+// una solicitud; no solo cuando se crea un ID nuevo.
+function notificationKey(entry: ActivityEntry) {
+  return [entry.id, entry.updatedAt ?? entry.publishedAt, entry.status].join(":");
+}
+
+function clockMode(): "working" | "sleeping" {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    hour: "2-digit",
+    hourCycle: "h23",
+    timeZone: CITY_TIME_ZONE,
+  }).formatToParts(new Date());
+  const hour = Number(parts.find((part) => part.type === "hour")?.value ?? "0");
+  return hour >= 8 && hour < 20 ? "working" : "sleeping";
+}
 
 function getSeenIds(): string[] {
   try {
@@ -50,6 +66,7 @@ export default function RecentActivityDock() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [feed, setFeed] = useState<ActivityFeed | null>(null);
   const [toast, setToast] = useState<ActivityEntry | null>(null);
+  const [mode, setMode] = useState<"working" | "sleeping" | null>(null);
 
   // Use the same body + html lock already used by project detail overlays.
   useBodyScrollLock(isOpen);
@@ -61,6 +78,13 @@ export default function RecentActivityDock() {
   const closeRef = useRef<HTMLButtonElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const closingRef = useRef(false);
+
+  useEffect(() => {
+    const refreshClock = () => setMode(clockMode());
+    refreshClock();
+    const interval = window.setInterval(refreshClock, 30_000);
+    return () => window.clearInterval(interval);
+  }, []);
 
   // Fetch the current production/preview feed every 45 s, and on tab return.
   // No client write API or tokens: publishing requires a reviewed GitHub change.
@@ -94,17 +118,18 @@ export default function RecentActivityDock() {
     };
   }, []);
 
-  const dismissToast = useCallback((entryId: string) => {
-    rememberSeen([entryId]);
+  const dismissToast = useCallback((entry: ActivityEntry) => {
+    rememberSeen([notificationKey(entry)]);
     setToast(null);
   }, []);
 
   const handleOpen = (entryId?: string) => {
     if (isOpen || !introReady || paused) return;
     closingRef.current = false;
-    rememberSeen(feed?.entries.map((entry) => entry.id) ?? []);
+    rememberSeen(feed?.entries.map(notificationKey) ?? []);
     setToast(null);
-    setExpandedId(entryId ?? null);
+    const selected = feed?.entries.find((entry) => entry.id === entryId);
+    setExpandedId(selected?.status === "completed" ? entryId ?? null : null);
     setIsOpen(true);
   };
 
@@ -202,10 +227,12 @@ export default function RecentActivityDock() {
   // Only a new, unseen entry from the current day triggers the on-site toast.
   useEffect(() => {
     if (!introReady || paused || isOpen || toast) return;
-    const newest = feed?.entries[0];
-    if (!newest || getSeenIds().includes(newest.id)) return;
-    // Schedule after the effect rather than synchronously cascading render.
-    const schedule = window.setTimeout(() => setToast(newest), 0);
+    const newest = feed?.entries.find(
+      (entry) => !getSeenIds().includes(notificationKey(entry))
+    );
+    if (!newest) return;
+    // Small presentation delay after receipt; no fictitious progress is generated.
+    const schedule = window.setTimeout(() => setToast(newest), 900);
     return () => window.clearTimeout(schedule);
   }, [feed, introReady, paused, isOpen, toast]);
 
@@ -223,7 +250,7 @@ export default function RecentActivityDock() {
 
   useEffect(() => {
     if (!toast || paused || isOpen) return;
-    const timeout = window.setTimeout(() => dismissToast(toast.id), 8500);
+    const timeout = window.setTimeout(() => dismissToast(toast), 8500);
     return () => window.clearTimeout(timeout);
   }, [toast, paused, isOpen, dismissToast]);
 
@@ -258,12 +285,12 @@ export default function RecentActivityDock() {
                 onClick={() => handleOpen(toast.id)}
                 className="mt-2 text-[11px] font-semibold text-[#ff2d00] hover:underline"
               >
-                Leer más →
+                {toast.status === "completed" ? "Leer resumen →" : "Ver avance →"}
               </button>
             </div>
             <button
               type="button"
-              onClick={() => dismissToast(toast.id)}
+              onClick={() => dismissToast(toast)}
               aria-label="Descartar notificación"
               className="shrink-0 p-1 text-white/55 transition-colors hover:text-white"
             >
@@ -280,16 +307,29 @@ export default function RecentActivityDock() {
         inert={!introReady || paused}
         aria-controls="recent-activity-panel"
         aria-expanded={isOpen}
-        aria-label="Trabajando. Ver las actualizaciones de hoy"
+        aria-label={mode === "sleeping"
+          ? "En horario de descanso. Ver las actualizaciones"
+          : "Trabajando. Ver las actualizaciones"}
         className={`fixed bottom-[58px] right-3 z-[950] flex h-9 w-[138px] items-center justify-center rounded-full border border-[#ff2d00] bg-[#ff2d00] px-2 text-[#090a09] md:bottom-[88px] md:right-5 md:h-14 md:w-[190px] md:px-4 transition-[background-color,opacity] duration-300 hover:bg-[#ff4d2a] ${!introReady || paused ? "pointer-events-none opacity-0" : "opacity-100"}`}
       >
         <span className="flex items-center text-[11px] font-bold tracking-[-0.03em] md:text-[14px]">
-          trabajando
-          <span aria-hidden="true" className="ml-0.5 inline-block w-[3ch] font-mono text-left">
-            <span className="working-dots inline-block overflow-hidden whitespace-nowrap align-bottom">
-              ...
-            </span>
-          </span>
+          {mode === "sleeping" ? (
+            <>
+              <span aria-hidden="true" className="mr-1 text-[15px] md:text-[18px]">😴</span>
+              zzz...
+            </>
+          ) : mode === "working" ? (
+            <>
+              trabajando
+              <span aria-hidden="true" className="ml-0.5 inline-block w-[3ch] font-mono text-left">
+                <span className="working-dots inline-block overflow-hidden whitespace-nowrap align-bottom">
+                  ...
+                </span>
+              </span>
+            </>
+          ) : (
+            <>actividad</>
+          )}
         </span>
       </button>
 
@@ -325,7 +365,7 @@ export default function RecentActivityDock() {
                     RECENT ACTIVITY<span className="text-[#ff2d00]">.</span>
                   </h2>
                   <p className="mt-2 text-[13px] text-white/50">
-                    Trabajos y avances del día. {feed?.preview ? "Vista de prueba." : ""}
+                    Solicitudes en curso y trabajos completados hoy. {feed?.preview ? "Vista de prueba." : ""}
                   </p>
                 </div>
                 <button
@@ -352,70 +392,98 @@ export default function RecentActivityDock() {
                 ) : (
                   <div className="space-y-3">
                     {todayEntries.map((entry) => {
-                      const expanded = expandedId === entry.id;
+                      const completed = entry.status === "completed";
+                      const expanded = completed && expandedId === entry.id;
+                      const latest = entry.progress?.at(-1);
                       return (
                         <article
                           key={entry.id}
-                          className="overflow-hidden rounded-xl border border-white/15"
+                          className={
+                            "overflow-hidden rounded-xl border " +
+                            (completed
+                              ? "border-white/15"
+                              : "border-white/10 bg-white/[0.015]")
+                          }
                         >
-                          <button
-                            type="button"
-                            aria-expanded={expanded}
-                            aria-controls={"activity-detail-" + entry.id}
-                            onClick={() => setExpandedId(expanded ? null : entry.id)}
-                            className="flex w-full items-center gap-5 px-5 py-6 text-left md:px-7"
-                          >
-                            <div className="min-w-0 flex-1">
-                              <div className="flex flex-wrap items-center justify-between gap-2">
-                                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#ff2d00]">
-                                  {entry.category}
-                                </span>
-                                <time
-                                  dateTime={entry.publishedAt}
-                                  className="font-mono text-[10px] text-white/40"
-                                >
-                                  {dateLabel(entry.publishedAt)}
-                                </time>
-                              </div>
-                              <h3 className="mt-4 text-[16px] font-semibold md:text-[18px]">
-                                {entry.title}
-                              </h3>
-                              <p className="mt-2 text-[13px] leading-relaxed text-white/55">
-                                {entry.summary}
-                              </p>
-                            </div>
-                            <span
-                              aria-hidden="true"
-                              className={
-                                "relative h-[18px] w-[18px] shrink-0 text-[#ff2d00] transition-transform duration-500 motion-reduce:transition-none " +
-                                (expanded ? "rotate-180" : "rotate-0")
-                              }
+                          {completed ? (
+                            <button
+                              type="button"
+                              aria-expanded={expanded}
+                              aria-controls={"activity-detail-" + entry.id}
+                              onClick={() => setExpandedId(expanded ? null : entry.id)}
+                              className="flex w-full items-center gap-5 px-5 py-6 text-left md:px-7"
                             >
-                              <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current" />
+                              <div className="min-w-0 flex-1">
+                                <div className="flex flex-wrap items-center justify-between gap-2">
+                                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#ff2d00]">
+                                    {entry.category} <span className="ml-2 text-white/40">/ FINALIZADO</span>
+                                  </span>
+                                  <time dateTime={entry.updatedAt ?? entry.publishedAt} className="font-mono text-[10px] text-white/40">
+                                    {dateLabel(entry.updatedAt ?? entry.publishedAt)}
+                                  </time>
+                                </div>
+                                <h3 className="mt-4 text-[16px] font-semibold md:text-[18px]">{entry.title}</h3>
+                                <p className="mt-2 text-[13px] leading-relaxed text-white/55">{entry.summary}</p>
+                              </div>
                               <span
+                                aria-hidden="true"
                                 className={
+                                  "relative h-[18px] w-[18px] shrink-0 text-[#ff2d00] transition-transform duration-500 motion-reduce:transition-none " +
+                                  (expanded ? "rotate-180" : "rotate-0")
+                                }
+                              >
+                                <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current" />
+                                <span className={
                                   "absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-current transition-opacity duration-300 motion-reduce:transition-none " +
                                   (expanded ? "opacity-0" : "opacity-100")
-                                }
-                              />
-                            </span>
-                          </button>
-                          <div
-                            id={"activity-detail-" + entry.id}
-                            inert={!expanded}
-                            className={
-                              "grid transition-[grid-template-rows,opacity] duration-500 ease-in-out motion-reduce:transition-none " +
-                              (expanded
-                                ? "grid-rows-[1fr] opacity-100"
-                                : "grid-rows-[0fr] opacity-0")
-                            }
-                          >
-                            <div className="min-h-0 overflow-hidden">
-                              <p className="border-t border-white/10 px-5 py-6 text-[13px] leading-[1.9] text-white/65 md:px-7 md:text-[14px]">
-                                {entry.description}
+                                } />
+                              </span>
+                            </button>
+                          ) : (
+                            // Una solicitud abierta se ve, pero no se puede accionar ni expandir.
+                            <div aria-label="Solicitud en proceso, aún sin resumen final" className="px-5 py-6 md:px-7">
+                              <div className="flex flex-wrap items-center justify-between gap-2">
+                                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#ff2d00]">
+                                  {entry.category} <span className="ml-2 text-white/45">/ EN PROCESO</span>
+                                </span>
+                                <time dateTime={entry.updatedAt ?? entry.publishedAt} className="font-mono text-[10px] text-white/40">
+                                  {dateLabel(entry.updatedAt ?? entry.publishedAt)}
+                                </time>
+                              </div>
+                              <h3 className="mt-4 text-[16px] font-semibold text-white/65 md:text-[18px]">{entry.title}</h3>
+                              <p className="mt-2 text-[13px] leading-relaxed text-white/45">{entry.summary}</p>
+                              {latest && (
+                                <div className="mt-4 flex items-start gap-2 border-t border-white/10 pt-4">
+                                  <span className="mt-[5px] h-[5px] w-[5px] shrink-0 rounded-full bg-[#ff2d00]" />
+                                  <div className="min-w-0">
+                                    <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/55">
+                                      Último avance · {latest.stage}
+                                    </p>
+                                    <p className="mt-1 text-[12px] leading-relaxed text-white/40">{latest.note}</p>
+                                  </div>
+                                </div>
+                              )}
+                              <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.1em] text-white/30">
+                                Resumen disponible al finalizar
                               </p>
                             </div>
-                          </div>
+                          )}
+                          {completed && (
+                            <div
+                              id={"activity-detail-" + entry.id}
+                              inert={!expanded}
+                              className={
+                                "grid transition-[grid-template-rows,opacity] duration-500 ease-in-out motion-reduce:transition-none " +
+                                (expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")
+                              }
+                            >
+                              <div className="min-h-0 overflow-hidden">
+                                <p className="border-t border-white/10 px-5 py-6 text-[13px] leading-[1.9] text-white/65 md:px-7 md:text-[14px]">
+                                  {entry.description ?? "Resumen pendiente de aprobación."}
+                                </p>
+                              </div>
+                            </div>
+                          )}
                         </article>
                       );
                     })}
