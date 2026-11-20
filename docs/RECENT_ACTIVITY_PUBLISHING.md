@@ -4,7 +4,7 @@
 
 - El botón naranja muestra "trabajando..." de las 08:00 a las 19:59 y "😴 zzz..." de las 20:00 a las 07:59, hora de America/Mexico_City. Es solo una etiqueta por horario; **no indica presencia laboral comprobada**.
 - El frontend consulta GET /api/activity al entrar, cada 45 segundos y cuando la pestaña vuelve al primer plano.
-- La API muestra solicitudes todavía abiertas (aunque comenzaron otro día) y trabajos finalizados cuya última actualización es de hoy. Trabajos finalizados de otros días no se listan; se cuentan como archivados.
+- La API muestra únicamente registros (en curso o completados) con una actualización publicada en las últimas 24 horas exactas, sin depender del cambio de día. El período se cuenta desde updatedAt, o publishedAt si nunca hubo avances. Una solicitud antigua también desaparece al vencer la ventana; una actualización real aprobada inicia una nueva ventana de 24 horas. El contador conserva únicamente los trabajos finalizados anteriores, no solicitudes vencidas.
 - Una notificación dentro de la página aparece si una etapa **real y aprobada** fue publicada durante la última hora y no se ha visto en ese navegador. No es un push nativo de Windows.
 - Una notificación de una solicitud abierta dice "Ver avance". Abre el módulo, pero su tarjeta queda deshabilitada para expandir. Muestra hasta tres avances reales en texto tenue y conserva la misma identidad visual.
 - Una notificación de trabajo finalizado dice "Leer resumen". Abre el módulo y despliega el resumen técnico.
@@ -18,7 +18,7 @@
 3. Completar publishedAt, category, title, summary y progress: [{ at, stage, note }]. La descripción técnica **no existe todavía**.
 4. Si surge un avance real (por ejemplo revisión, investigación, desarrollo o validación), añadir un elemento a progress **después de que ocurrió** y actualizar updatedAt a la fecha/hora real.
 5. En cada actualización, abrir revisión de código y aprobar su publicación en GitHub. Vercel actualiza la web después del despliegue; el frontend lo detectará al sondear la API.
-6. La ficha permanece visible y no muestra botón de expansión, aunque cambie el día.
+6. La ficha permanece visible y no muestra botón de expansión mientras registre actividad aprobada dentro de las últimas 24 horas. Si pasan 24 horas sin un nuevo avance, desaparece de la vista pública aunque todavía esté abierta.
 
 Ejemplo de entrada **ficticia de documentación, no publicarla**:
 
@@ -53,5 +53,7 @@ El esquema TypeScript exige description para status "completed" y la prohíbe pa
 - Cada etapa se registra porque ocurrió, **nunca para simular que un sistema está trabajando**.
 - No hay escritura pública ni tokens en el navegador: las publicaciones requieren un cambio autorizado en GitHub y deploy de Vercel.
 - Los ejemplos solo existen en desarrollo y en previews de Vercel. Producción empieza sin datos hasta aprobar la primera publicación real.
+- Decir en ChatGPT «empecemos» o «terminamos» no publica por sí mismo. Es necesario autorizar el registro, subir el cambio al repositorio y completar el despliegue antes de que aparezca la notificación.
+- La leyenda inferior del panel comunica que los registros representan actividad de las últimas 24 horas; al vencer su ventana dejan de mostrarse.
 - El preloader, los overlays de proyectos, Lenis, GSAP y el lock de scroll siguen utilizando los controles actuales.
 - Botones móviles: 138 × 36 px. Botones escritorio: 190 × 56 px. Toast de 340 px máximo.
