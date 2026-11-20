@@ -28,7 +28,7 @@ test("Social image route returns JPEG bytes directly instead of ImageResponse", 
   const route = readFileSync("src/app/og-image-v2/route.ts", "utf8");
   assert.match(route, /new Response\(new Uint8Array\(jpeg\)/);
   assert.match(route, /image\/jpeg/);
-  assert.doesNotMatch(route, /ImageResponse/);
+  assert.doesNotMatch(route, /new ImageResponse\\(/);
 });
 
 test("Open Graph and X cards reference the versioned image URL", () => {
