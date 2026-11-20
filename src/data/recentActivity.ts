@@ -12,7 +12,7 @@ export type ActivityEntry = {
 export const activityEntries: ActivityEntry[] = [
   {
     id: "demo-01",
-    publishedAt: "2026-11-19T15:00:00-06:00",
+    publishedAt: "2026-11-20T08:00:00-06:00",
     category: "FRONTEND",
     title: "Vista previa del módulo de actividad",
     summary: "Prueba de un panel integrado al portfolio.",
@@ -21,7 +21,7 @@ export const activityEntries: ActivityEntry[] = [
   },
   {
     id: "demo-00",
-    publishedAt: "2026-11-18T15:00:00-06:00",
+    publishedAt: "2026-11-19T15:00:00-06:00",
     category: "UI / UX",
     title: "Entrada de archivo (demostración)",
     summary: "Dato de prueba para validar el contador.",
