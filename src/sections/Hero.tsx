@@ -243,10 +243,11 @@ export default function Hero() {
       {/* Background image */}
       <div ref={bgRef} className="absolute inset-0 z-0 will-change-transform">
         <Image
-          src="/images/hero-portfolio.webp"
-          alt="Retrato de Isaías Frutos"
+          src="/hero-comic-preview"
+          alt="Ilustración de Isaías Frutos con chaqueta naranja en estilo cómic"
           fill
           priority
+          unoptimized
           className="object-cover object-center"
         />
 
