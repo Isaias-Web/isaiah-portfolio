@@ -1,43 +1,57 @@
-# Recent Activity: publicación segura
+# Recent Activity: solicitudes, avances y reportes
 
-## Comportamiento
+## Comportamiento del sitio
 
-- El frontend consulta GET /api/activity al cargar, cada 45 segundos y cuando la pestaña vuelve al primer plano.
-- La API devuelve solo entradas del día en America/Mexico_City, ordenadas de nuevas a antiguas, y un contador de entradas anteriores.
-- La notificación aparece dentro de la página cuando existe una entrada nueva no vista en ese navegador. No es una notificación del sistema operativo ni necesita permisos push.
-- «Leer más» abre el panel inferior y expande la entrada. «×» descarta el aviso; «trabajando...» abre manualmente el listado.
-- Los IDs vistos se recuerdan con localStorage; si está bloqueado, el contenido sigue disponible.
-- En producción no hay contenido ficticio. Los ejemplos solo se muestran en el entorno de desarrollo y previews Vercel.
+- El botón naranja muestra "trabajando..." de las 08:00 a las 19:59 y "😴 zzz..." de las 20:00 a las 07:59, hora de America/Mexico_City. Es solo una etiqueta por horario; **no indica presencia laboral comprobada**.
+- El frontend consulta GET /api/activity al entrar, cada 45 segundos y cuando la pestaña vuelve al primer plano.
+- La API muestra solicitudes todavía abiertas (aunque comenzaron otro día) y trabajos finalizados cuya última actualización es de hoy. Trabajos finalizados de otros días no se listan; se cuentan como archivados.
+- Una notificación dentro de la página aparece si una etapa **real y aprobada** fue publicada durante la última hora y no se ha visto en ese navegador. No es un push nativo de Windows.
+- Una notificación de una solicitud abierta dice "Ver avance". Abre el módulo, pero su tarjeta queda deshabilitada para expandir. Muestra hasta tres avances reales en texto tenue y conserva la misma identidad visual.
+- Una notificación de trabajo finalizado dice "Leer resumen". Abre el módulo y despliega el resumen técnico.
+- Los avisos nuevos tienen un retardo de presentación de 900 ms después de leer el feed, se descartan automáticamente a los 8.5 segundos y se recuerdan por ID + updatedAt + estado mediante localStorage.
+- No se generan etapas, conclusiones o avances con temporizadores. La única animación en loop es el indicador de puntos del botón de horario laboral.
 
-## Publicación de una actividad real
+## Forma de publicación 1: preregistro de solicitud
 
-1. Redactar un texto que no contenga datos de clientes, URLs internas, datos personales, capturas privadas, métricas reservadas, nombres de colaboradores ni código confidencial.
-2. Verificar qué se hizo y cómo se validó. Si no hubo despliegue, indicar «auditoría», «prototipo» o «análisis» en lugar de atribuir una implementación.
-3. Solicitar aprobación explícita para publicar.
-4. En una rama de trabajo, añadir la entrada aprobada al arreglo activityEntries del archivo src/data/recentActivity.ts. Nunca agregar publicaciones públicas a previewActivityEntries.
-5. Usar un ID único (por ejemplo build-2026-11-20-01) y una fecha ISO 8601 con desplazamiento correcto de CDMX (por ejemplo 2026-11-20T14:35:00-06:00). No inventar fechas ni resultados.
-6. Completar los campos id, publishedAt, category, title, summary y description. Evitar texto excesivo.
-7. Crear Pull Request; comprobar lint, tipos y build. Fusionar a main solo después de recibir autorización.
-8. Vercel despliega main automáticamente. Una vez finalizado el deploy, los navegadores abiertos consultan la API aproximadamente cada 45 segundos.
+1. Registrar una solicitud que el titular haya **aprobado publicar**, sin datos privados ni identidad de terceros.
+2. Añadirla al arreglo activityEntries del archivo src/data/recentActivity.ts con un ID único y status: "in_progress".
+3. Completar publishedAt, category, title, summary y progress: [{ at, stage, note }]. La descripción técnica **no existe todavía**.
+4. Si surge un avance real (por ejemplo revisión, investigación, desarrollo o validación), añadir un elemento a progress **después de que ocurrió** y actualizar updatedAt a la fecha/hora real.
+5. En cada actualización, abrir revisión de código y aprobar su publicación en GitHub. Vercel actualiza la web después del despliegue; el frontend lo detectará al sondear la API.
+6. La ficha permanece visible y no muestra botón de expansión, aunque cambie el día.
 
-Ejemplo ilustrativo (no publicar automáticamente):
+Ejemplo de entrada **ficticia de documentación, no publicarla**:
 
     {
-      id: "build-YYYY-MM-DD-01",
-      publishedAt: "YYYY-MM-DDTHH:mm:ss-06:00",
-      category: "FRONTEND",
-      title: "Título del trabajo autorizado",
-      summary: "Qué se consiguió, de manera verificable.",
-      description: "Problema, solución y validación, sin detalles sensibles.",
-    },
+      id: "request-2026-11-20-01",
+      publishedAt: "2026-11-20T09:00:00-06:00",
+      updatedAt: "2026-11-20T09:20:00-06:00",
+      status: "in_progress",
+      category: "WEB ENGINEERING",
+      title: "Revisión técnica (EJEMPLO)",
+      summary: "Análisis de requisitos y soluciones posibles.",
+      progress: [
+        { at: "2026-11-20T09:00:00-06:00", stage: "Solicitud recibida", note: "Objetivo registrado." },
+        { at: "2026-11-20T09:20:00-06:00", stage: "Revisión", note: "Revisión del alcance." },
+      ],
+    }
 
-## Verificación y límites
+## Forma de publicación 2: cierre de la misma solicitud
 
-- El botón se desactiva durante preloader y overlays de proyecto.
-- El panel reutiliza useBodyScrollLock, SmoothScrollContext y GSAP.
-- Botones móviles: 138 × 36 px. Escritorio: 190 × 56 px.
-- El toast tiene ancho máximo de 340 px.
-- La fecha del servidor se calcula en America/Mexico_City.
-- No existe un endpoint público de escritura; las publicaciones solo pueden llegar mediante un cambio aprobado en el repositorio.
-- Es una experiencia de **casi tiempo real** después del deploy, no notificaciones nativas de Windows ni WebSockets.
-- No existe una página de historial. Solo se ve el contador de entradas anteriores.
+1. Solo cuando realmente termine el trabajo, cambiar **el mismo ID**, nunca crear una entrada duplicada.
+2. Cambiar status a "completed", actualizar updatedAt, ajustar summary al resultado real y agregar **description** con problema, implementación y validación, sin información sensible.
+3. Añadir un último progress que marque la conclusión real si se desea.
+4. Solicitar aprobación expresa del resumen y fusionar la edición a main después de las verificaciones.
+5. Al desplegarse, la misma ficha deja de estar atenuada, habilita su acordeón y la notificación ofrece "Leer resumen".
+
+El esquema TypeScript exige description para status "completed" y la prohíbe para "in_progress".
+
+## Reglas de seguridad y publicación
+
+- No publicar datos personales, URLs internas, accesos, credenciales, código privado, métricas reservadas, nombres de clientes o infraestructura reconocible.
+- No declarar implementaciones si solo hubo auditoría o propuesta; no declarar pruebas o resultados sin verificarlos.
+- Cada etapa se registra porque ocurrió, **nunca para simular que un sistema está trabajando**.
+- No hay escritura pública ni tokens en el navegador: las publicaciones requieren un cambio autorizado en GitHub y deploy de Vercel.
+- Los ejemplos solo existen en desarrollo y en previews de Vercel. Producción empieza sin datos hasta aprobar la primera publicación real.
+- El preloader, los overlays de proyectos, Lenis, GSAP y el lock de scroll siguen utilizando los controles actuales.
+- Botones móviles: 138 × 36 px. Botones escritorio: 190 × 56 px. Toast de 340 px máximo.
