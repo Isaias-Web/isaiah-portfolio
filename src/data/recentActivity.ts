@@ -31,13 +31,11 @@ export const activityEntries: ActivityEntry[] = [
   {
     id: "og-social-card-2026-11-20",
     publishedAt: "2026-11-20T14:06:34-06:00",
-    updatedAt: "2026-11-20T14:12:58-06:00",
-    status: "completed",
+    updatedAt: "2026-11-20T14:25:32-06:00",
+    status: "in_progress",
     category: "SEO / FRONTEND",
     title: "Integración de vista previa en redes sociales",
-    summary: "Imagen Open Graph incorporada y desplegada en el portfolio.",
-    description:
-      "Se revisaron los metadatos sociales del portfolio y se detectó que no incluían imagen de presentación. Se integró el arte de marca proporcionado en una composición horizontal para Open Graph mediante Next.js ImageResponse y se configuró una tarjeta de vista previa grande para Twitter/X. Se conservaron los metadatos existentes y se verificaron las pruebas automáticas del cambio, además de la finalización del despliegue en Vercel. La apariencia definitiva en cada red social está sujeta a su propia caché.",
+    summary: "Corrección de imagen social pendiente de validación visual del propietario.",
     progress: [
       {
         at: "2026-11-20T14:06:34-06:00",
@@ -46,8 +44,13 @@ export const activityEntries: ActivityEntry[] = [
       },
       {
         at: "2026-11-20T14:12:58-06:00",
-        stage: "Integración y despliegue",
-        note: "Se integraron la imagen y los metadatos sociales; Vercel confirmó el despliegue.",
+        stage: "Integración inicial",
+        note: "Los metadatos se desplegaron, pero faltaba comprobar el resultado visual en WhatsApp.",
+      },
+      {
+        at: "2026-11-20T14:25:32-06:00",
+        stage: "Corrección en revisión",
+        note: "Se detectó una tarjeta naranja sin contenido. Se prepara una corrección para validación.",
       },
     ],
   },

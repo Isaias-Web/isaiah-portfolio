@@ -27,10 +27,10 @@ export const metadata: Metadata = {
     description: siteDescription,
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og-image-v2",
         width: 1200,
         height: 630,
-        type: "image/png",
+        type: "image/jpeg",
         alt: "Isaías Frutos — Desarrollo Full-Stack, eCommerce e Integración con IA",
       },
     ],
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     description: siteDescription,
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og-image-v2",
         alt: "Isaías Frutos — Desarrollo Full-Stack, eCommerce e Integración con IA",
       },
     ],

@@ -26,11 +26,13 @@ Este procedimiento se aplica aunque el trabajo original ocurra en otro chat, otr
 - Agregar al progress solo etapas comprobadas y actualizar updatedAt con la hora de CDMX.
 - Mantener status in_progress y sin description mientras siga abierto.
 
-**C. FINALIZAR**
-"Cierra y publica en mi portfolio [ID o título]. Ya terminamos y verificamos: [resultado]".
-- Conservar ID y fecha de origen; cambiar status a completed y actualizar updatedAt.
-- Revisar summary y agregar description: problema, solución y validación, sin datos confidenciales.
-- Agregar etapa de cierre solo si se verificó la finalización.
+**C. FINALIZAR (solo después de aceptación del propietario)**
+"Cierra y publica en mi portfolio [ID o título]. Ya revisé el resultado final y lo apruebo: [resultado]".
+- Primero presentar la implementación y su preview; solicitar/recibir validación real de la funcionalidad y la apariencia en el entorno correspondiente (por ejemplo, compartir la URL en WhatsApp).
+- **CI aprobada y Vercel desplegado NO equivalen a aceptación del usuario.** Si falta verificación visual o funcional, mantener status in_progress y registrar un avance real "Pendiente de validación del propietario".
+- Únicamente después de que el propietario confirme expresamente que el resultado es correcto, conservar ID y publishedAt y cambiar status a completed con updatedAt real.
+- Revisar summary y agregar description: problema, solución y validación, sin datos confidenciales. Nunca afirmar verificación visual que no ocurrió.
+- Agregar etapa de cierre solo después de validar y aprobar el resultado final.
 
 **D. SOLO BORRADOR**
 "Prepara el texto de actividad sin publicarlo".
@@ -42,7 +44,7 @@ Este procedimiento se aplica aunque el trabajo original ocurra en otro chat, otr
 2. Abrir el repositorio del portfolio y localizar el registro por ID. Si es nuevo, comprobar que no exista duplicado. No publicar nombres de clientes, URLs internas, credenciales, datos personales ni métricas privadas.
 3. Modificar únicamente el array activityEntries de src/data/recentActivity.ts en una rama nueva. No cambiar previewActivityEntries.
 4. Ejecutar npm run lint, npx tsc --noEmit, las pruebas pertinentes y npm run build (o verificar los resultados CI).
-5. Crear PR, revisar diff y confirmar privacidad. Fusionar a main solo con autorización de despliegue y pruebas correctas.
+5. Crear PR, revisar diff y confirmar privacidad. Para cambios de interfaz, imágenes sociales u otros resultados verificables visualmente, pedir la validación del preview **antes de fusionar**. Fusionar a main solo con autorización explícita para desplegar y pruebas correctas.
 6. Verificar Vercel para el commit fusionado antes de declarar éxito en producción.
 7. Informar: ID, categoría, estado, resumen público, PR, producción, CI/Vercel y pendientes.
 
