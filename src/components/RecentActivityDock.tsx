@@ -1,25 +1,39 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { X } from "lucide-react";
+import { Activity, X } from "lucide-react";
+import type { ActivityEntry } from "@/data/recentActivity";
 import { gsap } from "@/animations/gsap-config";
 import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
-import { activityEntries } from "@/data/recentActivity";
+type ActivityFeed = {
+  date: string;
+  entries: ActivityEntry[];
+  archivedCount: number;
+  preview: boolean;
+};
+
+const SEEN_STORAGE_KEY = "isaias:recent-activity:seen-v1";
+
+function getSeenIds(): string[] {
+  try {
+    const value: unknown = JSON.parse(localStorage.getItem(SEEN_STORAGE_KEY) ?? "[]");
+    return Array.isArray(value) ? value.filter((id): id is string => typeof id === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
+function rememberSeen(ids: string[]) {
+  try {
+    const seen = [...new Set([...ids, ...getSeenIds()])].slice(0, 120);
+    localStorage.setItem(SEEN_STORAGE_KEY, JSON.stringify(seen));
+  } catch {
+    // Storage can be unavailable in private browsing; the feed still works.
+  }
+}
 
 const CITY_TIME_ZONE = "America/Mexico_City";
-
-function dateKey(value: string | Date): string {
-  const date = typeof value === "string" ? new Date(value) : value;
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: CITY_TIME_ZONE,
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  }).formatToParts(date);
-  const part = (type: string) => parts.find((item) => item.type === type)?.value ?? "";
-  return part("year") + "-" + part("month") + "-" + part("day");
-}
 
 function dateLabel(iso: string): string {
   return new Intl.DateTimeFormat("es-MX", {
@@ -34,11 +48,13 @@ export default function RecentActivityDock() {
   const { introReady, paused, pauseScroll, resumeScroll } = useSmoothScrollControl();
   const [isOpen, setIsOpen] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [today, setToday] = useState("");
+  const [feed, setFeed] = useState<ActivityFeed | null>(null);
+  const [toast, setToast] = useState<ActivityEntry | null>(null);
 
   // Use the same body + html lock already used by project detail overlays.
   useBodyScrollLock(isOpen);
 
+  const toastRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
   const backdropRef = useRef<HTMLButtonElement>(null);
@@ -46,16 +62,49 @@ export default function RecentActivityDock() {
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const closingRef = useRef(false);
 
+  // Fetch the current production/preview feed every 45 s, and on tab return.
+  // No client write API or tokens: publishing requires a reviewed GitHub change.
   useEffect(() => {
-    const updateToday = () => setToday(dateKey(new Date()));
-    updateToday();
-    const interval = window.setInterval(updateToday, 60_000);
-    return () => window.clearInterval(interval);
+    let active = true;
+    let loading = false;
+    const refresh = async () => {
+      if (loading) return;
+      loading = true;
+      try {
+        const response = await fetch("/api/activity", { cache: "no-store" });
+        if (!response.ok) return;
+        const payload = (await response.json()) as ActivityFeed;
+        if (active && Array.isArray(payload.entries)) setFeed(payload);
+      } catch {
+        // Preserve the last successful feed during transient network failures.
+      } finally {
+        loading = false;
+      }
+    };
+    const onVisible = () => {
+      if (document.visibilityState === "visible") void refresh();
+    };
+    void refresh();
+    const interval = window.setInterval(() => void refresh(), 45_000);
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      active = false;
+      window.clearInterval(interval);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, []);
 
-  const handleOpen = () => {
+  const dismissToast = useCallback((entryId: string) => {
+    rememberSeen([entryId]);
+    setToast(null);
+  }, []);
+
+  const handleOpen = (entryId?: string) => {
     if (isOpen || !introReady || paused) return;
     closingRef.current = false;
+    rememberSeen(feed?.entries.map((entry) => entry.id) ?? []);
+    setToast(null);
+    setExpandedId(entryId ?? null);
     setIsOpen(true);
   };
 
@@ -150,19 +199,81 @@ export default function RecentActivityDock() {
     };
   }, [isOpen, handleClose, pauseScroll, resumeScroll]);
 
-  const todayEntries = activityEntries
-    .filter((entry) => today && dateKey(entry.publishedAt) === today)
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-  const archivedCount = activityEntries.filter(
-    (entry) => today && dateKey(entry.publishedAt) < today
-  ).length;
+  // Only a new, unseen entry from the current day triggers the on-site toast.
+  useEffect(() => {
+    if (!introReady || paused || isOpen || toast) return;
+    const newest = feed?.entries[0];
+    if (newest && !getSeenIds().includes(newest.id)) setToast(newest);
+  }, [feed, introReady, paused, isOpen, toast]);
+
+  useLayoutEffect(() => {
+    const element = toastRef.current;
+    if (!toast || !element || paused || isOpen) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const tween = gsap.fromTo(
+      element,
+      { autoAlpha: 0, y: -14 },
+      { autoAlpha: 1, y: 0, duration: 0.42, ease: "power3.out" }
+    );
+    return () => { tween.kill(); };
+  }, [toast, isOpen, paused]);
+
+  useEffect(() => {
+    if (!toast || paused || isOpen) return;
+    const timeout = window.setTimeout(() => dismissToast(toast.id), 8500);
+    return () => window.clearTimeout(timeout);
+  }, [toast, paused, isOpen, dismissToast]);
+
+  const todayEntries = feed?.entries ?? [];
+  const archivedCount = feed?.archivedCount ?? 0;
 
   return (
     <>
+      {toast && introReady && !paused && !isOpen && (
+        <aside
+          ref={toastRef}
+          role="status"
+          aria-live="polite"
+          className="fixed right-3 top-3 z-[990] w-[calc(100vw-24px)] max-w-[340px] rounded-xl border border-white/20 bg-[#151615] p-3 text-[#f5f5f5] shadow-[0_12px_42px_rgba(0,0,0,0.35)] md:right-5 md:top-5"
+        >
+          <div className="flex items-start gap-3">
+            <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-[#ff2d00]/35 text-[#ff2d00]">
+              <Activity size={15} strokeWidth={1.6} aria-hidden="true" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="pr-4 text-[12px] font-semibold leading-snug">
+                {toast.title}
+              </p>
+              <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-[#ff2d00]">
+                {toast.category} · {dateLabel(toast.publishedAt)}
+              </p>
+              <p className="mt-2 text-[11px] leading-[1.5] text-white/60">
+                {toast.summary}
+              </p>
+              <button
+                type="button"
+                onClick={() => handleOpen(toast.id)}
+                className="mt-2 text-[11px] font-semibold text-[#ff2d00] hover:underline"
+              >
+                Leer más →
+              </button>
+            </div>
+            <button
+              type="button"
+              onClick={() => dismissToast(toast.id)}
+              aria-label="Descartar notificación"
+              className="shrink-0 p-1 text-white/55 transition-colors hover:text-white"
+            >
+              <X size={14} strokeWidth={1.5} />
+            </button>
+          </div>
+        </aside>
+      )}
+
       <button
         ref={triggerRef}
         type="button"
-        onClick={handleOpen}
+        onClick={() => handleOpen()}
         inert={!introReady || paused}
         aria-controls="recent-activity-panel"
         aria-expanded={isOpen}
@@ -211,7 +322,7 @@ export default function RecentActivityDock() {
                     RECENT ACTIVITY<span className="text-[#ff2d00]">.</span>
                   </h2>
                   <p className="mt-2 text-[13px] text-white/50">
-                    Trabajos y avances del día. Datos de demostración.
+                    Trabajos y avances del día. {feed?.preview ? "Vista de prueba." : ""}
                   </p>
                 </div>
                 <button
