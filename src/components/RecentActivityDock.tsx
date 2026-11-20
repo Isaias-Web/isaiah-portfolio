@@ -4,6 +4,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { Plus, X } from "lucide-react";
 import { gsap } from "@/animations/gsap-config";
 import { useSmoothScrollControl } from "@/components/SmoothScrollContext";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { activityEntries } from "@/data/recentActivity";
 
 const CITY_TIME_ZONE = "America/Mexico_City";
@@ -34,6 +35,9 @@ export default function RecentActivityDock() {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [today, setToday] = useState("");
+
+  // Use the same body + html lock already used by project detail overlays.
+  useBodyScrollLock(isOpen);
 
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
@@ -106,8 +110,6 @@ export default function RecentActivityDock() {
     if (!isOpen) return;
 
     const previouslyFocused = document.activeElement;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     pauseScroll();
     closeRef.current?.focus({ preventScroll: true });
 
@@ -141,7 +143,6 @@ export default function RecentActivityDock() {
 
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = previousOverflow;
       resumeScroll();
       if (previouslyFocused instanceof HTMLElement && previouslyFocused.isConnected) {
         previouslyFocused.focus({ preventScroll: true });
@@ -274,7 +275,7 @@ export default function RecentActivityDock() {
                               strokeWidth={1.5}
                               aria-hidden="true"
                               className={
-                                "shrink-0 text-[#ff2d00] transition-transform duration-500 " +
+                                "shrink-0 text-[#ff2d00] transition-transform duration-500 motion-reduce:transition-none " +
                                 (expanded ? "rotate-180" : "rotate-0")
                               }
                             />
@@ -283,7 +284,7 @@ export default function RecentActivityDock() {
                             id={"activity-detail-" + entry.id}
                             inert={!expanded}
                             className={
-                              "grid transition-[grid-template-rows,opacity] duration-500 ease-in-out " +
+                              "grid transition-[grid-template-rows,opacity] duration-500 ease-in-out motion-reduce:transition-none " +
                               (expanded
                                 ? "grid-rows-[1fr] opacity-100"
                                 : "grid-rows-[0fr] opacity-0")
