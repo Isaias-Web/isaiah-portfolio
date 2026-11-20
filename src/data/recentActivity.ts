@@ -1,31 +1,35 @@
 export type ActivityEntry = {
   id: string;
-  publishedAt: string;
+  publishedAt: string; // ISO 8601 with UTC offset
   category: string;
   title: string;
   summary: string;
   description: string;
 };
 
-// Datos de demostración, NO publicaciones reales.
-// Reemplazar por entradas revisadas y autorizadas antes de publicar.
-export const activityEntries: ActivityEntry[] = [
+// Publicaciones aprobadas exclusivamente. No introducir datos de clientes,
+// credenciales, métricas privadas o detalles que identifiquen sistemas internos.
+// Cada nueva entrada aquí provoca un deploy automático al fusionarse en main.
+export const activityEntries: ActivityEntry[] = [];
+
+// Ejemplos visibles únicamente en Development / Vercel Preview.
+// No se incluyen en la API cuando VERCEL_ENV es production.
+export const previewActivityEntries: ActivityEntry[] = [
   {
-    id: "demo-01",
-    publishedAt: "2026-11-20T08:00:00-06:00",
+    id: "preview-activity-01",
+    publishedAt: "2026-11-20T08:30:00-06:00",
     category: "FRONTEND",
     title: "Vista previa del módulo de actividad",
-    summary: "Prueba de un panel integrado al portfolio.",
+    summary: "Ejemplo para comprobar notificaciones y acordeones.",
     description:
-      "Esta es una entrada de ejemplo para comprobar el diseño del listado, la apertura del acordeón y la lectura de descripciones técnicas. No representa una entrega publicada.",
+      "Este registro es una demostración del componente Recent Activity. Permite verificar la aparición de notificaciones, el despliegue del panel y el comportamiento de las descripciones técnicas. No representa un trabajo entregado a un cliente.",
   },
   {
-    id: "demo-00",
+    id: "preview-activity-00",
     publishedAt: "2026-11-19T15:00:00-06:00",
     category: "UI / UX",
-    title: "Entrada de archivo (demostración)",
-    summary: "Dato de prueba para validar el contador.",
-    description:
-      "Esta entrada solamente sirve para comprobar que los elementos de días anteriores dejan de aparecer y se suman al contador.",
+    title: "Ejemplo de registro archivado",
+    summary: "Verificación del contador de actividades anteriores.",
+    description: "Esta entrada solo se utiliza para comprobar el archivado visual.",
   },
 ];
