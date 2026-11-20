@@ -31,11 +31,13 @@ export const activityEntries: ActivityEntry[] = [
   {
     id: "og-social-card-2026-11-20",
     publishedAt: "2026-11-20T14:06:34-06:00",
-    updatedAt: "2026-11-20T14:25:32-06:00",
-    status: "in_progress",
+    updatedAt: "2026-11-20T14:43:41-06:00",
+    status: "completed",
     category: "SEO / FRONTEND",
     title: "Integración de vista previa en redes sociales",
-    summary: "Corrección de imagen social pendiente de validación visual del propietario.",
+    summary: "Vista previa Open Graph corregida y comprobada en WhatsApp.",
+    description:
+      "Se identificó que el enlace del portfolio se compartía inicialmente con un bloque de color, sin el arte de presentación. Se sustituyó la generación anterior por una imagen JPEG de 1200 × 630 píxeles servida directamente desde una ruta versionada, y se actualizaron las etiquetas Open Graph y Twitter. Las verificaciones técnicas y el despliegue se realizaron correctamente. Finalmente, el propietario comprobó en WhatsApp que la tarjeta mostraba la composición gráfica y el contenido esperado.",
     progress: [
       {
         at: "2026-11-20T14:06:34-06:00",
@@ -49,8 +51,13 @@ export const activityEntries: ActivityEntry[] = [
       },
       {
         at: "2026-11-20T14:25:32-06:00",
-        stage: "Corrección en revisión",
-        note: "Se detectó una tarjeta naranja sin contenido. Se prepara una corrección para validación.",
+        stage: "Corrección desplegada",
+        note: "Se sustituyó el renderizado anterior por una imagen JPEG directa y se actualizó la ruta pública.",
+      },
+      {
+        at: "2026-11-20T14:43:41-06:00",
+        stage: "Validación visual aprobada",
+        note: "El propietario verificó en WhatsApp que el enlace ya muestra correctamente la imagen social.",
       },
     ],
   },
