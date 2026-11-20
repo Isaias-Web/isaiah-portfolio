@@ -4,6 +4,7 @@ import CustomCursor from "@/components/system/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import { SmoothScrollProvider } from "@/components/SmoothScrollContext";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import RecentActivityDock from "@/components/RecentActivityDock";
 
 const siteUrl = "https://isaiasfrutos.dev";
 const siteTitle = "Isaías Frutos | Desarrollo full-stack, eCommerce y automatización";
@@ -48,6 +49,7 @@ export default function RootLayout({
           <CustomCursor />
           <SmoothScroll>{children}</SmoothScroll>
           <WhatsAppButton />
+          <RecentActivityDock />
         </SmoothScrollProvider>
       </body>
     </html>

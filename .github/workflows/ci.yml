@@ -28,5 +28,7 @@ jobs:
         run: npx tsc --noEmit
       - name: Contact field validation
         run: node --experimental-strip-types --test tests/contact.test.mjs
+      - name: Activity 24h window validation
+        run: node --experimental-strip-types --test tests/activity-window.test.mjs
       - name: Production build
         run: npm run build
