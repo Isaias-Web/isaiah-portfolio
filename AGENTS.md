@@ -12,6 +12,13 @@ GitHub repository: Isaias-Web/isaiah-portfolio. Vercel deploys `main` to product
 - Do not merge PRs, modify production settings, remove features, or introduce paid services without explicit approval.
 - For updates, describe the impact and include a concise verification summary.
 
+## Public activity publishing (cross-chat protocol)
+- If the user asks to log, update, close or publish work on their portfolio, read `docs/RECENT_ACTIVITY_PROTOCOL.md` and `docs/RECENT_ACTIVITY_PUBLISHING.md` first.
+- Keep the public activity feed separate from the private source project: publish only sanitized, verified and explicitly authorized information.
+- Keep one stable activity ID across preregistration, progress updates and completion, even if the source work spans multiple chats or clients.
+- Do not auto-publish on normal requests such as "start working"; publishing requires a specific approval. Never simulate stages or claim deployment without checking.
+- Update only `src/data/recentActivity.ts` for routine new entries or status changes; use a feature branch, PR, CI and Vercel verification.
+
 ## Commands
 - Install: `npm ci`
 - Develop: `npm run dev`

@@ -31,15 +31,23 @@ export const activityEntries: ActivityEntry[] = [
   {
     id: "activity-review-2026-11-20",
     publishedAt: "2026-11-20T13:27:23-06:00",
-    status: "in_progress",
+    updatedAt: "2026-11-20T13:41:11-06:00",
+    status: "completed",
     category: "WEB ENGINEERING",
     title: "Revisión del sistema de actividad",
-    summary: "Validación de las notificaciones y el flujo de solicitudes tras el despliegue.",
+    summary: "Módulo de notificaciones y seguimiento validado en producción.",
+    description:
+      "Se implementó y publicó un sistema de actividad para el portfolio con solicitudes en proceso, avances registrados, resúmenes técnicos de trabajos finalizados y notificaciones dentro de la página. La API consulta y presenta registros de las últimas 24 horas. La implementación pasó las verificaciones automáticas de ESLint, TypeScript, pruebas existentes y compilación, y se confirmó manualmente el funcionamiento general del módulo en producción. La ficha conserva únicamente una descripción pública sin datos confidenciales.",
     progress: [
       {
         at: "2026-11-20T13:27:23-06:00",
         stage: "Solicitud recibida",
         note: "Se inició la revisión del módulo y de la publicación de actividades.",
+      },
+      {
+        at: "2026-11-20T13:41:11-06:00",
+        stage: "Revisión completada",
+        note: "Se confirmó el funcionamiento del módulo en producción.",
       },
     ],
   },
