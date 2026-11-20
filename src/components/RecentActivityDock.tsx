@@ -60,6 +60,14 @@ function dateLabel(iso: string): string {
   }).format(new Date(iso));
 }
 
+function canReceiveFocus(element: HTMLElement | null): element is HTMLElement {
+  return Boolean(
+    element?.isConnected && !element.closest("[inert]") &&
+    !element.matches(":disabled") && element.getClientRects().length &&
+    getComputedStyle(element).visibility !== "hidden"
+  );
+}
+
 export default function RecentActivityDock() {
   const { introReady, paused, pauseScroll, resumeScroll } = useSmoothScrollControl();
   const [isOpen, setIsOpen] = useState(false);
@@ -78,6 +86,9 @@ export default function RecentActivityDock() {
   const closeRef = useRef<HTMLButtonElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const closingRef = useRef(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
+  const returnFocusPending = useRef(false);
 
   useEffect(() => {
     const refreshClock = () => setMode(clockMode());
@@ -123,8 +134,10 @@ export default function RecentActivityDock() {
     setToast(null);
   }, []);
 
-  const handleOpen = (entryId?: string) => {
+  const handleOpen = (entryId?: string, opener?: HTMLElement) => {
     if (isOpen || !introReady || paused) return;
+    openerRef.current = opener ?? triggerRef.current;
+    returnFocusPending.current = true;
     closingRef.current = false;
     rememberSeen(feed?.entries.map(notificationKey) ?? []);
     setToast(null);
@@ -180,12 +193,52 @@ export default function RecentActivityDock() {
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    if (!isOpen) return;
+  useLayoutEffect(() => {
+    const panel = panelRef.current;
+    const modal = modalRef.current;
+    if (!isOpen || !panel || !modal) return;
 
-    const previouslyFocused = document.activeElement;
     pauseScroll();
     closeRef.current?.focus({ preventScroll: true });
+
+    // Isolate siblings along the modal's ancestry, never its own container.
+    // Remember pre-existing inert states and cover later body portals too.
+    const previousInert = new Map<HTMLElement, boolean>();
+    const isolateBackground = () => {
+      let branch: HTMLElement = modal;
+      while (branch.parentElement) {
+        const parent = branch.parentElement;
+        for (const sibling of parent.children) {
+          if (
+            !(sibling instanceof HTMLElement) || sibling === branch ||
+            previousInert.has(sibling)
+          ) continue;
+          previousInert.set(sibling, sibling.inert);
+          sibling.inert = true;
+        }
+        if (parent === document.body) break;
+        branch = parent;
+      }
+    };
+    const keepFocusInside = () => {
+      const active = document.activeElement;
+      if (
+        !(active instanceof HTMLElement) || !panel.contains(active) ||
+        !canReceiveFocus(active)
+      ) closeRef.current?.focus({ preventScroll: true });
+    };
+    isolateBackground();
+
+    const observer = new MutationObserver(() => {
+      isolateBackground();
+      keepFocusInside();
+    });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["inert", "hidden", "disabled"],
+    });
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -195,16 +248,19 @@ export default function RecentActivityDock() {
       }
       if (event.key !== "Tab") return;
 
-      const panel = panelRef.current;
-      if (!panel) return;
       const controls = Array.from(
-        panel.querySelectorAll<HTMLButtonElement>('button:not([disabled])')
-      ).filter((control) => control.getClientRects().length > 0);
+        panel.querySelectorAll<HTMLElement>(
+          'button, a[href], input, select, textarea, [tabindex]'
+        )
+      ).filter((control) => control.tabIndex >= 0 && canReceiveFocus(control));
       const first = controls[0];
       const last = controls[controls.length - 1];
       if (!first || !last) return;
 
-      if (event.shiftKey && document.activeElement === first) {
+      if (!panel.contains(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      } else if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -214,15 +270,28 @@ export default function RecentActivityDock() {
     };
 
     document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("focusin", keepFocusInside);
 
     return () => {
+      observer.disconnect();
       document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("focusin", keepFocusInside);
+      previousInert.forEach((inert, element) => {
+        element.inert = inert;
+      });
       resumeScroll();
-      if (previouslyFocused instanceof HTMLElement && previouslyFocused.isConnected) {
-        previouslyFocused.focus({ preventScroll: true });
-      }
     };
   }, [isOpen, handleClose, pauseScroll, resumeScroll]);
+
+  useLayoutEffect(() => {
+    // resumeScroll commits after closing; the trigger is still inert before it.
+    if (isOpen || !introReady || paused || !returnFocusPending.current) return;
+    returnFocusPending.current = false;
+    const target = canReceiveFocus(openerRef.current)
+      ? openerRef.current : triggerRef.current;
+    if (canReceiveFocus(target)) target.focus({ preventScroll: true });
+    openerRef.current = null;
+  }, [isOpen, introReady, paused]);
 
   // Only a new, unseen entry from the current day triggers the on-site toast.
   useEffect(() => {
@@ -295,7 +364,7 @@ export default function RecentActivityDock() {
               </p>
               <button
                 type="button"
-                onClick={() => handleOpen(toast.id)}
+                onClick={(event) => handleOpen(toast.id, event.currentTarget)}
                 className="mt-2 text-[11px] font-semibold text-[#ff2d00] hover:underline"
               >
                 {toast.status === "completed" ? "Leer resumen →" : "Ver avance →"}
@@ -316,12 +385,12 @@ export default function RecentActivityDock() {
       <button
         ref={triggerRef}
         type="button"
-        onClick={() => handleOpen()}
+        onClick={(event) => handleOpen(undefined, event.currentTarget)}
         inert={!introReady || paused}
         aria-controls="recent-activity-panel"
         aria-expanded={isOpen}
         aria-label={mode === "sleeping"
-          ? "En horario de descanso. Ver las actualizaciones"
+          ? "zzz... En horario de descanso. Ver las actualizaciones"
           : "Trabajando. Ver las actualizaciones"}
         className={`fixed bottom-[58px] right-3 z-[950] flex h-9 w-[138px] items-center justify-center rounded-full border border-[#ff2d00] bg-[#ff2d00] px-2 text-[#090a09] md:bottom-[88px] md:right-5 md:h-14 md:w-[190px] md:px-4 transition-[background-color,opacity] duration-300 hover:bg-[#ff4d2a] ${!introReady || paused ? "pointer-events-none opacity-0" : "opacity-100"}`}
       >
@@ -347,7 +416,7 @@ export default function RecentActivityDock() {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-[9800] text-[#f5f5f5]">
+        <div ref={modalRef} className="fixed inset-0 z-[9800] text-[#f5f5f5]">
           <button
             ref={backdropRef}
             type="button"
