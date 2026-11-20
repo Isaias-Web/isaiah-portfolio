@@ -82,7 +82,7 @@ export const previewActivityEntries: ActivityEntry[] = [
   },
   {
     id: "preview-archived-01",
-    publishedAt: "2026-11-19T15:00:00-06:00",
+    publishedAt: "2026-11-18T15:00:00-06:00",
     status: "completed",
     category: "UI / UX",
     title: "Ejemplo archivado (DEMO)",
